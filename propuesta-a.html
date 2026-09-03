@@ -1,0 +1,1151 @@
+<!-- Propuesta A · Envío agrupado — Módulo de envíos T1envíos · NEXUS V2.0 (dashboard) -->
+<title>Envíos · Hilo agrupado</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" />
+<style>
+  /* ============ NEXUS V2.0 — tokens dashboard ============ */
+  :root{
+    --red-500:#DB3B2B; --red-700:#CC0000; --red-200:#F9D2D2; --red-50:#FEF4F4;
+    --oxford:#4C4C4C; --dark:#1F2937;
+    --g-50:#F8F8F8; --g-100:#F2F2F2; --g-200:#E7E7E7; --g-300:#D4D4D4; --g-400:#A3A3A3;
+    --sec:#6B7280; --ter:#9CA3AF;
+    --blue-100:#F0F8FF; --blue-500:#2180FF; --blue-700:#005EDC;
+    --green-100:#F0FDF4; --green-300:#6FCF97; --green-700:#16A34A;
+    --orange-100:#FFF0E5; --orange-700:#CC5200;
+    --yellow-100:#FFF4BF; --yellow-700:#A96A00;
+    --violet-100:#F5F3FF; --violet-700:#6D28D9;
+    --focus:#2180FF;
+  }
+  :root{color-scheme:light}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    font-family:'Manrope',-apple-system,'Segoe UI',sans-serif;
+    color:var(--oxford); background:#fff; font-size:14px; line-height:1.366;
+  }
+  button{font-family:inherit;color:inherit;background:none;border:none;cursor:pointer;font-size:inherit;line-height:inherit}
+  button:focus-visible,a:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+  a{color:inherit;text-decoration:none}
+  svg.brand{display:block;flex:none}
+  svg.ic{width:20px;height:20px;stroke:currentColor;stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+  /* ============ Shell ============ */
+  .topbar{
+    position:fixed;inset:44px 0 auto 0;height:64px;background:#fff;border-bottom:1px solid var(--g-200);
+    display:flex;align-items:center;gap:20px;padding:0 24px;z-index:50;
+  }
+  .topbar .logo{height:30px;width:98px;display:block}
+  .store{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark)}
+  .store .avstore{width:30px;height:30px;border-radius:8px;background:#2FA84F;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .topsearch{flex:1;display:flex;justify-content:center}
+  .topsearch .wrap{position:relative;width:min(420px,100%)}
+  .topsearch input{width:100%;height:40px;border:1px solid var(--g-200);border-radius:10px;padding:0 40px 0 14px;font:inherit;color:var(--oxford);background:#fff}
+  .topsearch input::placeholder{color:var(--ter)}
+  .topsearch input:hover{background:var(--g-50)}
+  .topsearch input:focus{outline:none;border-color:var(--g-400);background:#fff}
+  .topsearch svg{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--sec)}
+  .topright{display:flex;align-items:center;gap:14px}
+  .balance{display:flex;align-items:center;gap:8px;border:1px solid var(--g-200);border-radius:20px;height:38px;padding:0 12px;font-weight:700;font-size:13px}
+  .balance:hover{background:var(--g-50)}
+  .icbtn{position:relative;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--oxford)}
+  .icbtn:hover{background:var(--g-50)}
+  .icbtn .dotbadge{position:absolute;top:2px;right:0;background:var(--red-500);color:#fff;font-size:9px;font-weight:700;border-radius:8px;padding:1px 4px;line-height:1.2}
+  .avuser{width:38px;height:38px;border-radius:50%;background:var(--red-500);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+
+  .sidebar{
+    position:fixed;top:108px;left:0;bottom:0;width:260px;background:#fff;border-right:1px solid var(--g-200);
+    padding:16px 12px;overflow-y:auto;z-index:30;
+  }
+  .cta-crear{display:flex;align-items:center;justify-content:center;width:100%;height:40px;border-radius:10px;background:var(--red-500);color:#fff;font-weight:700;font-size:14px;margin-bottom:16px;transition:background-color .15s}
+  .cta-crear:hover{background:var(--red-700)}
+  .nav a,.nav .navrow{display:flex;align-items:center;gap:10px;height:38px;padding:0 12px;border-radius:18px;font-size:14px;color:var(--oxford);white-space:nowrap}
+  .nav a:hover{background:var(--g-50)}
+  .nav .sub{padding-left:36px;height:36px}
+  .nav .active{background:var(--g-100);font-weight:700}
+  .nav .grow{flex:1}
+  .nav .cnt{font-size:11px;font-weight:600;color:var(--sec);background:var(--g-100);border-radius:10px;padding:1px 6px}
+  .nav svg.ic{color:var(--oxford)}
+
+  .main{padding:136px 40px 48px 300px;max-width:1600px}
+
+  /* ============ Botones ============ */
+  .btn{height:35px;border-radius:10px;padding:0 16px;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:8px;transition:background-color .15s}
+  .btn-primary{background:var(--red-500);color:#fff}
+  .btn-primary:hover{background:var(--red-700)}
+  .btn-secondary{background:#fff;border:1px solid var(--g-200)}
+  .btn-secondary:hover{background:var(--g-50)}
+  .btn-ghost-icon{width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;color:var(--sec)}
+  .btn-ghost-icon:hover{background:var(--g-100)}
+
+  /* ============ Chips de estado ============ */
+  .chip{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 12px;border-radius:13px;font-size:12px;font-weight:600;white-space:nowrap}
+  .chip svg{width:13px;height:13px;stroke-width:2}
+  .chip.transito{background:var(--blue-100);color:var(--blue-700)}
+  .chip.entregado{background:var(--green-100);color:var(--green-700)}
+  .chip.retornado{background:var(--green-100);color:var(--green-700);border:1px solid var(--green-300)}
+  .chip.intento{background:var(--yellow-100);color:var(--yellow-700)}
+  .chip.generada{background:var(--g-100);color:#525252}
+  .chip.cancelado{background:var(--red-50);color:var(--red-700)}
+  .chip.excepcion{background:var(--orange-100);color:var(--orange-700)}
+  .chip.devuelto{background:var(--violet-100);color:var(--violet-700)}
+
+  /* ============ Vistas ============ */
+  .view{display:none}
+  .view.on{display:block}
+
+  /* ============ Listado ============ */
+  .pagehead{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+  .pagehead h1{font-size:24px;font-weight:800;color:var(--dark)}
+  .pagehead .acts{display:flex;gap:12px}
+  .search{position:relative;width:min(557px,100%);margin-bottom:20px}
+  .search input{width:100%;height:40px;border:1px solid var(--g-200);border-radius:10px;padding:0 40px 0 14px;font:inherit;color:var(--oxford);background:#fff}
+  .search input::placeholder{color:var(--ter)}
+  .search input:hover{background:var(--g-50)}
+  .search input:focus{outline:none;border-color:var(--g-400);background:#fff}
+  .search svg{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--sec)}
+
+  .tablecard{border:1px solid var(--g-200);border-radius:10px;background:#fff;overflow:visible}
+  .filters{display:flex;gap:10px;padding:12px 16px;border-bottom:1px solid var(--g-200);flex-wrap:wrap}
+  .fpill{position:relative}
+  .fpill>button{display:flex;align-items:center;gap:6px;height:30px;border:1px solid var(--g-200);border-radius:10px;padding:0 12px;font-size:13px;font-weight:500}
+  .fpill>button:hover{background:var(--g-50)}
+  .fpill>button.applied{border-color:var(--red-500);background:var(--red-50);font-weight:600}
+  .fpill .menu{position:absolute;top:calc(100% + 4px);left:0;min-width:170px;background:#fff;border:1px solid var(--g-200);border-radius:10px;padding:4px;z-index:40;display:none}
+  .fpill .menu.open{display:block}
+  .fpill .menu button{display:flex;align-items:center;gap:10px;width:100%;padding:9px 12px;border-radius:8px;font-size:13px;text-align:left}
+  .fpill .menu button:hover{background:var(--g-50)}
+  .fpill .menu .radio{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--g-300);flex:none;display:flex;align-items:center;justify-content:center}
+  .fpill .menu button[aria-checked="true"] .radio{border-color:var(--red-500)}
+  .fpill .menu button[aria-checked="true"] .radio::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--red-500)}
+
+  .grid-row{display:grid;grid-template-columns:48px 64px minmax(160px,1.2fr) 104px 112px minmax(118px,1fr) 106px 86px 154px 72px;align-items:center}
+  .thead{border-bottom:1px solid var(--g-200);height:48px;font-size:12px;font-weight:600;color:var(--sec)}
+  .thead .th{display:flex;align-items:center;gap:4px;padding:0 8px}
+  .thead .sort{display:inline-flex;flex-direction:column;gap:0;color:var(--g-400)}
+  .thead .sort svg{width:11px;height:11px;stroke-width:2;margin:-2.5px 0}
+  .cell{padding:12px 8px;min-width:0}
+  .row{border-bottom:1px solid var(--g-200);min-height:84px;transition:background-color .12s;position:relative}
+  .row:hover{background:var(--g-50)}
+  .row:last-of-type{border-bottom:none}
+  .ck{width:18px;height:18px;border-radius:4px;border:1.5px solid var(--g-300);margin-left:16px;display:flex;align-items:center;justify-content:center;background:#fff;flex:none}
+  .ck.on{background:var(--red-500);border-color:var(--red-500)}
+  .ck svg{width:11px;height:11px;color:#fff;stroke-width:3}
+  .carrier{width:40px;height:40px;border-radius:9px;display:block}
+  .gnum{font-weight:700;font-size:14px;color:var(--dark);display:flex;align-items:center;gap:6px}
+  .gsub{font-size:13px;color:var(--sec);margin-top:2px}
+  .fecha b{display:block;font-weight:600;font-size:13px}
+  .fecha span{font-size:12px;color:var(--sec)}
+  .canal{font-size:13px}
+  .cliente{display:flex;align-items:center;gap:5px;font-size:13px}
+  .cliente svg{width:14px;height:14px;color:var(--sec)}
+  .costo{font-size:15px;font-weight:800;color:var(--dark)}
+  .costo small{font-size:11px;font-weight:600;color:var(--sec);margin-left:3px}
+  .cell.estado{font-size:13px;color:var(--oxford)}
+
+  /* toggle "guías de retorno" de la fila padre */
+  .toggle-ret{display:inline-flex;align-items:center;gap:4px;margin-top:6px;font-size:12px;font-weight:600;color:var(--oxford);border:1px solid var(--g-200);border-radius:12px;padding:3px 9px;background:#fff;white-space:nowrap}
+  .toggle-ret:hover{background:var(--g-100)}
+  .toggle-ret svg{width:13px;height:13px;stroke-width:2;transition:transform .15s}
+  .toggle-ret .ret-glyph{color:var(--sec)}
+  .thread.closed .toggle-ret .chev{transform:rotate(180deg)}
+  .thread:not(.closed) .toggle-ret{background:var(--g-100);border-color:var(--g-300)}
+
+  /* subfila de retorno (hija) — sin fondo fijo; gris solo en hover */
+  .subrow{border-bottom:1px solid var(--g-200);min-height:76px;position:relative}
+  .subrow:hover{background:var(--g-50)}
+  /* divisor interno angosto: solo separa guía original de guía de retorno */
+  .thread:not(.closed) .row{border-bottom:none}
+  .subrow::before{content:"";position:absolute;top:0;left:112px;right:16px;border-top:1px solid var(--g-200)}
+  .thread.standalone .subrow::before{display:none}
+  .subrow .loopbadge{position:absolute;left:63px;top:calc(50% - 13px);width:26px;height:26px;border-radius:50%;background:#fff;border:1px solid var(--g-300);display:flex;align-items:center;justify-content:center;color:var(--sec)}
+  .subrow .loopbadge svg{width:13px;height:13px;stroke-width:2}
+  .subrow .gcell{grid-column:3}
+  .subrow .tag-ret{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:4px;background:var(--g-100);color:#525252;font-size:11px;font-weight:600;margin-left:6px}
+  .thread.closed .subrow{display:none}
+  .thread.standalone .loopbadge{display:none}
+  .subrow .carrier{display:none}
+  .thread.standalone .subrow .carrier{display:block}
+
+  .rowacts{position:relative;display:flex;justify-content:flex-end;padding-right:16px}
+  .menu-acts{position:absolute;right:8px;top:calc(100% - 6px);width:170px;background:#fff;border:1px solid var(--g-200);border-radius:10px;padding:4px;z-index:40;display:none}
+  .menu-acts.open{display:block}
+  .menu-acts button{display:block;width:100%;text-align:left;padding:9px 12px;border-radius:8px;font-size:13px}
+  .menu-acts button:hover{background:var(--g-50)}
+  .menu-acts button.danger{color:var(--red-700)}
+
+  .pag{display:flex;align-items:center;justify-content:center;gap:18px;padding:14px 16px;font-size:13px;color:var(--oxford)}
+  .pag .pages{display:flex;align-items:center;gap:4px}
+  .pag .pg{min-width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-weight:600}
+  .pag .pg:hover{background:var(--g-50)}
+  .pag .pg.cur{background:var(--red-500);color:#fff}
+  .pag input{width:44px;height:28px;border:1px solid var(--g-200);border-radius:8px;text-align:center;font:inherit;background:#fff;color:var(--oxford)}
+  .pag .arrow{width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;color:var(--sec)}
+  .pag .arrow:hover{background:var(--g-50)}
+
+  /* tooltip simple */
+  [data-tip]{position:relative}
+  [data-tip]:hover::after{
+    content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);
+    background:var(--oxford);color:#fff;font-size:12px;font-weight:500;padding:5px 10px;border-radius:4px;white-space:nowrap;z-index:60;pointer-events:none;
+  }
+
+  /* ============ Detalle ============ */
+  .dethead{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:24px}
+  .dethead .l h1{font-size:24px;font-weight:800;color:var(--dark);display:inline-flex;align-items:center;gap:12px}
+  .backbtn{width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;margin-right:4px}
+  .backbtn:hover{background:var(--g-100)}
+  .dethead .meta{margin-top:6px;font-size:13px;color:var(--sec)}
+  .detgrid{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:24px;align-items:start}
+  .card{border:1px solid var(--g-200);border-radius:10px;background:#fff}
+  .card+.card{margin-top:16px}
+  .card .hd{padding:16px 20px 0;font-size:15px;font-weight:700;color:var(--dark);display:flex;align-items:center;justify-content:space-between}
+  .card .bd{padding:20px}
+  .colcards>.card+.card{margin-top:16px}
+
+  /* cadena de guías — filas planas dentro del card, sin sub-cards */
+  .gnode{display:flex;align-items:center;gap:14px;padding:10px 0}
+  .gnode .info{flex:1;min-width:0}
+  .gnode .lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ter)}
+  .gnode .num{font-size:15px;font-weight:800;color:var(--dark);margin-top:2px;display:flex;align-items:center;gap:10px}
+  .gnode .svc{font-size:12.5px;color:var(--sec);margin-top:3px}
+  .gnode .xref{font-size:12.5px;color:var(--sec);margin-top:3px}
+  .gnode .xref a{color:var(--oxford);font-weight:600;text-decoration:underline}
+  .gnode .xref a:hover{color:#000}
+  .gnode .xref .nota{color:var(--ter)}
+  .gnode .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+  .gnode .tlab{font-size:11px;font-weight:600;color:var(--ter)}
+  .gnode .amt{font-size:14px;font-weight:800;color:var(--dark)}
+  .gnode .edate{font-size:15px;font-weight:600;color:var(--dark);margin-top:2px}
+  .gnode .right{align-self:flex-start;padding-top:16px}
+  .gconn{display:flex;align-items:center;gap:12px;padding:8px 0 8px 34px;position:relative}
+  .gconn::before{content:"";position:absolute;left:20px;top:-10px;bottom:-10px;border-left:2px dashed var(--g-300)}
+  .gconn .loop{width:30px;height:30px;border-radius:50%;background:var(--g-100);display:flex;align-items:center;justify-content:center;color:var(--oxford);position:relative;z-index:1;margin-left:-29px}
+  .gconn .loop svg{width:15px;height:15px;stroke-width:2}
+  .gconn .gt1{font-size:13.5px;font-weight:700;color:var(--dark)}
+  .gconn .gt2{font-size:12.5px;color:var(--sec);margin-top:1px}
+
+  /* cronograma */
+  .tl{position:relative;padding-left:6px}
+  .datechip{display:inline-block;background:var(--g-100);color:var(--sec);font-size:11px;font-weight:600;border-radius:6px;padding:3px 10px;margin:16px 0 12px 34px}
+  .datechip:first-child{margin-top:0}
+  .ev{position:relative;padding:0 0 18px 46px}
+  .ev::before{content:"";position:absolute;left:13px;top:24px;bottom:-2px;border-left:1.5px dashed var(--g-300)}
+  .ev:last-child::before{display:none}
+  .ev .ico{position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:#fff;border:1.5px solid var(--g-300);display:flex;align-items:center;justify-content:center;color:var(--sec)}
+  .ev .ico svg{width:14px;height:14px;stroke-width:2}
+  .ev .t{font-weight:700;font-size:14px;color:var(--dark)}
+  .ev .d{font-size:12px;color:var(--sec);margin-top:2px}
+  .ev .link{display:inline-block;margin-top:6px;font-size:12px;font-weight:600;color:var(--oxford)}
+  .ev .link:hover{text-decoration:underline}
+  /* hito del cronograma — banda gris de borde a borde, estilo Figma */
+  .milestone{position:relative;margin:2px -20px 18px -26px;background:var(--g-50);padding:12px 20px 16px 72px}
+  .milestone::before{content:"";position:absolute;left:39px;top:44px;bottom:0;border-left:1.5px dashed var(--g-300)}
+  .milestone.end::before{display:none}
+  .milestone .ico{position:absolute;left:26px;top:10px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--oxford)}
+  .milestone .ico svg{width:18px;height:18px;stroke-width:1.5}
+  .milestone .t{font-weight:800;font-size:14px;color:var(--dark)}
+  .milestone .d{font-size:12px;color:var(--sec);margin-top:8px}
+  .milestone .gref{display:inline-flex;align-items:center;gap:8px;margin-top:10px;padding:0;border:none;background:none;font-size:13px;font-weight:700;color:var(--dark)}
+  .milestone .gref img,.milestone .gref svg.brand{width:22px;height:22px;border-radius:5px}
+  .milestone .gref span{text-decoration:underline}
+  .milestone .gref:hover span{color:#000}
+
+  /* resumen de envío */
+  .addr{position:relative;padding-left:26px;padding-bottom:18px}
+  .addr::before{content:"";position:absolute;left:8px;top:22px;bottom:2px;border-left:1.5px dashed var(--g-300)}
+  .addr:last-of-type{padding-bottom:0}
+  .addr:last-of-type::before{display:none}
+  .addr .pin{position:absolute;left:0;top:2px;color:var(--sec)}
+  .addr .pin svg{width:17px;height:17px}
+  .addr h4{font-size:13.5px;font-weight:700;color:var(--dark)}
+  .addr p{font-size:12.5px;color:var(--sec);margin-top:3px}
+  .addr .c{color:var(--oxford);font-weight:600}
+  .subhd{font-size:13.5px;font-weight:700;color:var(--dark);margin-bottom:10px}
+  .dims p{font-size:13px;color:var(--sec)}
+  .dims b{color:var(--oxford)}
+
+  /* resumen de cobro — cobros desplegables con desglose */
+  .cobro-acc{border-bottom:1px solid var(--g-100)}
+  .cobro-head{display:flex;align-items:center;gap:12px;width:100%;padding:12px 0;text-align:left}
+  .cobro-head:hover .n{color:#000}
+  .cobro-head img,.cobro-head svg.brand{width:28px;height:28px;border-radius:7px}
+  .cobro-head .inf{flex:1;min-width:0}
+  .cobro-head .n{font-size:13px;font-weight:700;color:var(--dark)}
+  .cobro-head .m{font-size:12px;color:var(--sec);margin-top:2px}
+  .cobro-head .val{font-size:14px;font-weight:800;color:var(--dark);white-space:nowrap}
+  .cobro-head .chev{width:14px;height:14px;stroke-width:2;color:var(--sec);transition:transform .15s}
+  .cobro-acc:not(.open) .chev{transform:rotate(180deg)}
+  .cobro-acc .cobro-body{display:none;padding:0 22px 12px 40px}
+  .cobro-acc.open .cobro-body{display:block}
+  .cobro-body .bl{display:flex;justify-content:space-between;padding:5px 0;font-size:12.5px;color:var(--sec)}
+  .cobro-body .bl span:last-child{color:var(--oxford);font-weight:600}
+  .cobro-total{display:flex;justify-content:space-between;padding-top:14px;font-size:15px;font-weight:800;color:var(--dark)}
+  .cobro-note{margin-top:14px;background:var(--blue-100);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--blue-700);display:flex;gap:8px;align-items:flex-start}
+  .cobro-note svg{width:15px;height:15px;stroke-width:2;flex:none;margin-top:1px}
+  .count-pill{font-size:11px;font-weight:700;background:var(--g-100);color:var(--sec);border-radius:10px;padding:2px 9px}
+
+  @media (max-width:1180px){
+    .detgrid{grid-template-columns:1fr}
+    .grid-row{grid-template-columns:44px 52px minmax(140px,1.1fr) 92px 96px minmax(104px,1fr) 94px 78px 132px 60px}
+  }
+
+  /* ============ Barra de demo (control de prototipo — no es parte de la UI) ============ */
+  .demobar{position:fixed;inset:0 0 auto 0;height:44px;background:#1F2937;color:#fff;display:flex;align-items:center;gap:12px;padding:0 16px;z-index:100;font-size:12px;font-weight:600}
+  .demobar .dtag{background:var(--red-500);color:#fff;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border-radius:4px;padding:3px 8px}
+  .demobar .dlabel{font-weight:700;white-space:nowrap}
+  .demobar .dsep{width:1px;height:20px;background:rgba(255,255,255,.18)}
+  .demobar .vbtn{height:28px;border-radius:8px;padding:0 12px;color:#fff;background:rgba(255,255,255,.08);font-size:12px;font-weight:600}
+  .demobar .vbtn:hover{background:rgba(255,255,255,.16)}
+  .demobar .vbtn.on{background:#fff;color:#1F2937}
+  .demobar .wabtn{height:28px;border-radius:8px;padding:0 12px;background:rgba(37,211,102,.15);color:#4ADE80;font-size:12px;font-weight:700}
+  .demobar .wabtn:hover{background:rgba(37,211,102,.28)}
+  .demobar .dnote{margin-left:auto;color:#9CA3AF;font-weight:500;white-space:nowrap}
+
+  /* ============ Mock de notificación WhatsApp (loop del merchant) ============ */
+  .wamock{display:none;position:fixed;right:24px;bottom:24px;width:330px;border-radius:14px;overflow:hidden;background:#ECE5DD;z-index:95;border:1px solid var(--g-300);box-shadow:0 12px 40px rgba(0,0,0,.18)}
+  .wamock.open{display:block}
+  .wahead{display:flex;align-items:center;gap:10px;background:#075E54;color:#fff;padding:10px 14px}
+  .wahead .waav{width:30px;height:30px;border-radius:50%;background:var(--red-500);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+  .wahead .wt{font-size:13px;font-weight:700}
+  .wahead .ws{font-size:10px;opacity:.75}
+  .wahead button{margin-left:auto;color:#fff;opacity:.8;font-size:18px;line-height:1}
+  .wabody{padding:14px}
+  .wabubble{background:#fff;border-radius:10px;border-top-left-radius:2px;padding:10px 12px;font-size:12.5px;line-height:1.5;color:#111;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+  .wabubble p+p{margin-top:8px}
+  .wabubble .watime{display:block;text-align:right;font-size:10px;color:#8696A0;margin-top:6px}
+  .wacta{display:block;width:100%;margin-top:10px;background:#fff;border-radius:10px;padding:9px;text-align:center;font-size:13px;font-weight:700;color:#027EB5;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+  .wacta:hover{background:#F5F5F5}
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+  }
+</style>
+
+<div class="demobar" role="region" aria-label="Controles del prototipo">
+  <span class="dtag">Prototipo</span>
+  <span class="dlabel">Propuesta A · Hilo agrupado</span>
+  <span class="dsep"></span>
+  <button class="vbtn on" data-view="listado" onclick="show('listado')">Listado</button>
+  <span class="dsep"></span>
+  <span style="color:#9CA3AF;font-weight:500">Detalle:</span>
+  <button class="vbtn" data-caso="e-ampm" onclick="abrirDetalle('e-ampm')">AMPM · guía nueva</button>
+  <button class="vbtn" data-caso="e-dhl" onclick="abrirDetalle('e-dhl')">DHL · guía nueva</button>
+  <button class="vbtn" data-caso="e-99min" onclick="abrirDetalle('e-99min')">99 minutos · misma guía</button>
+  <button class="vbtn" data-caso="e-fedex" onclick="abrirDetalle('e-fedex')">FedEx · misma guía</button>
+  <span class="dsep"></span>
+  <button class="wabtn" onclick="toggleWA()">Notificación WhatsApp</button>
+  <span class="dnote">Los datos son de ejemplo</span>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8.5v9L12 22l-9-4.5v-9L12 4l9 4.5Z"/><path d="M3.3 8.7 12 13l8.7-4.3"/><line x1="12" y1="13" x2="12" y2="21.5"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6L5 8Z"/><path d="M8.5 10V6a3.5 3.5 0 0 1 7 0v4"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.2 3.4-5 6.5-5s5.7 1.8 6.5 5"/><path d="M16 5.2a3.5 3.5 0 0 1 0 5.6M18.5 15.5c1.6.8 2.7 2.3 3 4.5"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="5.5" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><line x1="8.2" y1="10.8" x2="15.8" y2="6.7"/><line x1="8.2" y1="13.2" x2="15.8" y2="17.3"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.5 3 8 7.5 9.5 4.5-1.5 7.5-5 7.5-9.5V6L12 3Z"/><path d="m9 11.5 2 2 4-4"/></symbol>
+    <symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 2 4 6.5v11L12 22l8-4.5v-11L12 2Z"/><path d="M4 6.5 12 11l8-4.5M12 11v11"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6a7 7 0 0 0 0 2.4l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.06-.4.1-.8.1-1.2Z"/></symbol>
+    <symbol id="i-chev-d" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-chev-u" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></symbol>
+    <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 9a6 6 0 1 0-12 0c0 6-2 7-2 7h16s-2-1-2-7"/><path d="M10 20a2.2 2.2 0 0 0 4 0"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1 1-1.1 1.8v.5"/><circle cx="12" cy="17" r=".6" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-dollar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.4-1-1.5-1.6-3-1.6-1.8 0-3 .9-3 2.1 0 3.1 6 1.5 6 4.4 0 1.3-1.3 2.1-3 2.1-1.6 0-2.7-.7-3.1-1.7M12 6.5v11"/></symbol>
+    <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="18.5" cy="12" r="1.4" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 5 5L19 7"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="7.5" x2="12" y2="13"/><circle cx="12" cy="16.5" r=".7" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-truckdot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-return" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
+    <symbol id="i-printer" viewBox="0 0 24 24"><path d="M7 8V3h10v5"/><rect x="4" y="8" width="16" height="9" rx="2"/><path d="M7 14h10v7H7z"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H6v18h12V7l-4-4Z"/><path d="M14 3v4h4"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.8" r=".7" fill="currentColor" stroke="none"/></symbol>
+
+    <symbol id="logo-dhl" viewBox="0 0 77 77"><g filter="url(#logo-dhl_filter0_d_14584_7883)">
+<g clip-path="url(#logo-dhl_clip0_14584_7883)">
+<rect x="6" y="6" width="65" height="65" rx="13" fill="#FFCB01"/>
+<path d="M18.0742 34.0049L16.0625 36.7643H27.0267C27.5811 36.7643 27.5742 36.9751 27.3032 37.3478C27.0281 37.7246 26.5677 38.3764 26.287 38.7603C26.1446 38.9543 25.8874 39.3074 26.7391 39.3074H31.2229L32.5516 37.4845C33.3757 36.3554 32.6235 34.0063 29.6772 34.0063L18.0742 34.0049Z" fill="#D80613"/>
+<path d="M15.2473 42.995L19.2887 37.451H24.3035C24.8579 37.451 24.851 37.6632 24.58 38.0345L23.5569 39.4414C23.4145 39.6354 23.1573 39.9886 24.009 39.9886H30.7258C30.1686 40.7618 28.3546 42.995 25.1027 42.995H15.2473ZM38.3897 39.9872L36.1982 42.995H30.4175L32.6089 39.9872H38.3897ZM47.244 39.306H33.1067L36.9725 34.0049H42.7505L40.5355 37.0449H43.1141L45.3318 34.0049H51.1098L47.244 39.306ZM46.7476 39.9872L44.5562 42.995H38.7782L40.9696 39.9872H46.7476ZM7 41.1736H15.5142L15.0496 41.8114H7V41.1736ZM7 39.9872H16.3797L15.9138 40.625H7V39.9872ZM7 42.36H14.65L14.1869 42.995H7V42.36ZM69.9687 41.8114H61.485L61.9509 41.1736H69.9687V41.8114ZM69.9687 42.995H60.6236L61.0854 42.36H69.9687V42.995ZM62.8151 39.9872H69.9687V40.6264H62.3505L62.8151 39.9872ZM59.1124 34.0049L55.2466 39.306H49.123L52.9915 34.0049H59.1124ZM48.628 39.9872C48.628 39.9872 48.2063 40.5706 48.0003 40.8497C47.2758 41.8407 47.9159 42.9937 50.2844 42.9937H59.5645L61.756 39.9872H48.628Z" fill="#D80613"/>
+</g>
+</g>
+<defs>
+<filter id="logo-dhl_filter0_d_14584_7883" x="0" y="0" width="77" height="77" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feMorphology radius="1" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_14584_7883"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="2.5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_14584_7883"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_14584_7883" result="shape"/>
+</filter>
+<clipPath id="logo-dhl_clip0_14584_7883">
+<rect x="6" y="6" width="65" height="65" rx="13" fill="white"/>
+</clipPath>
+</defs></symbol>
+    <symbol id="logo-fedex" viewBox="0 0 77 77"><g filter="url(#logo-fedex_filter0_d_14584_7934)">
+<g clip-path="url(#logo-fedex_clip0_14584_7934)">
+<rect x="6" y="6" width="65" height="65" rx="13" fill="#29007C"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M65.8679 42.2109C64.8698 42.2109 63.9883 42.9366 63.9883 44.0101C63.9883 45.0815 64.8698 45.8079 65.8679 45.8079C66.8693 45.8079 67.7494 45.0815 67.7494 44.0101C67.7494 42.9366 66.869 42.2109 65.8679 42.2109ZM65.8692 42.5007C66.7496 42.5007 67.3887 43.1387 67.3887 44.01C67.3887 44.8789 66.7496 45.5169 65.8692 45.5169C64.9903 45.5169 64.3504 44.8799 64.3504 44.01C64.3504 43.1387 64.9903 42.5007 65.8692 42.5007ZM65.4705 45.0734V44.0876L65.4723 44.0883V44.0872H65.7922C66.0105 44.0872 66.1121 44.1544 66.1699 44.3385C66.2002 44.4436 66.2156 44.5576 66.2308 44.6696C66.2506 44.8157 66.2699 44.9585 66.3213 45.0741H66.711C66.6492 45.0058 66.611 44.7452 66.5824 44.5502C66.5779 44.5192 66.5736 44.4899 66.5695 44.4633C66.5304 44.1632 66.4606 43.9992 66.2704 43.9699V43.9607C66.4895 43.9328 66.6595 43.7401 66.6595 43.4969C66.6595 43.1021 66.4394 42.8995 65.9597 42.8995H65.1411V45.0734H65.4705ZM65.879 43.8065C66.1989 43.8065 66.2903 43.6418 66.2903 43.4965C66.2903 43.3247 66.1989 43.189 65.879 43.189H65.4706V43.8072H65.879V43.8065Z" fill="#FF5A00"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M39.9609 30.375V45.4943H48.6399V45.4942H53.159L55.307 43.1447L57.474 45.4942H62.1543L57.6978 40.676L62.0932 35.8966H57.5954L55.4891 38.2281L53.3001 35.8966H48.6393L48.6393 35.8967H43.6372V33.7451H48.6399V30.375H39.9609ZM48.6399 35.8973L48.6393 35.8967H48.6399V35.8973ZM48.6399 35.8973L53.0567 40.6961L48.6399 45.4935V42.1157H43.6372V39.1395H48.6399V35.8973ZM48.6399 45.4935V45.4942H48.6393L48.6399 45.4935Z" fill="#FF5A00"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M36.2983 30.376V36.5629H36.2577C35.4471 35.6622 34.434 35.3483 33.2593 35.3483C30.852 35.3483 29.0386 36.9316 28.4021 39.0231C27.6759 36.7181 25.8036 35.3052 23.0279 35.3052C20.7731 35.3052 18.9933 36.2833 18.0635 37.8775V35.8966H13.4038V33.7457H18.4895V30.376H9.25V45.4945H13.4038V39.1397H17.544C17.4165 39.6284 17.3527 40.1306 17.3542 40.6346C17.3542 43.7869 19.8459 46.0021 23.0271 46.0021C25.7013 46.0021 27.465 44.7872 28.3969 42.5755H24.8369C24.3558 43.2411 23.9902 43.4377 23.0275 43.4377C21.9116 43.4377 20.9486 42.496 20.9486 41.3811H28.1973C28.5117 43.8855 30.5299 46.0449 33.2998 46.0449C34.4947 46.0449 35.5886 45.4769 36.2573 44.5172H36.2975V45.4967H39.9599V30.376H36.2983ZM21.0645 39.1849C21.2959 38.2241 22.0662 37.5963 23.0278 37.5963C24.0866 37.5963 24.8179 38.2047 25.0098 39.1849H21.0645ZM31.8873 40.7083C31.8873 41.978 32.7261 43.1936 34.0755 43.1936C35.5534 43.1936 36.1917 41.9943 36.1917 40.7083C36.1917 39.3517 35.5888 38.047 34.0755 38.047C32.6171 38.047 31.8873 39.351 31.8873 40.7083Z" fill="white"/>
+</g>
+</g>
+<defs>
+<filter id="logo-fedex_filter0_d_14584_7934" x="0" y="0" width="77" height="77" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feMorphology radius="1" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_14584_7934"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="2.5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_14584_7934"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_14584_7934" result="shape"/>
+</filter>
+<clipPath id="logo-fedex_clip0_14584_7934">
+<rect x="6" y="6" width="65" height="65" rx="13" fill="white"/>
+</clipPath>
+</defs></symbol>
+    <symbol id="logo-99min" viewBox="0 0 77 77"><g filter="url(#logo-99min_filter0_d_14584_7913)">
+<rect x="6" y="6" width="65" height="65" rx="13" fill="#3E3F3C"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M33.7569 32.204C34.6304 32.7451 35.3228 33.5487 35.7414 34.5073L35.7319 34.5132C36.5814 36.7486 36.8799 39.1667 36.6005 41.5505C36.4068 43.0849 36.0321 44.589 35.4848 46.0295C34.9882 47.0796 34.3172 48.0318 33.5022 48.8429C32.0249 50.1286 30.1001 50.7302 28.1799 50.5066C27.3658 50.4295 26.5698 50.2126 25.8248 49.865C25.342 49.6661 24.8839 49.4086 24.46 49.0979L26.817 46.2767C27.2154 46.5767 27.6879 46.7542 28.1799 46.7888C29.1766 46.9698 30.1959 46.6347 30.9076 45.8922C31.6902 45.0447 32.2086 43.9745 32.3959 42.8199C31.3045 43.4504 30.0517 43.7196 28.8072 43.5909C27.2458 43.4804 25.8036 42.6901 24.8402 41.4171C23.7888 40.0953 23.3375 38.3715 23.6009 36.683C23.6341 34.9536 24.4545 33.3413 25.8153 32.3316C27.1515 31.2618 28.8523 30.7999 30.5255 31.0524C31.6813 31.1403 32.7949 31.5372 33.7569 32.204ZM29.543 40.0083C30.283 40.1163 31.0353 39.9335 31.651 39.4963L31.6491 39.4924C32.1635 39.0265 32.5127 38.3968 32.6413 37.7031C32.6854 36.965 32.4649 36.2359 32.0217 35.6549C31.5562 35.0739 30.8875 34.7059 30.1608 34.6308C29.4586 34.4601 28.7198 34.6509 28.1782 35.1428C27.6758 35.6018 27.3651 36.2438 27.3115 36.934C27.2826 37.6524 27.4549 38.3642 27.8076 38.9842C28.2026 39.583 28.8427 39.9607 29.543 40.0083Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M47.5175 32.2031C48.39 32.7448 49.0816 33.5484 49.5001 34.5064H49.5096C50.4185 36.7257 50.7184 39.1603 50.3764 41.5437C50.1827 43.0781 49.808 44.5822 49.2606 46.0227C48.758 47.0754 48.0813 48.0294 47.2609 48.842C45.7836 50.1276 43.8589 50.7293 41.9387 50.5056C41.1237 50.4298 40.3269 50.2129 39.5816 49.8641C39.0996 49.6648 38.6422 49.4073 38.2188 49.097L40.5739 46.2758C40.9731 46.5755 41.4461 46.7529 41.9387 46.7879C42.9348 46.9692 43.9536 46.6341 44.6644 45.8913C45.4478 45.0444 45.9663 43.9739 46.1528 42.8189C45.0597 43.4506 43.8044 43.7185 42.5583 43.586C40.9963 43.4761 39.5533 42.6857 38.5894 41.4123C37.5396 40.0897 37.0885 38.3665 37.3501 36.6782C37.3895 34.9457 38.217 33.3335 39.5835 32.3267C40.9204 31.2568 42.6218 30.795 44.2957 31.0476C45.4483 31.1389 46.5584 31.537 47.5175 32.2031ZM43.3021 40.0097C44.0421 40.1177 44.7945 39.9349 45.4101 39.4976H45.4177C45.9332 39.0318 46.2825 38.4012 46.41 37.7064C46.4516 36.9658 46.2277 36.2353 45.7808 35.6543C45.3159 35.074 44.6478 34.7066 43.9218 34.6321C43.2196 34.4597 42.48 34.6508 41.9393 35.1442C41.4367 35.6025 41.1254 36.2436 41.0706 36.9334C41.0427 37.6524 41.2148 38.3645 41.5667 38.9856C41.9617 39.5843 42.6018 39.9621 43.3021 40.0097Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M63.6339 24.3989L59.7904 28.3659L55.4527 23.7613L54.4605 24.7854C62.5906 34.626 61.7403 49.337 52.5344 58.1102C43.3285 66.8834 29.053 66.5871 20.1962 57.4391C11.3395 48.291 11.0628 33.5566 19.5696 24.0613C28.0764 14.5659 42.33 13.6991 51.8583 22.0976L52.8505 21.0735L48.3874 16.4689L52.229 12.5C61.1628 17.8736 63.6339 24.3989 63.6339 24.3989ZM36.7839 58.797C46.7908 58.8149 54.9219 50.4659 54.9565 40.1375V40.008C54.9219 29.6795 46.7908 21.3306 36.7839 21.3484C26.7769 21.3663 18.6738 29.7442 18.6738 40.0727C18.6738 50.4013 26.7769 58.7792 36.7839 58.797Z" fill="#70C516"/>
+</g>
+<defs>
+<filter id="logo-99min_filter0_d_14584_7913" x="0" y="0" width="77" height="77" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feMorphology radius="1" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_14584_7913"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="2.5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_14584_7913"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_14584_7913" result="shape"/>
+</filter>
+</defs></symbol>
+    <symbol id="logo-t1envios" viewBox="0 0 137 42"><g clip-path="url(#logo-t1envios_clip0_266_2475)">
+<g clip-path="url(#logo-t1envios_clip1_266_2475)">
+<path d="M26.9684 18.6174H30.6027C30.7408 18.6174 30.8328 18.6174 30.9248 18.7094C30.9248 18.7094 30.9248 18.7094 30.9248 18.7554V36.7433C30.9248 37.5253 31.6609 38.0774 32.4429 37.8474C34.1451 37.1573 36.3533 36.2832 37.9635 35.5471C38.2395 35.4091 38.6076 35.2711 38.6076 34.7191V18.7554C38.6076 18.7554 38.6076 18.7094 38.6076 18.6634C38.6076 18.6174 38.6076 18.6174 38.6076 18.6174V7.66831C38.6076 7.02424 38.1015 6.51819 37.4574 6.51819H34.7432C34.2371 6.51819 33.8231 6.84022 33.6391 7.30027C32.5349 10.3826 30.4187 12.6828 27.2444 13.2349C24.0701 13.7869 26.9684 13.2809 26.7844 13.2809C26.1863 13.3729 25.7723 13.8329 25.7723 14.431V17.4213C25.7723 18.0654 26.2783 18.5714 26.9224 18.5714L26.9684 18.6174Z" fill="#D93A26"/>
+<path d="M31.7529 5.27603C31.6149 5.13802 31.3849 5 31.1549 5H4.51815C3.69007 5 3 5.59806 3 6.38014V10.4286C3 11.3947 3.18402 11.8547 4.38014 11.8547H13.259C13.4891 11.8547 13.6731 12.0387 13.6731 12.2687V15.6731V34.627C13.6731 35.0411 13.9491 35.3631 14.3632 35.5471C15.1452 35.8691 17.8595 37.2033 18.7796 37.7093C19.6997 38.2154 21.3099 37.3413 21.3099 36.0532V12.9128C21.3099 12.8668 21.3099 12.7288 21.3099 12.7288C21.2639 12.4068 21.3099 12.0847 21.6319 11.9467C21.7239 11.9467 21.7699 11.9467 21.8619 11.9467H24.7602C31.1089 11.3486 31.7529 6.42615 31.7989 5.87409C31.7989 5.87409 31.7989 5.82808 31.7989 5.78208V5.64407C31.7989 5.50605 31.7989 5.41404 31.6609 5.32203L31.7529 5.27603Z" fill="#D93A26"/>
+</g>
+<path d="M49.9755 34.435C48.4192 34.435 47.0513 34.0967 45.872 33.42C44.7023 32.7337 43.7888 31.7815 43.1315 30.5635C42.4838 29.3358 42.16 27.9148 42.16 26.3005C42.16 24.5895 42.479 23.1057 43.117 21.849C43.7647 20.5923 44.6637 19.6208 45.814 18.9345C46.9643 18.2482 48.3032 17.905 49.8305 17.905C51.4255 17.905 52.7837 18.2772 53.905 19.0215C55.0263 19.7562 55.8625 20.805 56.4135 22.168C56.9742 23.531 57.1965 25.1502 57.0805 27.0255H54.05V25.9235C54.0307 24.1062 53.6827 22.7625 53.006 21.8925C52.339 21.0225 51.3192 20.5875 49.9465 20.5875C48.4288 20.5875 47.2882 21.066 46.5245 22.023C45.7608 22.98 45.379 24.3623 45.379 26.17C45.379 27.8907 45.7608 29.2247 46.5245 30.172C47.2882 31.1097 48.3902 31.5785 49.8305 31.5785C50.7778 31.5785 51.5947 31.3658 52.281 30.9405C52.977 30.5055 53.5183 29.8868 53.905 29.0845L56.8775 30.027C56.2685 31.4287 55.3453 32.5162 54.108 33.2895C52.8707 34.0532 51.4932 34.435 49.9755 34.435ZM44.393 27.0255V24.662H55.5725V27.0255H44.393ZM70.8999 34V26.3005C70.8999 25.6915 70.8467 25.068 70.7404 24.43C70.6437 23.7823 70.4504 23.183 70.1604 22.632C69.8801 22.081 69.4789 21.6363 68.9569 21.298C68.4446 20.9597 67.7727 20.7905 66.9414 20.7905C66.4001 20.7905 65.8877 20.8823 65.4044 21.066C64.9211 21.24 64.4957 21.5252 64.1284 21.9215C63.7707 22.3178 63.4856 22.8398 63.2729 23.4875C63.0699 24.1352 62.9684 24.923 62.9684 25.851L61.0834 25.1405C61.0834 23.7195 61.3492 22.4677 61.8809 21.385C62.4126 20.2927 63.1762 19.442 64.1719 18.833C65.1676 18.224 66.3711 17.9195 67.7824 17.9195C68.8651 17.9195 69.7737 18.0935 70.5084 18.4415C71.2431 18.7895 71.8376 19.2487 72.2919 19.819C72.7559 20.3797 73.1087 20.9935 73.3504 21.6605C73.5921 22.3275 73.7564 22.98 73.8434 23.618C73.9304 24.256 73.9739 24.8167 73.9739 25.3V34H70.8999ZM59.8944 34V18.34H62.6059V22.864H62.9684V34H59.8944ZM81.9847 34L76.3007 18.34H79.3602L83.5217 30.201L87.6832 18.34H90.7427L85.0587 34H81.9847ZM96.4002 16.02H94.0222L96.0957 10.945H98.4737L96.4002 16.02ZM93.6452 34V18.34H96.6757V34H93.6452ZM107.831 34.435C106.265 34.435 104.906 34.0822 103.756 33.3765C102.606 32.6708 101.716 31.6993 101.088 30.462C100.469 29.215 100.16 27.7795 100.16 26.1555C100.16 24.5218 100.479 23.0863 101.117 21.849C101.755 20.602 102.649 19.6353 103.8 18.949C104.95 18.253 106.294 17.905 107.831 17.905C109.397 17.905 110.755 18.2578 111.905 18.9635C113.055 19.6692 113.945 20.6407 114.573 21.878C115.201 23.1153 115.516 24.5412 115.516 26.1555C115.516 27.7892 115.197 29.2295 114.559 30.4765C113.93 31.7138 113.041 32.6853 111.891 33.391C110.74 34.087 109.387 34.435 107.831 34.435ZM107.831 31.5785C109.329 31.5785 110.445 31.0758 111.18 30.0705C111.924 29.0555 112.297 27.7505 112.297 26.1555C112.297 24.5218 111.92 23.2168 111.166 22.2405C110.421 21.2545 109.31 20.7615 107.831 20.7615C106.816 20.7615 105.979 20.9935 105.322 21.4575C104.665 21.9118 104.177 22.545 103.858 23.357C103.539 24.1593 103.379 25.0922 103.379 26.1555C103.379 27.7988 103.756 29.1135 104.51 30.0995C105.264 31.0855 106.371 31.5785 107.831 31.5785ZM124.407 34.4205C122.503 34.4205 120.951 34 119.753 33.159C118.554 32.318 117.819 31.1338 117.549 29.6065L120.652 29.128C120.845 29.94 121.29 30.5828 121.986 31.0565C122.691 31.5205 123.566 31.7525 124.61 31.7525C125.558 31.7525 126.297 31.5592 126.829 31.1725C127.37 30.7858 127.641 30.2542 127.641 29.5775C127.641 29.1812 127.544 28.8622 127.351 28.6205C127.167 28.3692 126.776 28.1323 126.176 27.91C125.577 27.6877 124.663 27.4122 123.436 27.0835C122.092 26.7355 121.024 26.3633 120.231 25.967C119.448 25.561 118.888 25.0922 118.549 24.5605C118.221 24.0192 118.056 23.3667 118.056 22.603C118.056 21.6557 118.308 20.8292 118.81 20.1235C119.313 19.4178 120.019 18.8717 120.927 18.485C121.846 18.0983 122.919 17.905 124.146 17.905C125.345 17.905 126.413 18.0935 127.351 18.4705C128.288 18.8475 129.047 19.384 129.627 20.08C130.207 20.7663 130.555 21.5735 130.671 22.5015L127.568 23.067C127.462 22.313 127.109 21.7185 126.51 21.2835C125.91 20.8485 125.132 20.6117 124.175 20.573C123.257 20.5343 122.513 20.689 121.942 21.037C121.372 21.3753 121.087 21.8442 121.087 22.4435C121.087 22.7915 121.193 23.0863 121.406 23.328C121.628 23.5697 122.053 23.8017 122.682 24.024C123.31 24.2463 124.238 24.5122 125.466 24.8215C126.78 25.1598 127.824 25.5368 128.598 25.9525C129.371 26.3585 129.922 26.8467 130.251 27.417C130.589 27.9777 130.758 28.6592 130.758 29.4615C130.758 31.0082 130.193 32.2213 129.062 33.101C127.94 33.9807 126.389 34.4205 124.407 34.4205Z" fill="black"/>
+</g>
+<defs>
+<clipPath id="logo-t1envios_clip0_266_2475">
+<rect width="137" height="42" fill="white"/>
+</clipPath>
+<clipPath id="logo-t1envios_clip1_266_2475">
+<rect width="43" height="42" fill="white"/>
+</clipPath>
+</defs></symbol>
+    <symbol id="logo-ampm" viewBox="0 0 77 77"><rect x="6" y="6" width="65" height="65" rx="13" fill="#ffffff" stroke="#E7E7E7"/><g transform="translate(38.5,38.5) scale(0.24759) translate(-173.27,-173.27)"><g> <g> <g> <g> <g> <g> <path fill="#e1251b" d="M147.43,172.8c0-8.31-3.7-15.25-15.43-15.25-6.44,0-11.28,1.83-13.7,3.2l2.01,6.98c2.33-1.37,6.12-2.6,9.72-2.6,5.43,0,6.44,2.65,6.44,4.57v.41c-12.51,0-20.73,4.34-20.73,13.51,0,5.62,4.25,10.82,11.41,10.82,4.2,0,7.81-1.51,10.09-4.34h.23l.64,3.52h9.91c-.41-1.96-.59-5.2-.59-8.49v-12.33ZM136.84,180.79c0,.64-.09,1.28-.23,1.87-.73,2.24-3.01,4.06-5.71,4.06-2.47,0-4.34-1.37-4.34-4.2,0-4.2,4.47-5.57,10.23-5.57v3.83h.05Z"/> <path fill="#e1251b" d="M194.04,157.56c-2.6,0-4.75.64-6.71,1.73-1.73,1-3.24,2.47-4.61,4.34h-.14c-1.51-3.7-5.07-6.07-9.68-6.07-5.98,0-9.18,3.33-10.68,5.62h-.23l-.41-4.84h-9.31c.14,3.15.27,6.85.27,11.28v24.01h10.68v-20.5c0-.96.09-1.96.41-2.83.64-1.73,2.33-3.88,5.11-3.88,3.52,0,5.11,3.01,5.11,7.44v19.77h10.68v-20.64c0-.87.14-1.96.37-2.74.78-2.1,2.51-3.83,5.11-3.83,3.52,0,5.2,2.97,5.2,8.08v19.13h10.68v-20.77c0-10.55-5.11-15.29-11.92-15.29h.05Z"/> <g> <path fill="#002f87" d="M232.66,157.56c-5.11,0-9.18,2.01-11.78,5.71h-.14l-.5-4.93h-9.54c.14,3.33.27,7.21.27,11.82v37.75h10.96v-17.53h.14c1.6,2.33,4.88,4.02,9.18,4.02,7.85,0,16.02-6.07,16.02-18.9,0-11.28-6.94-17.99-14.65-17.99l.05.05ZM228.6,186c-3.2,0-5.71-2.24-6.44-5.2-.14-.73-.23-1.46-.23-2.33v-4.84c0-.64.09-1.37.23-1.96.73-3.24,3.47-5.57,6.57-5.57,4.93,0,7.44,4.25,7.44,9.91,0,5.98-2.83,9.95-7.58,9.95v.05Z"/> <path fill="#002f87" d="M292.06,157.56c-2.6,0-4.75.64-6.71,1.73-1.73,1-3.24,2.47-4.61,4.34h-.14c-1.51-3.7-5.07-6.07-9.68-6.07-5.98,0-9.18,3.33-10.68,5.62h-.23l-.41-4.84h-9.31c.14,3.15.27,6.85.27,11.28v24.01h10.68v-20.5c0-.96.09-1.96.41-2.83.64-1.73,2.33-3.88,5.11-3.88,3.52,0,5.11,3.01,5.11,7.44v19.77h10.68v-20.64c0-.87.14-1.96.37-2.74.78-2.1,2.51-3.83,5.11-3.83,3.52,0,5.2,2.97,5.2,8.08v19.13h10.68v-20.77c0-10.55-5.11-15.29-11.92-15.29h.05Z"/> </g> </g> <g> <path fill="#002f87" d="M66.25,145.46c2.05.96,3.56,2.92,3.88,5.25,15.29,3.15,26.84,16.71,26.84,32.96v.55h4.7v-.55c0-20.22-15.57-36.75-35.38-38.21h-.05Z"/> <path fill="#002f87" d="M63.34,156.69c-14.93,0-27.03,12.05-27.03,27.03,0,1,.05,2.01.18,2.97h5.07c.23,12.83,10.59,23.51,23.1,24.01,14.34-.68,25.7-12.55,25.7-26.98s-12.1-27.03-27.03-27.03ZM39.78,185.18c-.91,0-1.6-.73-1.6-1.6s.68-1.6,1.6-1.6,1.6.73,1.6,1.6-.73,1.6-1.6,1.6ZM63.06,158.7c.87,0,1.6.68,1.6,1.6s-.68,1.6-1.6,1.6-1.6-.73-1.6-1.6.73-1.6,1.6-1.6ZM63.06,208.46c-.87,0-1.6-.73-1.6-1.6s.73-1.6,1.6-1.6,1.6.73,1.6,1.6-.68,1.6-1.6,1.6ZM65.71,184.49c0,1.32-1.05,2.37-2.37,2.37-1.1,0-1.96-.73-2.28-1.73l-12.46-8.9.91-1.42,13.19,7.4s.46-.09.68-.09c.18,0,.32,0,.46.05l10.23-16.48.73.41-9.54,16.98c.32.41.5.87.5,1.42h-.05ZM86.34,181.98c.87,0,1.6.73,1.6,1.6s-.68,1.6-1.6,1.6-1.6-.73-1.6-1.6.73-1.6,1.6-1.6Z"/> </g> </g> <g> <path fill="#002f87" d="M305.21,156.42c.27,0,.68-.09,1.14-.09.55,0,.96.09,1.23.27.23.18.37.46.37.78,0,.46-.32.82-.69.91.27.14.41.37.5.68.14.46.23.91.32,1.1h-.87s-.14-.41-.27-.87c-.09-.46-.27-.59-.59-.59h-.23v1.51h-.82v-3.7h-.09ZM306.03,158.01h.32c.41,0,.69-.23.69-.55s-.23-.5-.6-.5h-.36v1l-.05.05Z"/> <path fill="#002f87" d="M309.55,158.29c0,1.69-1.37,3.06-3.06,3.06s-3.06-1.37-3.06-3.06,1.37-3.06,3.06-3.06,3.06,1.37,3.06,3.06ZM306.49,154.54c-2.06,0-3.74,1.64-3.74,3.74s1.69,3.74,3.74,3.74,3.74-1.64,3.74-3.74-1.69-3.74-3.74-3.74Z"/> </g> </g> <g> <path fill="#002f87" d="M135.7,145.46c-1.37.46-3.93,1.1-6.53,1.1-3.56,0-6.12-.91-7.94-2.6-1.78-1.69-2.74-4.25-2.74-7.12,0-6.48,4.75-10.18,11.14-10.18,2.51,0,4.47.5,5.39.91l-.91,3.56c-1.05-.5-2.37-.82-4.52-.82-3.65,0-6.48,2.1-6.48,6.3s2.56,6.39,6.16,6.39c1,0,1.78-.09,2.15-.27v-4.11h-3.01v-3.42h7.26v10.27h.05Z"/> <path fill="#002f87" d="M139.08,136.88c0-2.1,0-3.47-.14-4.66h3.74l.18,2.65h.14c.73-2.1,2.42-2.97,3.84-2.97.41,0,.59,0,.91.09v4.15c-.37-.05-.73-.14-1.23-.14-1.6,0-2.74.82-3.01,2.24-.05.27-.09.59-.09,1v7.17h-4.38v-9.54h.05Z"/> <path fill="#002f87" d="M163.32,141.81c0,1.87.05,3.33.09,4.57h-3.83l-.18-2.01h-.09c-.55.87-1.87,2.33-4.43,2.33-2.88,0-4.98-1.78-4.98-6.16v-8.31h4.38v7.62c0,2.05.68,3.29,2.24,3.29,1.23,0,1.92-.82,2.19-1.55.14-.27.18-.59.18-.96v-8.4h4.38v9.59h.05Z"/> <path fill="#002f87" d="M166.83,136.97c0-1.87-.05-3.42-.14-4.75h3.83l.18,1.96h.05c1.05-1.46,2.65-2.28,4.7-2.28,3.1,0,5.89,2.69,5.89,7.21,0,5.16-3.29,7.58-6.44,7.58-1.69,0-3.01-.68-3.65-1.64h-.05v7.03h-4.38v-15.11ZM171.21,140.3c0,.37,0,.64.09.91.27,1.19,1.28,2.1,2.56,2.1,1.92,0,3.06-1.6,3.06-3.97,0-2.24-1-3.97-2.97-3.97-1.23,0-2.33.91-2.65,2.24-.05.23-.09.5-.09.78v1.92Z"/> <path fill="#002f87" d="M190.76,146.69c-4.15,0-7.3-2.69-7.3-7.3s3.01-7.49,7.58-7.49c4.29,0,7.21,2.97,7.21,7.26,0,5.16-3.65,7.53-7.44,7.53h-.05ZM190.85,143.54c1.73,0,2.78-1.69,2.78-4.25,0-2.1-.82-4.25-2.78-4.25s-2.88,2.15-2.88,4.25c0,2.42,1,4.25,2.88,4.25Z"/> </g> </g> </g> </g></g></symbol>
+  </defs>
+</svg>
+
+<!-- ================= HEADER ================= -->
+<header class="topbar">
+  <button class="btn-ghost-icon" aria-label="Colapsar menú"><svg class="ic"><use href="#i-panel"/></svg></button>
+  <svg class="logo brand" role="img" aria-label="T1envíos"><use href="#logo-t1envios"/></svg>
+  <button class="store">
+    <span class="avstore">CO</span> Chicos Ole
+    <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg>
+  </button>
+  <div class="topsearch">
+    <div class="wrap">
+      <input type="text" placeholder="Número de rastreo" aria-label="Número de rastreo" />
+      <svg class="ic" style="width:18px;height:18px"><use href="#i-search"/></svg>
+    </div>
+  </div>
+  <div class="topright">
+    <button class="balance"><svg class="ic" style="width:18px;height:18px"><use href="#i-dollar"/></svg> $9,456.00 <svg class="ic" style="width:13px;height:13px"><use href="#i-chev-r"/></svg></button>
+    <button class="icbtn" aria-label="Apps"><svg class="ic"><use href="#i-grid"/></svg></button>
+    <button class="icbtn" aria-label="Ayuda"><svg class="ic"><use href="#i-help"/></svg></button>
+    <button class="icbtn" aria-label="Notificaciones"><svg class="ic"><use href="#i-bell"/></svg><span class="dotbadge">+9</span></button>
+    <button class="avuser" aria-label="Cuenta">AE</button>
+  </div>
+</header>
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="sidebar">
+  <button class="cta-crear">+ Crear envío</button>
+  <nav class="nav">
+    <a href="#"><svg class="ic"><use href="#i-home"/></svg> Inicio</a>
+    <a href="#"><svg class="ic"><use href="#i-box"/></svg> Envíos <span class="grow"></span><svg class="ic" style="width:14px;height:14px"><use href="#i-chev-u"/></svg></a>
+    <a href="#" class="sub">Cotizador</a>
+    <a href="#" class="sub">Recolecciones</a>
+    <a href="#" class="sub">Rastreo de guías</a>
+    <a href="#" class="sub active" onclick="show('listado');return false">Mis envíos</a>
+    <a href="#"><svg class="ic"><use href="#i-bag"/></svg> Mis Pedidos</a>
+    <a href="#"><svg class="ic"><use href="#i-users"/></svg> Clientes</a>
+    <a href="#"><svg class="ic"><use href="#i-share"/></svg> Canales de Venta</a>
+    <a href="#"><svg class="ic"><use href="#i-shield"/></svg> Control de calidad <span class="grow"></span><svg class="ic" style="width:14px;height:14px"><use href="#i-chev-u"/></svg></a>
+    <a href="#" class="sub">Gestión de incidencias <span class="grow"></span><span class="cnt">22</span></a>
+    <a href="#" class="sub">Sobrepesos</a>
+    <a href="#"><svg class="ic"><use href="#i-cube"/></svg> HUB logístico <span class="grow"></span><svg class="ic" style="width:14px;height:14px"><use href="#i-chev-u"/></svg></a>
+    <a href="#" class="sub">Reglas</a>
+    <a href="#" class="sub">Logs</a>
+    <a href="#"><svg class="ic"><use href="#i-chart"/></svg> Reportes</a>
+    <a href="#"><svg class="ic"><use href="#i-gear"/></svg> Configuración <span class="grow"></span><svg class="ic" style="width:14px;height:14px"><use href="#i-chev-u"/></svg></a>
+    <a href="#" class="sub">Direcciones guardadas</a>
+    <a href="#" class="sub">Plantillas de paquetes</a>
+    <a href="#" class="sub">Paqueterías</a>
+    <a href="#" class="sub">Zonas</a>
+  </nav>
+</aside>
+
+<main class="main">
+
+  <!-- ================= VISTA: LISTADO ================= -->
+  <section id="listado" class="view on">
+    <div class="pagehead">
+      <h1>Mis envíos</h1>
+      <div class="acts">
+        <button class="btn btn-secondary">Exportar</button>
+        <button class="btn btn-secondary">Crear guías masivas</button>
+        <button class="btn btn-primary">Crear envío</button>
+      </div>
+    </div>
+
+    <div class="search">
+      <input type="text" placeholder="Búsqueda" aria-label="Búsqueda" />
+      <svg class="ic" style="width:18px;height:18px"><use href="#i-search"/></svg>
+    </div>
+
+    <div class="tablecard">
+      <div class="filters">
+        <div class="fpill"><button>Paquetería <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button></div>
+        <div class="fpill"><button>Estatus <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button></div>
+        <div class="fpill"><button>Fecha <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button></div>
+        <div class="fpill"><button>Estado de envío <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button></div>
+        <div class="fpill" id="fTipo">
+          <button id="fTipoBtn" onclick="toggleTipoMenu(event)">Tipo de guía <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button>
+          <div class="menu" id="tipoMenu" role="menu">
+            <button role="menuitemradio" aria-checked="true" onclick="filtraTipo('todas',this)"><span class="radio"></span> Todas</button>
+            <button role="menuitemradio" aria-checked="false" onclick="filtraTipo('envio',this)"><span class="radio"></span> Envío</button>
+            <button role="menuitemradio" aria-checked="false" onclick="filtraTipo('retorno',this)"><span class="radio"></span> Retorno</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-row thead">
+        <div class="th"><span class="ck on"><svg class="ic"><use href="#i-check"/></svg></span></div>
+        <div class="th" style="grid-column:2/4">Guía</div>
+        <div class="th">Fecha <span class="sort"><svg class="ic"><use href="#i-chev-u"/></svg><svg class="ic"><use href="#i-chev-d"/></svg></span></div>
+        <div class="th">Canal de venta</div>
+        <div class="th">Cliente</div>
+        <div class="th">Costo <span class="sort"><svg class="ic"><use href="#i-chev-u"/></svg><svg class="ic"><use href="#i-chev-d"/></svg></span></div>
+        <div class="th">Estado</div>
+        <div class="th">Estado de rastreo</div>
+        <div class="th" style="justify-content:flex-end;padding-right:16px">Acciones</div>
+      </div>
+
+      <div id="tbody"></div>
+
+      <div class="pag">
+        <span>En total 23,456 registro(s)</span>
+        <div class="pages">
+          <button class="arrow"><svg class="ic" style="width:14px;height:14px;transform:rotate(180deg)"><use href="#i-chev-r"/></svg></button>
+          <button class="pg cur">1</button><button class="pg">2</button><button class="pg">3</button><button class="pg">4</button><button class="pg">5</button>
+          <span style="color:var(--sec)">…</span><button class="pg">68</button>
+          <button class="arrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-chev-r"/></svg></button>
+        </div>
+        <span style="display:flex;align-items:center;gap:8px">Saltar a página <input type="text" value="1" aria-label="Página" /> <button class="arrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-chev-r"/></svg></button></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VISTA: DETALLE (render por datos) ================= -->
+  <section id="detalle" class="view"></section>
+
+</main>
+
+<aside class="wamock" id="wamock" aria-label="Notificación de WhatsApp (mock)">
+  <div class="wahead">
+    <span class="waav">T1</span>
+    <div><div class="wt">T1envíos</div><div class="ws">mock · se envía al generarse el retorno</div></div>
+    <button onclick="toggleWA()" aria-label="Cerrar">×</button>
+  </div>
+  <div class="wabody" id="wabody"></div>
+</aside>
+
+<main class="main">
+
+  <!-- ================= VISTA: LISTADO ================= -->
+  <section id="listado" class="view on">
+    <div class="pagehead">
+      <h1>Mis envíos</h1>
+      <div class="acts">
+        <button class="btn btn-secondary">Exportar</button>
+        <button class="btn btn-secondary">Crear guías masivas</button>
+        <button class="btn btn-primary">Crear envío</button>
+      </div>
+    </div>
+
+    <div class="search">
+      <input type="text" placeholder="Búsqueda" aria-label="Búsqueda" />
+      <svg class="ic" style="width:18px;height:18px"><use href="#i-search"/></svg>
+    </div>
+
+    <div class="tablecard">
+      <div class="filters">
+        <div class="fpill"><button>Paquetería <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button></div>
+        <div class="fpill"><button>Estatus <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button></div>
+        <div class="fpill"><button>Fecha <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button></div>
+        <div class="fpill"><button>Estado de envío <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button></div>
+        <div class="fpill" id="fTipo">
+          <button id="fTipoBtn" onclick="toggleTipoMenu(event)">Tipo de guía <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button>
+          <div class="menu" id="tipoMenu" role="menu">
+            <button role="menuitemradio" aria-checked="true" onclick="filtraTipo('todas',this)"><span class="radio"></span> Todas</button>
+            <button role="menuitemradio" aria-checked="false" onclick="filtraTipo('envio',this)"><span class="radio"></span> Envío</button>
+            <button role="menuitemradio" aria-checked="false" onclick="filtraTipo('retorno',this)"><span class="radio"></span> Retorno</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-row thead">
+        <div class="th"><span class="ck on"><svg class="ic"><use href="#i-check"/></svg></span></div>
+        <div class="th" style="grid-column:2/4">Guía</div>
+        <div class="th">Fecha <span class="sort"><svg class="ic"><use href="#i-chev-u"/></svg><svg class="ic"><use href="#i-chev-d"/></svg></span></div>
+        <div class="th">Canal de venta</div>
+        <div class="th">Cliente</div>
+        <div class="th">Costo <span class="sort"><svg class="ic"><use href="#i-chev-u"/></svg><svg class="ic"><use href="#i-chev-d"/></svg></span></div>
+        <div class="th">Estado</div>
+        <div class="th">Estado de rastreo</div>
+        <div class="th" style="justify-content:flex-end;padding-right:16px">Acciones</div>
+      </div>
+
+      <div id="tbody"></div>
+
+      <div class="pag">
+        <span>En total 23,456 registro(s)</span>
+        <div class="pages">
+          <button class="arrow"><svg class="ic" style="width:14px;height:14px;transform:rotate(180deg)"><use href="#i-chev-r"/></svg></button>
+          <button class="pg cur">1</button><button class="pg">2</button><button class="pg">3</button><button class="pg">4</button><button class="pg">5</button>
+          <span style="color:var(--sec)">…</span><button class="pg">68</button>
+          <button class="arrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-chev-r"/></svg></button>
+        </div>
+        <span style="display:flex;align-items:center;gap:8px">Saltar a página <input type="text" value="1" aria-label="Página" /> <button class="arrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-chev-r"/></svg></button></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VISTA: DETALLE (render por datos) ================= -->
+  <section id="detalle" class="view"></section>
+
+</main>
+
+<aside class="wamock" id="wamock" aria-label="Notificación de WhatsApp (mock)">
+  <div class="wahead">
+    <span class="waav">T1</span>
+    <div><div class="wt">T1envíos</div><div class="ws">mock · se envía al generarse el retorno</div></div>
+    <button onclick="toggleWA()" aria-label="Cerrar">×</button>
+  </div>
+  <div class="wabody">
+    <div class="wabubble">
+      <p>Hola, Chicos Olé 👋 Tu envío <b>43567890082</b> no se pudo entregar después de 3 intentos.</p>
+      <p>DHL generó la guía de retorno <b>7374310930</b> y el paquete va de regreso a tu dirección de origen. El retorno generó un cobro de <b>$87.45 MXN</b>, descontado de tu saldo T1envíos. Saldo restante: <b>$9,456.00</b>.</p>
+      <p>Revisa los intentos y el cobro en <b>T1envíos → Mis envíos</b>.</p>
+      <span class="watime">18 jul · 17:06</span>
+    </div>
+    <button class="wacta" onclick="show('detalle','retorno')">Rastrear retorno</button>
+  </div>
+</aside>
+
+<script>
+  /* ===================== DATOS DE EJEMPLO =====================
+     Todos los datos son ficticios. Cada envío con retorno define su
+     cadena de guías, cronograma y desglose de cobros.                  */
+
+  const DIR_ORIGEN = {
+    t:'Av. Insurgentes Sur',
+    d:'Av. Insurgentes Sur, San José Insurgentes, México, Ciudad de México, 03900',
+    c:['monadic_chicos@claroshop.com · Chicos Olé','55 4879 0021']
+  };
+
+  const ENVIOS = [
+    /* CASO 1 · AMPM — retorno con guía nueva, 3 intentos */
+    {
+      id:'e-ampm', guia:'AMP0459812', logo:'logo-ampm', carrier:'AMPM', servicio:'Estándar nacional',
+      fecha:'19 de Jul', hora:'11:40 hrs', canal:'Amazon', cliente:'SOFÍA HERRERA',
+      costo:'145.20', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'19 de julio 2026 a las 11:40 hrs',
+      destino:{t:'Av. Patriotismo', d:'Av. Patriotismo 615, San Juan, Benito Juárez, México, Ciudad de México, 03730', c:['sofia.herrera@gmail.com','55 6620 7734']},
+      paquete:['3 paquetes','(28 × 20 × 15 cm)','2.6 kg'],
+      creadaOrig:'19 de julio · 11:40 hrs',
+      estimadaOrig:'21 de julio',
+      retorno:{
+        tipo:'nueva', guia:'AMP0461377', fecha:'22 de Jul', hora:'9:35 hrs',
+        creada:'22 de julio · 9:35 hrs', costo:'138.60', rastreo:{t:'En tránsito', c:'transito'},
+        intentos:3, estimada:'25 de julio'
+      },
+      timeline:[
+        {fecha:'22 de julio 2026'},
+        {hito:'retorno', t:'Guía de retorno generada', d:'La paquetería generó una nueva guía tras 3 intentos de entrega sin éxito · 9:35 hrs', guia:'AMP0461377'},
+        {t:'Recibido en sucursal AMPM', d:'Paquete en resguardo para su retorno · 8:50 hrs'},
+        {fecha:'21 de julio 2026'},
+        {t:'Intento de entrega (3 de 3)', d:'Sin quien reciba en el domicilio · 16:12 hrs', link:'Ver evidencia'},
+        {fecha:'20 de julio 2026'},
+        {t:'Intento de entrega (2 de 3)', d:'El cliente pidió reprogramar · 14:05 hrs', link:'Ver evidencia'},
+        {fecha:'19 de julio 2026'},
+        {t:'Intento de entrega (1 de 3)', d:'Domicilio cerrado · 13:28 hrs', link:'Ver evidencia'},
+        {t:'Envío en camino', d:'12:10 hrs', link:'Ver seguimiento', dot:true},
+        {t:'Recolectado por paquetería', d:'Escaneado por AMPM · 11:58 hrs', link:'Ver / Imprimir guía'},
+        {hito:'original', t:'Guía creada (Original)', d:'11:40 hrs', guia:'AMP0459812'}
+      ],
+      cobros:[
+        {lbl:'Guía original', guia:'AMP0459812', fecha:'19 de julio 2026', total:'145.20',
+         bl:[['Tarifa base','$125.17'],['IVA (16%)','$20.03']]},
+        {lbl:'Guía de retorno', guia:'AMP0461377', fecha:'22 de julio 2026', total:'138.60',
+         bl:[['Tarifa de retorno','$119.48'],['IVA (16%)','$19.12']]}
+      ],
+      total:'283.80'
+    },
+
+    /* CASO 2 · DHL — retorno con guía nueva, 3 intentos */
+    {
+      id:'e-dhl', guia:'43567890082', logo:'logo-dhl', carrier:'DHL', servicio:'Mismo día 24H',
+      fecha:'10 de Jul', hora:'18:21 hrs', canal:'Shopify', cliente:'JAVIER MENA',
+      costo:'92.33', estado:'Activa', rastreo:{t:'Retornado', c:'retornado', ret:true},
+      creado:'10 de julio 2026 a las 18:21 hrs',
+      destino:{t:'Calle Lago Zurich', d:'Calle Lago Zurich, Depto. 4B, México, Ciudad de México, 11529', c:['alonsocharbel@gmail.com','74 4123 4567']},
+      paquete:['6 paquetes','(24 × 10 × 30 cm)','2 kg'],
+      creadaOrig:'10 de julio · 18:21 hrs',
+      estimadaOrig:'13 de julio',
+      retorno:{
+        tipo:'nueva', guia:'7374310930', fecha:'18 de Jul', hora:'17:05 hrs',
+        creada:'18 de julio · 17:05 hrs', costo:'87.45', rastreo:{t:'En tránsito', c:'transito'},
+        intentos:3, estimada:'21 de julio'
+      },
+      timeline:[
+        {fecha:'18 de julio 2026'},
+        {hito:'retorno', t:'Guía de retorno generada', d:'La paquetería generó una nueva guía tras 3 intentos de entrega sin éxito · 17:05 hrs', guia:'7374310930'},
+        {t:'Recibido en sucursal DHL', d:'Paquete en resguardo para su retorno · 16:40 hrs'},
+        {fecha:'16 de julio 2026'},
+        {t:'Intento de entrega (3 de 3)', d:'Sin quien reciba en el domicilio · 17:34 hrs', link:'Ver evidencia'},
+        {fecha:'15 de julio 2026'},
+        {t:'Intento de entrega (2 de 3)', d:'Domicilio cerrado · 13:12 hrs', link:'Ver evidencia'},
+        {fecha:'14 de julio 2026'},
+        {t:'Intento de entrega (1 de 3)', d:'Sin quien reciba en el domicilio · 11:03 hrs', link:'Ver evidencia'},
+        {t:'Envío en camino', d:'8:15 hrs', link:'Ver seguimiento', dot:true},
+        {fecha:'13 de julio 2026'},
+        {t:'Recolectado por paquetería', d:'Escaneado por DHL · 17:34 hrs', link:'Ver / Imprimir guía'},
+        {fecha:'10 de julio 2026'},
+        {hito:'original', t:'Guía creada (Original)', d:'18:21 hrs', guia:'43567890082'}
+      ],
+      cobros:[
+        {lbl:'Guía original', guia:'43567890082', fecha:'10 de julio 2026', total:'92.33',
+         bl:[['Tarifa base','$70.11'],['Cargos adicionales (sobrepeso)','$9.49'],['IVA (16%)','$12.73']]},
+        {lbl:'Guía de retorno', guia:'7374310930', fecha:'18 de julio 2026', total:'87.45',
+         bl:[['Tarifa base','$75.39'],['IVA (16%)','$12.06']]}
+      ],
+      total:'179.78'
+    },
+
+    /* CASO 3 · 99 minutos — retorno SOBRE LA MISMA GUÍA (2 intentos) + segundo cobro */
+    {
+      id:'e-99min', guia:'99M240815330', logo:'logo-99min', carrier:'99 minutos', servicio:'Mismo día 24H',
+      fecha:'17 de Jul', hora:'9:12 hrs', canal:'T1tienda', cliente:'REGINA TORRES',
+      costo:'64.90', estado:'Activa', rastreo:{t:'Retornado', c:'retornado', ret:true},
+      creado:'17 de julio 2026 a las 9:12 hrs',
+      destino:{t:'Calle Ámsterdam', d:'Calle Ámsterdam 240, Hipódromo Condesa, México, Ciudad de México, 06100', c:['regina.torres@gmail.com','55 2214 8890']},
+      paquete:['1 paquete','(20 × 15 × 10 cm)','0.8 kg'],
+      creadaOrig:'17 de julio · 9:12 hrs',
+      estimadaOrig:'18 de julio',
+      retorno:{
+        tipo:'misma', fecha:'19 de Jul', hora:'14:20 hrs',
+        creada:'19 de julio · 14:20 hrs', costo:'58.00', rastreo:{t:'En tránsito', c:'transito'},
+        intentos:2, estimada:'20 de julio'
+      },
+      timeline:[
+        {fecha:'19 de julio 2026'},
+        {hito:'misma', t:'Retorno iniciado en la misma guía', d:'99 minutos no generó una guía nueva: el paquete regresa con el mismo número y se aplicó un cobro por el retorno · 14:20 hrs', guia:'99M240815330'},
+        {t:'Recibido en bodega 99 minutos', d:'Paquete en resguardo para su retorno · 13:05 hrs'},
+        {fecha:'18 de julio 2026'},
+        {t:'Intento de entrega (2 de 2)', d:'El cliente no aceptó el paquete · 16:48 hrs', link:'Ver evidencia'},
+        {fecha:'17 de julio 2026'},
+        {t:'Intento de entrega (1 de 2)', d:'Sin quien reciba en el domicilio · 12:30 hrs', link:'Ver evidencia'},
+        {t:'Envío en camino', d:'10:05 hrs', link:'Ver seguimiento', dot:true},
+        {t:'Recolectado por paquetería', d:'Escaneado por 99 minutos · 9:48 hrs', link:'Ver / Imprimir guía'},
+        {hito:'original', t:'Guía creada (Original)', d:'9:12 hrs', guia:'99M240815330'}
+      ],
+      cobros:[
+        {lbl:'Cobro inicial · Guía 99M240815330', guia:'99M240815330', fecha:'17 de julio 2026', total:'64.90',
+         bl:[['Tarifa base','$55.95'],['IVA (16%)','$8.95']]},
+        {lbl:'Cobro por retorno · Misma guía 99M240815330', guia:'99M240815330', fecha:'19 de julio 2026', total:'58.00',
+         bl:[['Tarifa de retorno','$50.00'],['IVA (16%)','$8.00']]}
+      ],
+      total:'122.90'
+    },
+
+    /* CASO 4 · FedEx — retorno SOBRE LA MISMA GUÍA (domicilio incorrecto) + segundo cobro */
+    {
+      id:'e-fedex', guia:'794658219873', logo:'logo-fedex', carrier:'FedEx', servicio:'Express nacional',
+      fecha:'16 de Jul', hora:'13:45 hrs', canal:'Amazon', cliente:'LUIS DAMIÁN',
+      costo:'118.00', estado:'Activa', rastreo:{t:'Retornado', c:'retornado', ret:true},
+      creado:'16 de julio 2026 a las 13:45 hrs',
+      destino:{t:'Blvd. Manuel Ávila Camacho', d:'Blvd. Manuel Ávila Camacho 5, Lomas de Sotelo, Naucalpan, Estado de México, 53390', c:['luis.damian@outlook.com','55 3390 1147']},
+      paquete:['2 paquetes','(30 × 22 × 18 cm)','3.4 kg'],
+      creadaOrig:'16 de julio · 13:45 hrs',
+      estimadaOrig:'18 de julio',
+      retorno:{
+        tipo:'misma', fecha:'20 de Jul', hora:'10:12 hrs',
+        creada:'20 de julio · 10:12 hrs', costo:'112.30', rastreo:{t:'En tránsito', c:'transito'},
+        intentos:2, estimada:'23 de julio'
+      },
+      timeline:[
+        {fecha:'20 de julio 2026'},
+        {hito:'misma', t:'Retorno iniciado en la misma guía', d:'FedEx no generó una guía nueva: el paquete regresa con el mismo número y se aplicó un cobro por el retorno · 10:12 hrs', guia:'794658219873'},
+        {fecha:'19 de julio 2026'},
+        {t:'Paquete retenido en sucursal', d:'Sucursal FedEx Naucalpan · 18:22 hrs'},
+        {t:'Intento de entrega (2 de 2)', d:'Domicilio incorrecto o incompleto · 15:40 hrs', link:'Ver evidencia'},
+        {fecha:'18 de julio 2026'},
+        {t:'Intento de entrega (1 de 2)', d:'Sin quien reciba en el domicilio · 11:18 hrs', link:'Ver evidencia'},
+        {fecha:'17 de julio 2026'},
+        {t:'Envío en camino', d:'7:40 hrs', link:'Ver seguimiento', dot:true},
+        {fecha:'16 de julio 2026'},
+        {t:'Recolectado por paquetería', d:'Escaneado por FedEx · 16:05 hrs', link:'Ver / Imprimir guía'},
+        {hito:'original', t:'Guía creada (Original)', d:'13:45 hrs', guia:'794658219873'}
+      ],
+      cobros:[
+        {lbl:'Cobro inicial · Guía 794658219873', guia:'794658219873', fecha:'16 de julio 2026', total:'118.00',
+         bl:[['Tarifa base','$92.24'],['Cargos adicionales (zona extendida)','$9.52'],['IVA (16%)','$16.24']]},
+        {lbl:'Cobro por retorno · Misma guía 794658219873', guia:'794658219873', fecha:'20 de julio 2026', total:'112.30',
+         bl:[['Tarifa de retorno','$96.81'],['IVA (16%)','$15.49']]}
+      ],
+      total:'230.30'
+    },
+
+    {
+      id:'e-dhl-generada', guia:'5512045589', logo:'logo-dhl', carrier:'DHL', servicio:'Estándar nacional',
+      fecha:'16 de Jul', hora:'8:03 hrs', canal:'T1envíos', cliente:'CARLOS PEÑA',
+      costo:'102.50', estado:'Activa', rastreo:{t:'Guía generada', c:'generada'}
+    },
+
+    {
+      id:'e-ml-exc', guia:'794658198010', logo:'logo-fedex', carrier:'FedEx', servicio:'Express nacional',
+      fecha:'15 de Jul', hora:'16:28 hrs', canal:'Mercado Libre', cliente:'ANA SALAS',
+      costo:'131.75', estado:'Activa', rastreo:{t:'Excepción', c:'excepcion'}
+    },
+    {
+      id:'e-99-cancel', guia:'99M240811207', logo:'logo-99min', carrier:'99 minutos', servicio:'Mismo día 24H',
+      fecha:'14 de Jul', hora:'10:55 hrs', canal:'Mercado Libre', cliente:'MARIANA RUIZ',
+      costo:'58.00', estado:'Cancelada', rastreo:{t:'Cancelado', c:'cancelado'}
+    },
+    {
+      id:'e-dhl-dev', guia:'5511998231', logo:'logo-dhl', carrier:'DHL', servicio:'Estándar nacional',
+      fecha:'12 de Jul', hora:'14:17 hrs', canal:'Shopify', cliente:'DIEGO LARA',
+      costo:'96.40', estado:'Activa', rastreo:{t:'Devuelto', c:'devuelto'}
+    }
+  ];
+
+  const byId = id => ENVIOS.find(e => e.id === id);
+  const logoSvg = (e, cls) => `<svg class="${cls}" role="img" aria-label="${e.carrier}"><use href="#${e.logo}"/></svg>`;
+  const chip = r => `<span class="chip ${r.c}">${r.t}</span>`;
+
+  /* ===================== LISTADO ===================== */
+  function acciones(e){
+    const verRet = e.retorno && e.retorno.tipo === 'nueva'
+      ? `<button onclick="abrirDetalle('${e.id}')">Ver guía de retorno</button>` : '';
+    return `<div class="cell rowacts"><button class="btn-ghost-icon" onclick="toggleActs(event,this)" aria-label="Acciones">
+        <svg class="ic" style="width:18px;height:18px"><use href="#i-dots"/></svg></button>
+      <div class="menu-acts">
+        <button onclick="abrirDetalle('${e.id}')">Ver detalle</button>${verRet}
+        <button>Imprimir guía</button><button>Rastrear</button>
+        ${e.estado === 'Activa' ? '<button class="danger">Cancelar envío</button>' : ''}
+      </div></div>`;
+  }
+
+  function filaEnvio(e){
+    const toggle = (e.retorno && e.retorno.tipo === 'nueva')
+      ? `<button class="toggle-ret" onclick="toggleThread('${e.id}')" aria-expanded="true" data-tip="Este envío generó una guía de retorno">
+           <svg class="ic ret-glyph"><use href="#i-return"/></svg> <span class="tlabel">Ver menos</span>
+           <svg class="ic chev"><use href="#i-chev-u"/></svg></button>` : '';
+    return `<div class="grid-row row" data-tipo="envio">
+      <div class="cell"><span class="ck"></span></div>
+      <div class="cell">${logoSvg(e,'carrier brand')}</div>
+      <div class="cell"><div class="gnum">${e.guia}</div><div class="gsub">${e.carrier}</div>${toggle}</div>
+      <div class="cell fecha"><b>${e.fecha}</b><span>${e.hora}</span></div>
+      <div class="cell canal">${e.canal}</div>
+      <div class="cell cliente">${e.cliente} <svg class="ic"><use href="#i-chev-d"/></svg></div>
+      <div class="cell costo">$${e.costo}<small>MXN</small></div>
+      <div class="cell estado">${e.estado}</div>
+      <div class="cell">${chip(e.rastreo)}</div>
+      ${acciones(e)}</div>`;
+  }
+
+  function filaRetorno(e){
+    const r = e.retorno;
+    return `<div class="grid-row subrow" data-tipo="retorno">
+      <div class="cell"><span class="ck" style="visibility:hidden"></span></div>
+      <div class="cell">${logoSvg(e,'carrier brand')}</div>
+      <span class="loopbadge" data-tip="Guía de retorno"><svg class="ic"><use href="#i-return"/></svg></span>
+      <div class="cell gcell"><div class="gnum">${r.guia}</div><div style="margin-top:4px"><span class="tag-ret">Retorno</span></div></div>
+      <div class="cell fecha"><b>${r.fecha}</b><span>${r.hora}</span></div>
+      <div class="cell canal">${e.canal}</div>
+      <div class="cell cliente">${e.cliente} <svg class="ic"><use href="#i-chev-d"/></svg></div>
+      <div class="cell costo">$${r.costo}<small>MXN</small></div>
+      <div class="cell estado">Activa</div>
+      <div class="cell">${chip(r.rastreo)}</div>
+      ${acciones(e)}</div>`;
+  }
+
+  function renderListado(){
+    document.getElementById('tbody').innerHTML = ENVIOS.map(e =>
+      (e.retorno && e.retorno.tipo === 'nueva')
+        ? `<div class="thread" id="th-${e.id}">${filaEnvio(e)}${filaRetorno(e)}</div>`
+        : filaEnvio(e)
+    ).join('');
+  }
+
+  /* ===================== DETALLE ===================== */
+  function evento(ev){
+    if (ev.fecha) return `<span class="datechip">${ev.fecha}</span>`;
+    if (ev.hito){
+      const ico = ev.hito === 'original' ? 'i-doc' : 'i-return';
+      const end = ev.hito === 'original' ? ' end' : '';
+      const cs  = window.__casoActual;
+      return `<div class="milestone${end}">
+        <span class="ico"><svg class="ic"><use href="#${ico}"/></svg></span>
+        <div class="t">${ev.t}</div><div class="d">${ev.d}</div>
+        <button class="gref">${logoSvg(cs,'brand')} <span>${ev.guia}</span></button></div>`;
+    }
+    const ico = ev.dot
+      ? '<svg class="ic" style="width:8px;height:8px"><use href="#i-truckdot"/></svg>'
+      : '<svg class="ic"><use href="#i-check"/></svg>';
+    return `<div class="ev"><span class="ico">${ico}</span>
+      <div class="t">${ev.t}</div><div class="d">${ev.d}</div>
+      ${ev.link ? `<a class="link" href="#" onclick="return false">${ev.link}</a>` : ''}</div>`;
+  }
+
+  function cadenaGuias(e){
+    const r = e.retorno;
+    const misma = r.tipo === 'misma';
+
+    /* Bloque de guía con la estructura de Figma:
+       [logo]  Carrier: número  ·  servicio  ·  referencia cruzada     Fecha estimada de entrega */
+    const bloque = (o) => `<div class="gnode">
+      ${logoSvg(e,'carrier brand')}
+      <div class="info">
+        <div class="lbl">${o.lbl}</div>
+        <div class="num">${e.carrier}: ${o.guia} ${chip(o.rastreo)}</div>
+        <div class="svc">${e.servicio}</div>
+        ${o.refGuia ? `<div class="xref">${o.refLbl}: <a href="#" onclick="return false">${o.refGuia}</a></div>` : ''}
+      </div>
+      <div class="right"><span class="tlab">Fecha estimada de entrega</span><span class="edate">${o.entrega}</span></div>
+    </div>`;
+
+    const original = bloque({
+      lbl: 'Guía original',
+      guia: e.guia,
+      rastreo: e.rastreo,
+      refLbl: 'Guía retorno',
+      refGuia: misma ? '' : r.guia,
+      entrega: e.estimadaOrig
+    });
+
+    const retorno = bloque({
+      lbl: 'Guía retorno',
+      guia: misma ? e.guia : r.guia,
+      rastreo: r.rastreo,
+      refLbl: 'Guía original',
+      refGuia: misma ? '' : e.guia,
+      entrega: r.estimada
+    });
+
+    const conector = `<div class="gconn">
+      <span class="loop"><svg class="ic"><use href="#i-return"/></svg></span>
+      <div><p class="gt1">${misma ? 'Retorno en la misma guía' : 'Retorno generado'}</p>
+      <p class="gt2">${misma ? `${e.carrier} no generó una guía nueva · ${r.creada}` : `Se creó la guía de retorno el ${r.creada}`}</p></div>
+    </div>`;
+
+    return original + conector + retorno;
+  }
+
+  function cobros(e){
+    return e.cobros.map((c,i) => `
+      <div class="cobro-acc${i === 0 ? ' open' : ''}" id="cb-${i}">
+        <button class="cobro-head" onclick="toggleCobro('cb-${i}')" aria-expanded="${i === 0}">
+          ${logoSvg(e,'brand')}
+          <div class="inf"><div class="n">${c.lbl}${c.lbl.includes(c.guia) ? '' : ' · ' + c.guia}</div>
+          <div class="m">Cobrada el ${c.fecha}</div></div>
+          <div class="val">$${c.total}</div>
+          <svg class="ic chev"><use href="#i-chev-u"/></svg>
+        </button>
+        <div class="cobro-body">${c.bl.map(l => `<div class="bl"><span>${l[0]}</span><span>${l[1]}</span></div>`).join('')}</div>
+      </div>`).join('');
+  }
+
+  function renderDetalle(e){
+    window.__casoActual = e;
+    const r = e.retorno;
+    const nota = r.tipo === 'misma'
+      ? `${e.carrier} regresó el paquete con el mismo número de guía y aplicó un segundo cobro por el retorno, descontado automáticamente de tu saldo T1envíos.`
+      : 'El cobro de la guía de retorno se generó al no concretarse la entrega y se descontó automáticamente de tu saldo T1envíos.';
+    const meta = r.tipo === 'misma'
+      ? `Creado el ${e.creado} &nbsp;·&nbsp; 1 guía · 2 cobros`
+      : `Creado el ${e.creado} &nbsp;·&nbsp; 2 guías asociadas`;
+
+    document.getElementById('detalle').innerHTML = `
+      <div class="dethead">
+        <div class="l">
+          <h1><button class="backbtn" onclick="show('listado')" aria-label="Volver"><svg class="ic"><use href="#i-back"/></svg></button>
+            Envío ${e.guia} ${chip(e.rastreo)}</h1>
+          <p class="meta">${meta}</p>
+        </div>
+        <div style="display:flex;gap:12px">
+          <button class="btn btn-secondary">Más acciones <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button>
+          <button class="btn btn-primary">Imprimir guía</button>
+        </div>
+      </div>
+
+      <div class="detgrid">
+        <div class="colcards">
+          <div class="card">
+            <div class="hd">Guías de envío</div>
+            <div class="bd">
+              <div class="cobro-note" style="margin:0 0 16px 0">
+                <svg class="ic"><use href="#i-info"/></svg> ${nota}
+              </div>
+              ${cadenaGuias(e)}
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="hd">Cronograma <span style="font-size:12px;font-weight:500;color:var(--sec)">Fecha estimada de entrega del retorno: ${r.estimada}</span></div>
+            <div class="bd"><div class="tl">${e.timeline.map(evento).join('')}</div></div>
+          </div>
+        </div>
+
+        <div class="colcards">
+          <div class="card">
+            <div class="hd">Resumen de envío</div>
+            <div class="bd">
+              <div class="subhd">Direcciones</div>
+              <div class="addr"><span class="pin"><svg class="ic"><use href="#i-pin"/></svg></span>
+                <h4>${DIR_ORIGEN.t}</h4><p>${DIR_ORIGEN.d}</p>
+                ${DIR_ORIGEN.c.map(x => `<p class="c">${x}</p>`).join('')}</div>
+              <div class="addr"><span class="pin"><svg class="ic"><use href="#i-pin"/></svg></span>
+                <h4>${e.destino.t}</h4><p>${e.destino.d}</p>
+                ${e.destino.c.map(x => `<p class="c">${x}</p>`).join('')}</div>
+              <hr style="border:none;border-top:1px solid var(--g-100);margin:18px 0" />
+              <div class="subhd">Dimensiones del paquete</div>
+              <div class="dims"><p><b>${e.paquete[0]}</b></p>${e.paquete.slice(1).map(x => `<p>${x}</p>`).join('')}</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="hd">Resumen de cobro</div>
+            <div class="bd" style="padding-top:8px">
+              ${cobros(e)}
+              <div class="cobro-total"><span>Total del envío</span><span>$${e.total} MXN</span></div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  /* ===================== NOTIFICACIÓN WHATSAPP ===================== */
+  function renderWA(e){
+    const r = e.retorno;
+    const linea = r.tipo === 'misma'
+      ? `${e.carrier} regresa el paquete con el <b>mismo número de guía</b> y aplicó un cobro por el retorno de <b>$${r.costo} MXN</b>, descontado de tu saldo T1envíos. Saldo restante: <b>$9,456.00</b>.`
+      : `${e.carrier} generó la guía de retorno <b>${r.guia}</b> y el paquete va de regreso a tu dirección de origen. El retorno generó un cobro de <b>$${r.costo} MXN</b>, descontado de tu saldo T1envíos. Saldo restante: <b>$9,456.00</b>.`;
+    document.getElementById('wabody').innerHTML = `
+      <div class="wabubble">
+        <p>Hola, Chicos Olé 👋 Tu envío <b>${e.guia}</b> no se pudo entregar después de ${r.intentos} intentos.</p>
+        <p>${linea}</p>
+        <p>Revisa los intentos y el cobro en <b>T1envíos → Mis envíos</b>.</p>
+        <span class="watime">${r.fecha} · ${r.hora}</span>
+      </div>
+      <button class="wacta" onclick="abrirDetalle('${e.id}')">Rastrear retorno</button>`;
+  }
+
+  /* ===================== INTERACCIONES ===================== */
+  let casoWA = 'e-dhl';
+
+  function abrirDetalle(id){
+    const e = byId(id);
+    if (!e || !e.retorno){ show('listado'); return; }
+    casoWA = id; renderWA(e); renderDetalle(e); show('detalle');
+    document.querySelectorAll('.demobar .vbtn[data-caso]').forEach(b => b.classList.toggle('on', b.dataset.caso === id));
+  }
+
+  function show(view){
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('on'));
+    document.getElementById(view).classList.add('on');
+    document.querySelectorAll('.demobar .vbtn[data-view]').forEach(b => b.classList.toggle('on', b.dataset.view === view));
+    if (view === 'listado') document.querySelectorAll('.demobar .vbtn[data-caso]').forEach(b => b.classList.remove('on'));
+    closeMenus();
+    window.scrollTo({top:0});
+  }
+
+  function toggleThread(id){
+    const th = document.getElementById('th-' + id);
+    th.classList.toggle('closed');
+    const closed = th.classList.contains('closed');
+    th.querySelector('.tlabel').textContent = closed ? 'Ver retornos' : 'Ver menos';
+    th.querySelector('.toggle-ret').setAttribute('aria-expanded', String(!closed));
+  }
+
+  function toggleWA(){ document.getElementById('wamock').classList.toggle('open'); }
+
+  function toggleCobro(id){
+    const acc = document.getElementById(id);
+    acc.classList.toggle('open');
+    acc.querySelector('.cobro-head').setAttribute('aria-expanded', String(acc.classList.contains('open')));
+  }
+
+  function toggleActs(e, btn){
+    e.stopPropagation();
+    const menu = btn.nextElementSibling;
+    const was = menu.classList.contains('open');
+    closeMenus();
+    if (!was) menu.classList.add('open');
+  }
+
+  function toggleTipoMenu(e){
+    e.stopPropagation();
+    const m = document.getElementById('tipoMenu');
+    const was = m.classList.contains('open');
+    closeMenus();
+    if (!was) m.classList.add('open');
+  }
+
+  function filtraTipo(tipo, btn){
+    document.querySelectorAll('#tipoMenu button').forEach(b => b.setAttribute('aria-checked','false'));
+    btn.setAttribute('aria-checked','true');
+    const label = document.getElementById('fTipoBtn');
+    label.classList.toggle('applied', tipo !== 'todas');
+    label.firstChild.textContent = tipo === 'todas' ? 'Tipo de guía '
+      : (tipo === 'envio' ? 'Tipo de guía: Envío ' : 'Tipo de guía: Retorno ');
+    document.querySelectorAll('#tbody [data-tipo]').forEach(r => {
+      r.style.display = (tipo === 'todas' || r.dataset.tipo === tipo) ? '' : 'none';
+    });
+    document.querySelectorAll('.thread').forEach(th => {
+      th.classList.remove('closed');
+      th.classList.toggle('standalone', tipo === 'retorno');
+      const l = th.querySelector('.tlabel'); if (l) l.textContent = 'Ver menos';
+    });
+    closeMenus();
+  }
+
+  function closeMenus(){
+    document.querySelectorAll('.menu-acts.open,.fpill .menu.open').forEach(m => m.classList.remove('open'));
+  }
+
+  document.addEventListener('click', closeMenus);
+  renderListado();
+  renderWA(byId(casoWA));
+</script>
