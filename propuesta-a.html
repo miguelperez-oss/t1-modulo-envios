@@ -83,7 +83,7 @@
   .chip svg{width:13px;height:13px;stroke-width:2}
   .chip.transito{background:var(--blue-100);color:var(--blue-700)}
   .chip.entregado{background:var(--green-100);color:var(--green-700)}
-  .chip.retornado{background:var(--green-100);color:var(--green-700);border:1px solid var(--green-300)}
+  .chip.retornado{background:var(--g-100);color:#525252}
   .chip.intento{background:var(--yellow-100);color:var(--yellow-700)}
   .chip.generada{background:var(--g-100);color:#525252}
   .chip.cancelado{background:var(--red-50);color:var(--red-700)}
@@ -285,6 +285,41 @@
   .cobro-note svg{width:15px;height:15px;stroke-width:2;flex:none;margin-top:1px}
   .count-pill{font-size:11px;font-weight:700;background:var(--g-100);color:var(--sec);border-radius:10px;padding:2px 9px}
 
+
+  /* card de guía — estructura del productivo */
+  .gcard{display:flex;align-items:flex-start;gap:16px;padding:20px}
+  .gcard .info{flex:1;min-width:0}
+  .gcard .num{font-size:16px;font-weight:700;color:var(--dark);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .gcard .num a{color:var(--dark);text-decoration:underline;text-underline-offset:2px}
+  .gcard .num a:hover{color:#000}
+  .gcard .svc{font-size:13px;color:var(--sec);margin-top:4px}
+  .gcard .xref{font-size:13px;color:var(--sec);margin-top:3px}
+  .gcard .xref a{color:var(--oxford);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+  .gcard .xref b{color:var(--oxford);font-weight:700}
+  .gcard .xref .nota{color:var(--ter)}
+  .gcard .right{text-align:right;flex:none}
+  .gcard .tlab{display:block;font-size:12px;color:var(--sec)}
+  .gcard .edate{display:block;font-size:15px;font-weight:600;color:var(--dark);margin-top:2px}
+  .tag-misma{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:4px;background:var(--blue-100);color:var(--blue-700);font-size:11px;font-weight:700}
+  .subrow .gsub.der{color:var(--ter);font-size:11.5px;margin-top:3px}
+  .subrow .gnum{font-size:13.5px;letter-spacing:-0.2px}
+
+  /* hito del cronograma */
+  .milestone .gref{display:inline-flex;align-items:center;gap:8px;margin-top:8px;padding:0;border:none;background:none;font-size:13px;font-weight:600;color:var(--dark)}
+  .milestone .gref svg{width:20px;height:20px;border-radius:5px}
+  .milestone.ret{background:var(--blue-100)}
+  .milestone.ret .ico{color:var(--blue-700)}
+
+  /* bloques del resumen de cobro */
+  .cobro-blk{padding:2px 0 12px}
+  .cobro-blk+.cobro-blk{border-top:1px solid var(--g-100);padding-top:14px}
+  .cobro-blk .cb-t{font-size:13px;font-weight:700;color:var(--dark);margin-bottom:8px}
+  .cobro-blk .cb-s{font-weight:500;color:var(--ter)}
+  .cobro-line{display:flex;justify-content:space-between;padding:5px 0;font-size:13px;color:var(--sec)}
+  .cobro-line span:last-child{color:var(--oxford);font-weight:600}
+  .cobro-line.tot{border-top:1px solid var(--g-100);margin-top:6px;padding-top:9px;color:var(--dark);font-weight:700}
+  .cobro-line.tot span:last-child{color:var(--dark);font-weight:800}
+
   @media (max-width:1180px){
     .detgrid{grid-template-columns:1fr}
     .grid-row{grid-template-columns:44px 52px minmax(140px,1.1fr) 92px 96px minmax(104px,1fr) 94px 78px 132px 60px}
@@ -328,11 +363,17 @@
   <span class="dsep"></span>
   <button class="vbtn on" data-view="listado" onclick="show('listado')">Listado</button>
   <span class="dsep"></span>
-  <span style="color:#9CA3AF;font-weight:500">Detalle:</span>
-  <button class="vbtn" data-caso="e-ampm" onclick="abrirDetalle('e-ampm')">AMPM · guía nueva</button>
-  <button class="vbtn" data-caso="e-dhl" onclick="abrirDetalle('e-dhl')">DHL · guía nueva</button>
-  <button class="vbtn" data-caso="e-99min" onclick="abrirDetalle('e-99min')">99 minutos · misma guía</button>
-  <button class="vbtn" data-caso="e-fedex" onclick="abrirDetalle('e-fedex')">FedEx · misma guía</button>
+  <span style="color:#9CA3AF;font-weight:500">Guía nueva:</span>
+  <button class="vbtn" data-caso="e-dhl" onclick="abrirDetalle('e-dhl')">DHL</button>
+  <button class="vbtn" data-caso="e-fedex" onclick="abrirDetalle('e-fedex')">FedEx</button>
+  <button class="vbtn" data-caso="e-99min" onclick="abrirDetalle('e-99min')">99 min</button>
+  <span class="dsep"></span>
+  <span style="color:#9CA3AF;font-weight:500">Misma guía:</span>
+  <button class="vbtn" data-caso="e-ups" onclick="abrirDetalle('e-ups')">UPS</button>
+  <button class="vbtn" data-caso="e-express" onclick="abrirDetalle('e-express')">Paquete Express</button>
+  <button class="vbtn" data-caso="e-t1envios" onclick="abrirDetalle('e-t1envios')">T1envíos</button>
+  <button class="vbtn" data-caso="e-t1economic" onclick="abrirDetalle('e-t1economic')">T1 Economic</button>
+  <button class="vbtn" data-caso="e-ampm" onclick="abrirDetalle('e-ampm')">AMPM</button>
   <span class="dsep"></span>
   <button class="wabtn" onclick="toggleWA()">Notificación WhatsApp</button>
   <span class="dnote">Los datos son de ejemplo</span>
@@ -366,6 +407,7 @@
     <symbol id="i-truckdot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-return" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
     <symbol id="i-printer" viewBox="0 0 24 24"><path d="M7 8V3h10v5"/><rect x="4" y="8" width="16" height="9" rx="2"/><path d="M7 14h10v7H7z"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/></symbol>
     <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H6v18h12V7l-4-4Z"/><path d="M14 3v4h4"/></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.8" r=".7" fill="currentColor" stroke="none"/></symbol>
 
@@ -450,7 +492,35 @@
 <rect width="43" height="42" fill="white"/>
 </clipPath>
 </defs></symbol>
-    <symbol id="logo-ampm" viewBox="0 0 77 77"><rect x="6" y="6" width="65" height="65" rx="13" fill="#ffffff" stroke="#E7E7E7"/><g transform="translate(38.5,38.5) scale(0.24759) translate(-173.27,-173.27)"><g> <g> <g> <g> <g> <g> <path fill="#e1251b" d="M147.43,172.8c0-8.31-3.7-15.25-15.43-15.25-6.44,0-11.28,1.83-13.7,3.2l2.01,6.98c2.33-1.37,6.12-2.6,9.72-2.6,5.43,0,6.44,2.65,6.44,4.57v.41c-12.51,0-20.73,4.34-20.73,13.51,0,5.62,4.25,10.82,11.41,10.82,4.2,0,7.81-1.51,10.09-4.34h.23l.64,3.52h9.91c-.41-1.96-.59-5.2-.59-8.49v-12.33ZM136.84,180.79c0,.64-.09,1.28-.23,1.87-.73,2.24-3.01,4.06-5.71,4.06-2.47,0-4.34-1.37-4.34-4.2,0-4.2,4.47-5.57,10.23-5.57v3.83h.05Z"/> <path fill="#e1251b" d="M194.04,157.56c-2.6,0-4.75.64-6.71,1.73-1.73,1-3.24,2.47-4.61,4.34h-.14c-1.51-3.7-5.07-6.07-9.68-6.07-5.98,0-9.18,3.33-10.68,5.62h-.23l-.41-4.84h-9.31c.14,3.15.27,6.85.27,11.28v24.01h10.68v-20.5c0-.96.09-1.96.41-2.83.64-1.73,2.33-3.88,5.11-3.88,3.52,0,5.11,3.01,5.11,7.44v19.77h10.68v-20.64c0-.87.14-1.96.37-2.74.78-2.1,2.51-3.83,5.11-3.83,3.52,0,5.2,2.97,5.2,8.08v19.13h10.68v-20.77c0-10.55-5.11-15.29-11.92-15.29h.05Z"/> <g> <path fill="#002f87" d="M232.66,157.56c-5.11,0-9.18,2.01-11.78,5.71h-.14l-.5-4.93h-9.54c.14,3.33.27,7.21.27,11.82v37.75h10.96v-17.53h.14c1.6,2.33,4.88,4.02,9.18,4.02,7.85,0,16.02-6.07,16.02-18.9,0-11.28-6.94-17.99-14.65-17.99l.05.05ZM228.6,186c-3.2,0-5.71-2.24-6.44-5.2-.14-.73-.23-1.46-.23-2.33v-4.84c0-.64.09-1.37.23-1.96.73-3.24,3.47-5.57,6.57-5.57,4.93,0,7.44,4.25,7.44,9.91,0,5.98-2.83,9.95-7.58,9.95v.05Z"/> <path fill="#002f87" d="M292.06,157.56c-2.6,0-4.75.64-6.71,1.73-1.73,1-3.24,2.47-4.61,4.34h-.14c-1.51-3.7-5.07-6.07-9.68-6.07-5.98,0-9.18,3.33-10.68,5.62h-.23l-.41-4.84h-9.31c.14,3.15.27,6.85.27,11.28v24.01h10.68v-20.5c0-.96.09-1.96.41-2.83.64-1.73,2.33-3.88,5.11-3.88,3.52,0,5.11,3.01,5.11,7.44v19.77h10.68v-20.64c0-.87.14-1.96.37-2.74.78-2.1,2.51-3.83,5.11-3.83,3.52,0,5.2,2.97,5.2,8.08v19.13h10.68v-20.77c0-10.55-5.11-15.29-11.92-15.29h.05Z"/> </g> </g> <g> <path fill="#002f87" d="M66.25,145.46c2.05.96,3.56,2.92,3.88,5.25,15.29,3.15,26.84,16.71,26.84,32.96v.55h4.7v-.55c0-20.22-15.57-36.75-35.38-38.21h-.05Z"/> <path fill="#002f87" d="M63.34,156.69c-14.93,0-27.03,12.05-27.03,27.03,0,1,.05,2.01.18,2.97h5.07c.23,12.83,10.59,23.51,23.1,24.01,14.34-.68,25.7-12.55,25.7-26.98s-12.1-27.03-27.03-27.03ZM39.78,185.18c-.91,0-1.6-.73-1.6-1.6s.68-1.6,1.6-1.6,1.6.73,1.6,1.6-.73,1.6-1.6,1.6ZM63.06,158.7c.87,0,1.6.68,1.6,1.6s-.68,1.6-1.6,1.6-1.6-.73-1.6-1.6.73-1.6,1.6-1.6ZM63.06,208.46c-.87,0-1.6-.73-1.6-1.6s.73-1.6,1.6-1.6,1.6.73,1.6,1.6-.68,1.6-1.6,1.6ZM65.71,184.49c0,1.32-1.05,2.37-2.37,2.37-1.1,0-1.96-.73-2.28-1.73l-12.46-8.9.91-1.42,13.19,7.4s.46-.09.68-.09c.18,0,.32,0,.46.05l10.23-16.48.73.41-9.54,16.98c.32.41.5.87.5,1.42h-.05ZM86.34,181.98c.87,0,1.6.73,1.6,1.6s-.68,1.6-1.6,1.6-1.6-.73-1.6-1.6.73-1.6,1.6-1.6Z"/> </g> </g> <g> <path fill="#002f87" d="M305.21,156.42c.27,0,.68-.09,1.14-.09.55,0,.96.09,1.23.27.23.18.37.46.37.78,0,.46-.32.82-.69.91.27.14.41.37.5.68.14.46.23.91.32,1.1h-.87s-.14-.41-.27-.87c-.09-.46-.27-.59-.59-.59h-.23v1.51h-.82v-3.7h-.09ZM306.03,158.01h.32c.41,0,.69-.23.69-.55s-.23-.5-.6-.5h-.36v1l-.05.05Z"/> <path fill="#002f87" d="M309.55,158.29c0,1.69-1.37,3.06-3.06,3.06s-3.06-1.37-3.06-3.06,1.37-3.06,3.06-3.06,3.06,1.37,3.06,3.06ZM306.49,154.54c-2.06,0-3.74,1.64-3.74,3.74s1.69,3.74,3.74,3.74,3.74-1.64,3.74-3.74-1.69-3.74-3.74-3.74Z"/> </g> </g> <g> <path fill="#002f87" d="M135.7,145.46c-1.37.46-3.93,1.1-6.53,1.1-3.56,0-6.12-.91-7.94-2.6-1.78-1.69-2.74-4.25-2.74-7.12,0-6.48,4.75-10.18,11.14-10.18,2.51,0,4.47.5,5.39.91l-.91,3.56c-1.05-.5-2.37-.82-4.52-.82-3.65,0-6.48,2.1-6.48,6.3s2.56,6.39,6.16,6.39c1,0,1.78-.09,2.15-.27v-4.11h-3.01v-3.42h7.26v10.27h.05Z"/> <path fill="#002f87" d="M139.08,136.88c0-2.1,0-3.47-.14-4.66h3.74l.18,2.65h.14c.73-2.1,2.42-2.97,3.84-2.97.41,0,.59,0,.91.09v4.15c-.37-.05-.73-.14-1.23-.14-1.6,0-2.74.82-3.01,2.24-.05.27-.09.59-.09,1v7.17h-4.38v-9.54h.05Z"/> <path fill="#002f87" d="M163.32,141.81c0,1.87.05,3.33.09,4.57h-3.83l-.18-2.01h-.09c-.55.87-1.87,2.33-4.43,2.33-2.88,0-4.98-1.78-4.98-6.16v-8.31h4.38v7.62c0,2.05.68,3.29,2.24,3.29,1.23,0,1.92-.82,2.19-1.55.14-.27.18-.59.18-.96v-8.4h4.38v9.59h.05Z"/> <path fill="#002f87" d="M166.83,136.97c0-1.87-.05-3.42-.14-4.75h3.83l.18,1.96h.05c1.05-1.46,2.65-2.28,4.7-2.28,3.1,0,5.89,2.69,5.89,7.21,0,5.16-3.29,7.58-6.44,7.58-1.69,0-3.01-.68-3.65-1.64h-.05v7.03h-4.38v-15.11ZM171.21,140.3c0,.37,0,.64.09.91.27,1.19,1.28,2.1,2.56,2.1,1.92,0,3.06-1.6,3.06-3.97,0-2.24-1-3.97-2.97-3.97-1.23,0-2.33.91-2.65,2.24-.05.23-.09.5-.09.78v1.92Z"/> <path fill="#002f87" d="M190.76,146.69c-4.15,0-7.3-2.69-7.3-7.3s3.01-7.49,7.58-7.49c4.29,0,7.21,2.97,7.21,7.26,0,5.16-3.65,7.53-7.44,7.53h-.05ZM190.85,143.54c1.73,0,2.78-1.69,2.78-4.25,0-2.1-.82-4.25-2.78-4.25s-2.88,2.15-2.88,4.25c0,2.42,1,4.25,2.88,4.25Z"/> </g> </g> </g> </g></g></symbol>
+    <symbol id="logo-ups" viewBox="0 0 77 77"><rect x="6" y="6" width="65" height="65" rx="13" fill="#2b190f"/><g transform="translate(38.5,38.5) scale(0.21570) translate(-173.27,-173.27)"><defs> <style> .cls-1 { fill: #fff; } .cls-2 { fill: #2b190f; } .cls-3 { fill: #f3d634; } </style> </defs> <g> <path fill="#2b190f" d="M173.06,292.17c2.08-.83,54-23.26,70.2-36.55,17.03-14.12,26.17-34.06,26.17-57.73v-112.98l-1.25-.83c-41.54-22.43-93.04-20.77-95.12-20.77s-53.17-1.66-94.7,20.77l-1.25.83v112.56c0,24.09,9.14,44.03,26.17,57.73,15.78,13.71,67.7,36.14,69.78,36.97Z"/> <path fill="#f3d634" d="M173.08,289.26s-52.34-22.43-68.53-35.72c-17.03-13.71-24.92-33.23-24.92-56.07v-110.9c41.54-22.43,93.87-20.35,93.87-20.35,0,0,52.34-1.66,93.87,20.35v110.9c0,22.43-8.31,41.95-24.92,56.07-17.03,13.29-69.36,35.72-69.36,35.72ZM86.68,197.47c0,20.77,7.89,38.21,22.43,50.26,13.29,10.8,52.75,28.66,63.97,33.64,11.21-4.98,50.67-22.84,63.96-33.64,14.54-12.05,22.43-29.49,22.43-50.26v-109.24c-55.24-4.98-120.87-2.08-172.37,45.69v63.55h-.42Z"/> <path fill="#f3d634" d="M119.89,217.4c9.97,0,18.69-2.49,24.92-6.65v-71.86h-16.61v62.3c-1.66,1.25-4.57,2.08-7.89,2.08-7.48,0-8.72-7.06-8.72-11.63v-52.75h-16.61v51.92c.42,17.45,8.72,26.58,24.92,26.58Z"/> <path fill="#f3d634" d="M169.74,216.16c1.66.42,4.15.83,7.48.83,18.28,0,29.08-16.61,29.08-40.71s-10.8-39.04-30.74-39.04c-9.14,0-16.2,2.08-22.43,5.82v107.58h16.61v-34.47ZM169.74,151.78c1.25-.83,3.74-1.25,5.81-1.25,9.55,0,13.71,7.48,13.71,26.17s-4.57,26.58-14.12,26.58c-2.08,0-4.15-.42-5.4-.83v-50.67Z"/> <path fill="#f3d634" d="M225.79,182.1c7.48,4.15,10.38,7.06,10.38,12.46,0,5.81-3.74,9.14-9.97,9.14-5.4,0-11.63-2.91-15.78-6.65v14.95c4.98,2.91,11.63,4.98,18.28,4.98,16.2,0,23.68-11.63,24.09-22.01.42-9.55-2.49-17.03-16.2-24.92-6.23-3.74-11.21-5.82-10.8-12.05,0-5.81,4.98-7.89,9.55-7.89,5.82,0,11.21,3.32,14.95,6.65v-14.54c-2.91-2.08-9.14-5.82-18.28-5.4-10.8.42-22.43,8.31-22.01,21.6,0,9.14,2.49,15.78,15.78,23.68Z"/> <path fill="#f3d634" d="M239.08,273.06v10.8h2.08v-4.57h.42c0,.42,2.91,4.57,2.91,4.57h2.49s-2.91-4.15-3.32-4.57c1.25-.42,2.49-1.25,2.49-2.91s-.83-3.32-3.74-3.32h-3.32ZM241.99,274.31c1.66,0,1.66.83,1.66,1.66s-.42,1.66-2.49,1.66h-.42v-3.32h1.25Z"/> <path fill="#f3d634" d="M249.47,278.47c0,4.15-3.32,7.48-7.48,7.48s-7.48-3.32-7.48-7.48,3.32-7.48,7.48-7.48c4.57,0,7.48,3.32,7.48,7.48ZM242.41,269.33c-4.98,0-8.72,4.15-8.72,8.72,0,4.98,4.15,8.72,8.72,8.72,4.98,0,8.72-4.15,8.72-8.72s-3.74-8.72-8.72-8.72Z"/> </g></g></symbol>
+    <symbol id="logo-express" viewBox="0 0 77 77"><rect x="6" y="6" width="65" height="65" rx="13" fill="#002a52"/><g transform="translate(38.5,38.5) scale(0.20800) translate(-173.27,-173.27)"><defs> <style> .cls-1 { fill: #002a52; } .cls-2 { fill: #fff; } </style> </defs> <g> <g> <path fill="#fff" d="M56.95,181.78v-32.71h6.55c3.38,0,5.95.81,7.71,2.37,1.56,1.56,2.57,3.98,2.57,7.16s-.81,5.54-2.57,7.16c-1.56,1.76-3.78,2.57-6.75,2.57h-1.41l-.2,13.46h-5.95.05ZM62.9,163.33h.81c1.41,0,2.37-.4,2.97-1.21.81-.81,1.21-1.97,1.21-3.38,0-1.56-.4-2.77-1.01-3.58-.81-.81-1.76-1.01-3.18-1.01h-.81v9.17ZM115.61,181.17l-3.38,2.97-2.97-3.38c-.6.4-1.41.81-2.17,1.01-.81.2-1.76.4-2.77.4-3.58,0-6.35-1.56-8.32-4.54-1.76-2.97-2.77-7.16-2.77-12.7,0-4.94,1.01-8.92,2.97-11.89,1.97-2.97,4.54-4.38,8.11-4.38s6.15,1.41,8.11,4.54c1.97,2.97,2.97,7.16,2.97,12.7,0,2.57-.2,4.94-.81,6.96-.4,1.76-1.21,3.38-2.17,4.54l3.18,3.78ZM105.33,169.28l2.97,3.38c.2-.81.4-1.97.6-2.97.2-1.21.2-2.57.2-4.18,0-3.58-.4-6.15-1.21-7.91-.81-1.76-1.97-2.77-3.58-2.77-1.76,0-2.97,1.01-3.78,2.77-.81,1.76-1.21,4.74-1.21,8.52,0,3.18.4,5.75,1.21,7.51,1.01,1.56,2.17,2.57,3.58,2.57.2,0,.4,0,.6-.2h.4l-3.18-3.78,3.38-2.97v.05ZM137.99,149.07v20.61c0,2.57,0,4.38-.2,5.34-.2.96-.4,1.97-.81,2.57-.81,1.56-1.76,2.77-3.38,3.58-1.41.6-3.18,1.01-5.54,1.01-2.17,0-4.18-.4-5.54-1.01-1.56-.81-2.57-1.97-3.38-3.58-.4-.81-.6-1.56-.81-2.57,0-1.21-.2-2.97-.2-5.34v-20.61h6.35v21.02c0,2.77.2,4.54.81,5.34.6.6,1.41,1.01,2.77,1.01s2.37-.4,2.77-1.21c.6-.81.81-2.37.81-5.14v-21.02h6.35ZM142.17,181.78v-32.71h13.25v6.15h-7.31v6.55h6.55v5.95h-6.55v7.71h7.31v6.35h-13.25ZM163.59,181.78v-26.56h-4.74v-6.15h16.03v6.15h-4.94v26.56h-6.35ZM177.66,181.78v-32.71h13.25v6.15h-7.31v6.55h6.55v5.95h-6.55v7.71h7.31v6.35h-13.25ZM207.39,181.78l-2.57-6.55-.6-2.37c-.2-.81-.4-1.56-.6-2.57-.2,1.01-.4,1.76-.6,2.57-.2,1.01-.4,1.56-.6,2.37l-2.17,6.55h-7.16l7.31-16.43-6.75-16.23h6.75l2.37,6.96c0,.4.2.81.4,1.41.2.81.4,1.56.6,2.57.2-1.01.2-1.56.4-2.37.2-.6.4-1.21.6-1.56l2.37-6.96h6.55l-6.75,16.23,7.16,16.43h-6.75l.05-.05ZM216.11,181.78v-32.71h6.55c3.58,0,6.15.81,7.71,2.37,1.76,1.56,2.57,3.98,2.57,7.16s-.81,5.54-2.37,7.16c-1.76,1.76-3.98,2.57-6.96,2.57h-1.41v13.46h-6.15.05ZM222.26,163.33h.6c1.41,0,2.37-.4,3.18-1.21.6-.81,1.01-1.97,1.01-3.38,0-1.56-.4-2.77-1.01-3.58s-1.76-1.01-3.18-1.01h-.6v9.17ZM235.36,181.78v-32.71h6.55c3.58,0,6.15.81,7.91,2.17,1.56,1.56,2.37,3.78,2.37,7.16,0,2.17-.4,4.18-1.21,5.54-1.01,1.41-2.17,2.37-3.78,2.97l5.95,14.87h-6.55l-5.14-13.46v13.46h-6.15.05ZM241.51,163.33h.6c1.41,0,2.37-.4,3.18-1.21.6-.81,1.01-1.97,1.01-3.58s-.2-2.57-1.01-3.38c-.6-.81-1.56-1.01-2.97-1.01h-.81v9.17ZM255.98,181.78v-32.71h13.25v6.15h-7.16v6.55h6.55v5.95h-6.55v7.71h7.16v6.35h-13.25ZM273.01,180.77v-6.96c.81.81,1.56,1.41,2.37,1.56.81.4,1.56.6,2.37.6,1.01,0,1.97-.2,2.57-.81s.81-1.41.81-2.37c0-1.41-.81-2.57-2.37-4.18-.6-.4-.81-.6-1.01-.81-1.97-1.97-3.38-3.58-4.18-4.94-.6-1.41-1.01-2.97-1.01-4.74,0-2.97.81-5.14,2.37-6.96,1.41-1.76,3.58-2.57,5.95-2.57,1.01,0,1.76.2,2.57.4,1.01.2,1.76.6,2.77,1.21v5.75c-1.21-.6-1.97-.81-2.57-1.21-.6-.2-1.21-.2-1.56-.2-1.01,0-1.76.2-2.37.81-.6.6-.81,1.41-.81,2.37,0,.81.2,1.56.6,2.37.6.81,1.56,1.76,3.18,3.18,1.97,1.97,3.38,3.58,3.98,4.74.6,1.21,1.01,2.77,1.01,4.54,0,2.97-.81,5.34-2.37,6.96-1.76,1.76-3.98,2.57-6.75,2.57-1.01,0-1.97,0-2.97-.4-.81-.2-1.76-.6-2.57-1.01M289.64,180.67v-6.96c.81.81,1.56,1.41,2.37,1.56.81.4,1.56.6,2.37.6,1.01,0,1.97-.2,2.57-.81.6-.6.81-1.41.81-2.37,0-1.41-.81-2.57-2.37-4.18-.6-.4-.81-.6-1.01-.81-1.97-1.97-3.38-3.58-4.18-4.94-.6-1.41-1.01-2.97-1.01-4.74,0-2.97.81-5.14,2.37-6.96,1.41-1.76,3.58-2.57,5.95-2.57,1.01,0,1.76.2,2.57.4,1.01.2,1.76.6,2.77,1.21v5.75c-1.21-.6-1.97-.81-2.57-1.21-.6-.2-1.21-.2-1.56-.2-1.01,0-1.76.2-2.37.81s-.81,1.41-.81,2.37c0,.81.2,1.56.6,2.37.6.81,1.56,1.76,3.18,3.18,1.97,1.97,3.38,3.58,3.98,4.74.6,1.21,1.01,2.77,1.01,4.54,0,2.97-.81,5.34-2.37,6.96-1.76,1.76-3.98,2.57-6.75,2.57-1.01,0-1.97,0-2.97-.4-.81-.2-1.76-.6-2.57-1.01M310.66,181.57v-5.14h1.56l.81,3.58,1.01-3.58h1.56v5.14h-1.01v-3.98l-1.01,3.98h-1.01l-1.01-3.98v3.98h-1.01.1Z"/> <path fill="#fff" d="M37.95,142.52h-15.88v52.92c0,6.96,5.34,12.5,12.1,12.5h290.3v-6.55H48.84c-6.15,0-10.89-4.94-10.89-11.09v-47.78ZM44.3,185.3c0,5.34,4.18,9.53,9.32,9.53h270.84v-6.55H52.97c-1.41,0-2.37-1.01-2.37-2.37v-43.39h-6.35v42.79h.05ZM82.7,162.52l-.81-4.94-.6,4.94-1.41,8.72h4.38l-1.56-8.72ZM85.48,149.07l7.51,32.71h-6.55l-1.21-5.54h-6.35l-1.21,5.54h-6.15l7.31-32.71h6.65ZM316.55,181.78h1.01v-1.01h-1.01v1.01ZM319.53,178.8h1.56l.4-.2v-.81s-.2-.2-.4-.2c-.2-.2-.4-.2-.81-.2h-.81v1.41h.05ZM318.52,181.78v-5.14h2.17c.4,0,.81,0,1.21.2.2,0,.4.2.6.4,0,.2.2.6.2.81,0,.4-.2.81-.4,1.01-.2.4-.6.4-1.01.6.2,0,.4.2.6.4,0,.2.2.4.6.81l.6,1.01h-1.21l-.81-1.01c-.2-.4-.4-.81-.6-.81,0-.2-.2-.2-.2-.2-.2-.2-.4-.2-.6-.2h-.2v2.17h-1.01l.05-.05ZM323.66,181.78h.81v-1.01h-.81v1.01Z"/> </g> </g></g></symbol>
+    <symbol id="logo-ampm" viewBox="0 0 134 132"><g >
+    <rect x="9" y="9" width="115.5" height="114" rx="23" fill="#0D298E"/>
+    <g>
+    <g>
+    <path d="M102.59 80.8058H30.9053C22.949 80.8058 16.5 74.3273 16.5 66.3348C16.5 58.3423 22.949 51.8639 30.9053 51.8639H102.595C110.551 51.8639 117 58.3423 117 66.3348C117 74.3273 110.551 80.8058 102.595 80.8058" fill="white"/>
+    <path d="M102.59 80.8058H30.9053C22.949 80.8058 16.5 74.3273 16.5 66.3348C16.5 58.3423 22.949 51.8639 30.9053 51.8639H102.595C110.551 51.8639 117 58.3423 117 66.3348C117 74.3273 110.551 80.8058 102.595 80.8058H102.592H102.59Z" stroke="#25377A" stroke-width="0.36" stroke-miterlimit="10"/>
+    <path d="M112.131 71.7204V71.7139C112.131 71.1548 112.582 70.6849 113.152 70.6849C113.721 70.6849 114.17 71.1483 114.17 71.7106V71.7172C114.17 72.2763 113.718 72.7462 113.152 72.7462C112.586 72.7462 112.131 72.2828 112.131 71.7237M114.052 71.7139V71.7074C114.052 71.2125 113.663 70.7937 113.15 70.7937C112.637 70.7937 112.248 71.2114 112.248 71.7106V71.7172C112.248 72.2121 112.637 72.6309 113.15 72.6309C113.663 72.6309 114.052 72.2132 114.052 71.7139ZM112.75 71.1722H113.219C113.446 71.1722 113.618 71.2843 113.618 71.5029V71.5094C113.618 71.6671 113.516 71.7803 113.376 71.8216L113.652 72.2153H113.411L113.163 71.8575H112.946V72.2153H112.747V71.1722H112.75ZM113.202 71.6889C113.335 71.6889 113.412 71.6182 113.412 71.517V71.5105C113.412 71.4083 113.335 71.3387 113.202 71.3452H112.949V71.6856H113.202V71.6889Z" fill="#0D298E"/>
+    <path d="M66.7471 66.7145C63.4739 66.7145 60.8232 69.3772 60.8232 72.6654H72.6721C72.6721 69.3805 70.0214 66.7145 66.7482 66.7145" fill="#0D298E"/>
+    <path d="M66.7482 65.9659C70.0214 65.9659 72.6721 63.3032 72.6721 60.015H60.8232C60.8232 63.2999 63.4739 65.9659 66.7471 65.9659" fill="#2861C6"/>
+    <path d="M42.7441 72.665H38.4185V60.0138H42.7441V60.7871C42.8145 60.7164 42.8557 60.6849 42.8914 60.6468C43.7024 59.7723 44.7137 59.3394 45.895 59.3078C47.046 59.2796 48.1504 59.4906 49.1509 60.1476C49.466 60.3553 49.7345 60.6251 49.9836 60.9133C50.0085 60.9448 50.0399 60.9731 50.0713 61.0079C50.1135 60.9731 50.1482 60.9448 50.1796 60.9133C50.9559 60.116 51.9033 59.6483 52.9883 59.4373C53.9953 59.2371 55.0022 59.2437 55.9962 59.5004C57.7308 59.9463 58.8396 61.071 59.2727 62.8799C59.3886 63.3607 59.434 63.8567 59.434 64.3516V72.6563H55.0943C55.0975 70.1447 55.0943 67.6256 55.0943 65.1097C55.0943 64.7377 55.0694 64.369 54.9405 64.01C54.7023 63.3639 53.9162 62.8614 53.2265 62.8647C52.2293 62.8712 51.5579 63.402 51.2504 64.4386C51.1108 64.9128 51.0718 65.3979 51.0718 65.8896V72.6519C49.6273 72.6519 48.1797 72.6519 46.732 72.6552C46.7353 70.1393 46.732 67.6212 46.732 65.1053C46.732 64.729 46.7039 64.3603 46.5783 64.0024C46.34 63.3346 45.7629 62.9136 45.057 62.8647C43.8605 62.7798 43.161 63.4792 42.8784 64.5408C42.7626 64.977 42.7355 65.4186 42.7355 65.8689V72.653" fill="#2861C6"/>
+    <path d="M32.3129 61.1041V60.0153H36.6495V72.6665L32.3097 72.6556V71.5668C32.2848 71.5494 32.261 71.532 32.2361 71.5103C32.2112 71.5625 32.1971 71.6223 32.1592 71.6647C31.3439 72.561 30.3271 73.0766 29.1372 73.2702C28.102 73.4388 27.0777 73.3866 26.0772 73.0559C24.7173 72.61 23.7374 71.7137 23.0769 70.453C22.6329 69.5992 22.3947 68.6822 22.2799 67.7305C22.1641 66.7744 22.1641 65.8194 22.2864 64.8676C22.4543 63.5711 22.843 62.3517 23.6605 61.3086C24.5029 60.234 25.6149 59.6151 26.9554 59.3975C28.1064 59.2115 29.2357 59.2953 30.3228 59.7238C31.0331 60.0045 31.6416 60.433 32.1549 60.9954C32.1863 61.0302 32.2209 61.0661 32.2523 61.0976C32.2588 61.1009 32.2729 61.0976 32.3086 61.1041M26.532 66.447C26.5428 66.5873 26.5602 66.8505 26.5883 67.1105C26.6056 67.2617 26.6403 67.4129 26.6793 67.5597C27.0225 68.9476 28.0219 69.7732 29.3895 69.7939C30.6487 69.8145 31.6243 69.1369 32.0433 67.9426C32.3822 66.9767 32.3866 65.9967 32.1375 65.009C31.8019 63.6951 30.8014 62.8869 29.4696 62.876C28.2807 62.8695 27.4134 63.3992 26.9023 64.4847C26.6295 65.0678 26.5418 65.6899 26.5353 66.4481" fill="#2861C6"/>
+    <path d="M74.0013 59.9999H78.3237V60.9626C78.3237 61.0289 78.4039 61.0648 78.4537 61.0148C78.4753 60.993 78.4753 60.993 78.4537 61.0148C79.3729 59.9999 80.5272 59.4757 81.8709 59.3386C82.8324 59.2364 83.7766 59.3179 84.6894 59.6475C86.1544 60.1783 87.144 61.2182 87.7525 62.6333C88.3188 63.9538 88.4726 65.3493 88.4239 66.772C88.3892 67.8054 88.2279 68.8137 87.85 69.7796C87.2306 71.3535 86.1858 72.5021 84.5551 73.047C83.5795 73.3734 82.5758 73.4267 81.558 73.2755C80.6939 73.1449 79.8938 72.8469 79.1943 72.3161C78.8965 72.0877 78.628 71.8212 78.3237 71.5504V78.0951H73.998V60.0043L74.0013 60.001V59.9999ZM78.3281 66.3174C78.3281 66.3174 78.3844 67.1603 78.4786 67.565C78.7969 68.9496 79.8071 69.7709 81.1714 69.7883C82.4231 69.8057 83.4128 69.1248 83.8329 67.9402C84.1718 66.9809 84.1826 66.0041 83.9303 65.0208C83.5914 63.696 82.5845 62.8813 81.2407 62.8671C80.1352 62.8563 79.2993 63.3207 78.772 64.304C78.4363 64.9294 78.3313 65.6147 78.3313 66.3174" fill="#0D298E"/>
+    <path d="M102.646 64.4477C102.506 64.922 102.467 65.4071 102.467 65.8987V72.661C101.023 72.661 99.5751 72.661 98.1274 72.6643C98.1306 70.1484 98.1274 67.6304 98.1274 65.1145C98.1274 64.7381 98.0992 64.3694 97.9736 64.0116C97.7354 63.3437 97.1583 62.9228 96.4523 62.8738C95.2559 62.789 94.5564 63.4884 94.2738 64.55C94.1579 64.9861 94.1265 65.4278 94.1309 65.8781V72.6621H89.8052V60.0153H94.1309V60.7887C94.2045 60.718 94.2424 60.6864 94.2781 60.6483C95.0891 59.7738 96.1004 59.3409 97.2817 59.3094C98.4327 59.2811 99.5372 59.4921 100.538 60.1523C100.853 60.3601 101.121 60.6299 101.37 60.9181C101.395 60.9496 101.427 60.9779 101.461 61.016C101.5 60.9812 101.538 60.9529 101.57 60.9214C102.346 60.1241 103.293 59.6563 104.378 59.4453C105.385 59.2452 106.392 59.2517 107.386 59.5084C109.121 59.9544 110.23 61.0791 110.663 62.8879C110.779 63.3687 110.824 63.8647 110.824 64.3596V72.6643H106.484C106.488 70.1528 106.484 67.6336 106.488 65.1178C106.488 64.7458 106.463 64.377 106.331 64.0181C106.092 63.372 105.306 62.8695 104.616 62.8727C103.619 62.8792 102.948 63.41 102.64 64.4466" fill="#0D298E"/>
+    </g>
+    </g>
+    </g>
+    <defs> </defs></symbol>
+    <symbol id="logo-t1envios-iso" viewBox="0 0 77 77"><rect x="6" y="6" width="65" height="65" rx="13" fill="#DB3B2B"/><g transform="translate(38.5,38.5) scale(1.0233) translate(-21.5,-21)"><g >
+    <path d="M26.9684 18.6174H30.6027C30.7408 18.6174 30.8328 18.6174 30.9248 18.7094C30.9248 18.7094 30.9248 18.7094 30.9248 18.7554V36.7433C30.9248 37.5253 31.6609 38.0774 32.4429 37.8474C34.1451 37.1573 36.3533 36.2832 37.9635 35.5471C38.2395 35.4091 38.6076 35.2711 38.6076 34.7191V18.7554C38.6076 18.7554 38.6076 18.7094 38.6076 18.6634C38.6076 18.6174 38.6076 18.6174 38.6076 18.6174V7.66831C38.6076 7.02424 38.1015 6.51819 37.4574 6.51819H34.7432C34.2371 6.51819 33.8231 6.84022 33.6391 7.30027C32.5349 10.3826 30.4187 12.6828 27.2444 13.2349C24.0701 13.7869 26.9684 13.2809 26.7844 13.2809C26.1863 13.3729 25.7723 13.8329 25.7723 14.431V17.4213C25.7723 18.0654 26.2783 18.5714 26.9224 18.5714L26.9684 18.6174Z" fill="#FFFFFF"/>
+    <path d="M31.7529 5.27603C31.6149 5.13802 31.3849 5 31.1549 5H4.51815C3.69007 5 3 5.59806 3 6.38014V10.4286C3 11.3947 3.18402 11.8547 4.38014 11.8547H13.259C13.4891 11.8547 13.6731 12.0387 13.6731 12.2687V15.6731V34.627C13.6731 35.0411 13.9491 35.3631 14.3632 35.5471C15.1452 35.8691 17.8595 37.2033 18.7796 37.7093C19.6997 38.2154 21.3099 37.3413 21.3099 36.0532V12.9128C21.3099 12.8668 21.3099 12.7288 21.3099 12.7288C21.2639 12.4068 21.3099 12.0847 21.6319 11.9467C21.7239 11.9467 21.7699 11.9467 21.8619 11.9467H24.7602C31.1089 11.3486 31.7529 6.42615 31.7989 5.87409C31.7989 5.87409 31.7989 5.82808 31.7989 5.78208V5.64407C31.7989 5.50605 31.7989 5.41404 31.6609 5.32203L31.7529 5.27603Z" fill="#FFFFFF"/>
+    </g>
+    <defs> </defs></g></symbol>
+    <symbol id="logo-t1economic" viewBox="0 0 77 77"><rect x="6" y="6" width="65" height="65" rx="13" fill="#1F2937"/><g transform="translate(38.5,38.5) scale(1.0233) translate(-21.5,-21)"><g >
+    <path d="M26.9684 18.6174H30.6027C30.7408 18.6174 30.8328 18.6174 30.9248 18.7094C30.9248 18.7094 30.9248 18.7094 30.9248 18.7554V36.7433C30.9248 37.5253 31.6609 38.0774 32.4429 37.8474C34.1451 37.1573 36.3533 36.2832 37.9635 35.5471C38.2395 35.4091 38.6076 35.2711 38.6076 34.7191V18.7554C38.6076 18.7554 38.6076 18.7094 38.6076 18.6634C38.6076 18.6174 38.6076 18.6174 38.6076 18.6174V7.66831C38.6076 7.02424 38.1015 6.51819 37.4574 6.51819H34.7432C34.2371 6.51819 33.8231 6.84022 33.6391 7.30027C32.5349 10.3826 30.4187 12.6828 27.2444 13.2349C24.0701 13.7869 26.9684 13.2809 26.7844 13.2809C26.1863 13.3729 25.7723 13.8329 25.7723 14.431V17.4213C25.7723 18.0654 26.2783 18.5714 26.9224 18.5714L26.9684 18.6174Z" fill="#FFFFFF"/>
+    <path d="M31.7529 5.27603C31.6149 5.13802 31.3849 5 31.1549 5H4.51815C3.69007 5 3 5.59806 3 6.38014V10.4286C3 11.3947 3.18402 11.8547 4.38014 11.8547H13.259C13.4891 11.8547 13.6731 12.0387 13.6731 12.2687V15.6731V34.627C13.6731 35.0411 13.9491 35.3631 14.3632 35.5471C15.1452 35.8691 17.8595 37.2033 18.7796 37.7093C19.6997 38.2154 21.3099 37.3413 21.3099 36.0532V12.9128C21.3099 12.8668 21.3099 12.7288 21.3099 12.7288C21.2639 12.4068 21.3099 12.0847 21.6319 11.9467C21.7239 11.9467 21.7699 11.9467 21.8619 11.9467H24.7602C31.1089 11.3486 31.7529 6.42615 31.7989 5.87409C31.7989 5.87409 31.7989 5.82808 31.7989 5.78208V5.64407C31.7989 5.50605 31.7989 5.41404 31.6609 5.32203L31.7529 5.27603Z" fill="#FFFFFF"/>
+    </g>
+    <defs> </defs></g></symbol>
   </defs>
 </svg>
 
@@ -665,211 +735,267 @@
 
 <script>
   /* ===================== DATOS DE EJEMPLO =====================
-     Todos los datos son ficticios. Cada envío con retorno define su
-     cadena de guías, cronograma y desglose de cobros.                  */
+     Estructura replicada del productivo (shipping.t1.com).
+     Dos comportamientos de retorno según la paquetería:
+       · tipo 'nueva' → la paquetería genera una guía nueva (DHL, FedEx, 99 minutos)
+       · tipo 'misma' → el retorno viaja con el mismo número (UPS, Paquete Express,
+                        T1envíos, T1 Economic, AMPM)                                */
 
   const DIR_ORIGEN = {
-    t:'Av. Insurgentes Sur',
-    d:'Av. Insurgentes Sur, San José Insurgentes, México, Ciudad de México, 03900',
-    c:['monadic_chicos@claroshop.com · Chicos Olé','55 4879 0021']
+    t:'Av. Adolfo López Mateos Sur 5550',
+    d:'Av. Adolfo López Mateos Sur 5550, Fraccionamiento La Rioja, México, Jalisco, 45640',
+    c:['info@essensorial.com','3342052870']
   };
 
   const ENVIOS = [
-    /* CASO 1 · AMPM — retorno con guía nueva, 3 intentos */
+    /* ── Retorno con GUÍA NUEVA ────────────────────────────────── */
     {
-      id:'e-ampm', guia:'AMP0459812', logo:'logo-ampm', carrier:'AMPM', servicio:'Estándar nacional',
-      fecha:'19 de Jul', hora:'11:40 hrs', canal:'Amazon', cliente:'SOFÍA HERRERA',
+      id:'e-dhl', guia:'8427659995', logo:'logo-dhl', carrier:'DHL', servicio:'Economico / 2 días',
+      fecha:'03 de Sep', hora:'11:03 hrs', canal:'—', cliente:'Essensorial',
+      costo:'116.15', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'3 de septiembre, 2026 a las 11:03hrs', entrega:'09 sep',
+      destino:{t:'Av. San Ignacio 942', d:'Av. San Ignacio 942, Jardines de San Ignacio, México, Jalisco, 45040', c:['info@essensorial.com','3342052870']},
+      paquete:['1 paquete','(17 x 17 x 17 cm)','2kg'],
+      cobro:{precio:'104.07', cargos:'12.08', total:'116.15'},
+      retorno:{
+        tipo:'nueva', guia:'1697107624', fecha:'26 de Ago', hora:'14:11 hrs',
+        costo:'108.33', rastreo:{t:'Entregado', c:'entregado'}, entrega:'29 ago',
+        cobroEstado:'Pendiente',
+        cobro:{precio:'101.12', cargos:'7.21', total:'108.33'}
+      },
+      timeline:[
+        {f:'26/08/2026', hito:true, t:'Guía generada', guia:'8427659995', monto:'116.15', h:'2:11:37 PM'},
+        {f:'26/08/2026', t:'Recolectado', h:'6:58:52 PM'},
+        {f:'26/08/2026', t:'En camino', h:'10:24:23 PM', dot:true},
+        {f:'26/08/2026', t:'Llegada al centro de clasificación', h:'11:00:15 PM'},
+        {f:'27/08/2026', t:'En espera de ser recogido por el destinatario', h:'12:08:20 PM'},
+        {f:'02/09/2026', t:'Devuelto al remitente', h:'5:27:44 PM'},
+        {f:'02/09/2026', hito:true, ret:true, t:'Guía de retorno generada', guia:'1697107624', monto:'108.33', h:'5:30:02 PM'},
+        {f:'03/09/2026', t:'En manos del courier para entrega', h:'11:01:48 AM'},
+        {f:'03/09/2026', t:'Entregado', h:'5:04:15 PM'},
+        {f:'03/09/2026', t:'RETORNADA', h:'5:04:15 PM'}
+      ]
+    },
+    {
+      id:'e-fedex', guia:'794658219873', logo:'logo-fedex', carrier:'FedEx', servicio:'Express nacional / 1 día',
+      fecha:'01 de Sep', hora:'13:45 hrs', canal:'Amazon', cliente:'Luis Damián',
+      costo:'118.00', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'1 de septiembre, 2026 a las 13:45hrs', entrega:'03 sep',
+      destino:{t:'Blvd. Manuel Ávila Camacho 5', d:'Blvd. Manuel Ávila Camacho 5, Lomas de Sotelo, Naucalpan, Estado de México, 53390', c:['luis.damian@outlook.com','5533901147']},
+      paquete:['2 paquetes','(30 x 22 x 18 cm)','3.4kg'],
+      cobro:{precio:'101.76', cargos:'16.24', total:'118.00'},
+      retorno:{
+        tipo:'nueva', guia:'794658331120', fecha:'05 de Sep', hora:'10:12 hrs',
+        costo:'112.30', rastreo:{t:'En camino', c:'transito'}, entrega:'08 sep',
+        cobroEstado:'$112.30 MXN',
+        cobro:{precio:'96.81', cargos:'15.49', total:'112.30'}
+      },
+      timeline:[
+        {f:'01/09/2026', hito:true, t:'Guía generada', guia:'794658219873', monto:'118.00', h:'1:45:10 PM'},
+        {f:'01/09/2026', t:'Recolectado', h:'4:05:33 PM'},
+        {f:'02/09/2026', t:'En camino', h:'7:40:12 AM', dot:true},
+        {f:'03/09/2026', t:'Intento de entrega — domicilio incorrecto', h:'11:18:40 AM'},
+        {f:'04/09/2026', t:'Intento de entrega — sin quien reciba', h:'3:40:05 PM'},
+        {f:'05/09/2026', t:'Devuelto al remitente', h:'9:58:11 AM'},
+        {f:'05/09/2026', hito:true, ret:true, t:'Guía de retorno generada', guia:'794658331120', monto:'112.30', h:'10:12:47 AM'},
+        {f:'06/09/2026', t:'En camino', h:'8:22:19 AM', dot:true}
+      ]
+    },
+    {
+      id:'e-99min', guia:'99M240815330', logo:'logo-99min', carrier:'99 minutos', servicio:'Mismo día / 24H',
+      fecha:'31 de Ago', hora:'09:12 hrs', canal:'T1tienda', cliente:'Regina Torres',
+      costo:'64.90', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'31 de agosto, 2026 a las 09:12hrs', entrega:'01 sep',
+      destino:{t:'Calle Ámsterdam 240', d:'Calle Ámsterdam 240, Hipódromo Condesa, México, Ciudad de México, 06100', c:['regina.torres@gmail.com','5522148890']},
+      paquete:['1 paquete','(20 x 15 x 10 cm)','0.8kg'],
+      cobro:{precio:'55.95', cargos:'8.95', total:'64.90'},
+      retorno:{
+        tipo:'nueva', guia:'99M240816871', fecha:'02 de Sep', hora:'14:20 hrs',
+        costo:'58.00', rastreo:{t:'En camino', c:'transito'}, entrega:'03 sep',
+        cobroEstado:'$58.00 MXN',
+        cobro:{precio:'50.00', cargos:'8.00', total:'58.00'}
+      },
+      timeline:[
+        {f:'31/08/2026', hito:true, t:'Guía generada', guia:'99M240815330', monto:'64.90', h:'9:12:04 AM'},
+        {f:'31/08/2026', t:'Recolectado', h:'9:48:31 AM'},
+        {f:'31/08/2026', t:'En camino', h:'10:05:22 AM', dot:true},
+        {f:'31/08/2026', t:'Intento de entrega — sin quien reciba', h:'12:30:18 PM'},
+        {f:'01/09/2026', t:'Intento de entrega — el cliente no aceptó el paquete', h:'4:48:52 PM'},
+        {f:'02/09/2026', t:'Devuelto al remitente', h:'1:05:09 PM'},
+        {f:'02/09/2026', hito:true, ret:true, t:'Guía de retorno generada', guia:'99M240816871', monto:'58.00', h:'2:20:44 PM'},
+        {f:'02/09/2026', t:'En camino', h:'3:02:15 PM', dot:true}
+      ]
+    },
+
+    /* ── Retorno sobre la MISMA GUÍA ───────────────────────────── */
+    {
+      id:'e-ups', guia:'1Z999AA10123456784', logo:'logo-ups', carrier:'UPS', servicio:'Terrestre / 3 días',
+      fecha:'30 de Ago', hora:'10:26 hrs', canal:'Mercado Libre', cliente:'Mauricio Beltrán',
+      costo:'269.52', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'30 de agosto, 2026 a las 10:26hrs', entrega:'02 sep',
+      destino:{t:'Av. Vallarta 1500', d:'Av. Vallarta 1500, Americana, Guadalajara, Jalisco, 44160', c:['mauricio.beltran@gmail.com','3312440087']},
+      paquete:['1 paquete','(40 x 30 x 20 cm)','5kg'],
+      cobro:{precio:'232.34', cargos:'37.18', total:'269.52'},
+      retorno:{
+        tipo:'misma', fecha:'04 de Sep', hora:'09:14 hrs',
+        costo:'241.10', rastreo:{t:'En camino', c:'transito'}, entrega:'07 sep',
+        cobroEstado:'$241.10 MXN',
+        cobro:{precio:'207.84', cargos:'33.26', total:'241.10'}
+      },
+      timeline:[
+        {f:'30/08/2026', hito:true, t:'Guía generada', guia:'1Z999AA10123456784', monto:'269.52', h:'10:26:41 AM'},
+        {f:'30/08/2026', t:'Recolectado', h:'2:15:07 PM'},
+        {f:'31/08/2026', t:'En camino', h:'7:12:55 AM', dot:true},
+        {f:'01/09/2026', t:'Intento de entrega — sin quien reciba', h:'11:44:20 AM'},
+        {f:'02/09/2026', t:'Intento de entrega — domicilio cerrado', h:'1:22:38 PM'},
+        {f:'03/09/2026', t:'En espera de ser recogido por el destinatario', h:'9:30:12 AM'},
+        {f:'04/09/2026', t:'Devuelto al remitente', h:'8:58:03 AM'},
+        {f:'04/09/2026', hito:true, ret:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'1Z999AA10123456784', monto:'241.10', h:'9:14:26 AM'},
+        {f:'05/09/2026', t:'En camino', h:'7:45:11 AM', dot:true}
+      ]
+    },
+    {
+      id:'e-express', guia:'PEX00918273645', logo:'logo-express', carrier:'Paquete Express', servicio:'Estándar / 4 días',
+      fecha:'29 de Ago', hora:'16:08 hrs', canal:'Shopify', cliente:'Carlos Peña',
+      costo:'102.50', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'29 de agosto, 2026 a las 16:08hrs', entrega:'03 sep',
+      destino:{t:'Calle Río Nazas 45', d:'Calle Río Nazas 45, Cuauhtémoc, México, Ciudad de México, 06500', c:['carlos.pena@gmail.com','5588112043']},
+      paquete:['1 paquete','(35 x 25 x 12 cm)','1.6kg'],
+      cobro:{precio:'88.36', cargos:'14.14', total:'102.50'},
+      retorno:{
+        tipo:'misma', fecha:'06 de Sep', hora:'09:30 hrs',
+        costo:'96.80', rastreo:{t:'En camino', c:'transito'}, entrega:'10 sep',
+        cobroEstado:'Pendiente',
+        cobro:{precio:'83.45', cargos:'13.35', total:'96.80'}
+      },
+      timeline:[
+        {f:'29/08/2026', hito:true, t:'Guía generada', guia:'PEX00918273645', monto:'102.50', h:'4:08:20 PM'},
+        {f:'30/08/2026', t:'Recolectado', h:'11:30:44 AM'},
+        {f:'31/08/2026', t:'En camino', h:'7:55:02 AM', dot:true},
+        {f:'02/09/2026', t:'Intento de entrega — sin quien reciba', h:'10:21:36 AM'},
+        {f:'04/09/2026', t:'Intento de entrega — domicilio cerrado', h:'12:47:19 PM'},
+        {f:'05/09/2026', t:'En espera de ser recogido por el destinatario', h:'5:15:40 PM'},
+        {f:'06/09/2026', t:'Devuelto al remitente', h:'9:02:11 AM'},
+        {f:'06/09/2026', hito:true, ret:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'PEX00918273645', monto:'96.80', h:'9:30:55 AM'}
+      ]
+    },
+    {
+      id:'e-t1envios', guia:'T1E20260903117', logo:'logo-t1envios-iso', carrier:'T1envíos', servicio:'Nacional / 3 días',
+      fecha:'28 de Ago', hora:'12:41 hrs', canal:'T1tienda', cliente:'Ana Salas',
+      costo:'131.75', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'28 de agosto, 2026 a las 12:41hrs', entrega:'01 sep',
+      destino:{t:'Calle Zaragoza 88', d:'Calle Zaragoza 88, Centro, Puebla, Puebla, 72000', c:['ana.salas@gmail.com','2224510098']},
+      paquete:['1 paquete','(25 x 18 x 14 cm)','1.2kg'],
+      cobro:{precio:'113.58', cargos:'18.17', total:'131.75'},
+      retorno:{
+        tipo:'misma', fecha:'05 de Sep', hora:'11:52 hrs',
+        costo:'124.40', rastreo:{t:'Entregado', c:'entregado'}, entrega:'08 sep',
+        cobroEstado:'$124.40 MXN',
+        cobro:{precio:'107.24', cargos:'17.16', total:'124.40'}
+      },
+      timeline:[
+        {f:'28/08/2026', hito:true, t:'Guía generada', guia:'T1E20260903117', monto:'131.75', h:'12:41:09 PM'},
+        {f:'28/08/2026', t:'Recolectado', h:'6:20:31 PM'},
+        {f:'29/08/2026', t:'En camino', h:'8:14:02 AM', dot:true},
+        {f:'31/08/2026', t:'Llegada al centro de clasificación', h:'10:38:47 PM'},
+        {f:'01/09/2026', t:'Intento de entrega — sin quien reciba', h:'1:12:25 PM'},
+        {f:'03/09/2026', t:'En espera de ser recogido por el destinatario', h:'9:45:18 AM'},
+        {f:'05/09/2026', t:'Devuelto al remitente', h:'11:20:06 AM'},
+        {f:'05/09/2026', hito:true, ret:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'T1E20260903117', monto:'124.40', h:'11:52:33 AM'},
+        {f:'07/09/2026', t:'Entregado', h:'4:05:52 PM'}
+      ]
+    },
+    {
+      id:'e-t1economic', guia:'T1EC0459812337', logo:'logo-t1economic', carrier:'T1 Economic', servicio:'Económico / 5 días',
+      fecha:'27 de Ago', hora:'08:55 hrs', canal:'Claroshop', cliente:'Diego Lara',
+      costo:'96.40', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'27 de agosto, 2026 a las 08:55hrs', entrega:'03 sep',
+      destino:{t:'Av. Chapultepec 320', d:'Av. Chapultepec 320, Americana, Guadalajara, Jalisco, 44160', c:['diego.lara@hotmail.com','3319887744']},
+      paquete:['1 paquete','(22 x 16 x 9 cm)','0.9kg'],
+      cobro:{precio:'83.10', cargos:'13.30', total:'96.40'},
+      retorno:{
+        tipo:'misma', fecha:'07 de Sep', hora:'15:18 hrs',
+        costo:'91.20', rastreo:{t:'En camino', c:'transito'}, entrega:'12 sep',
+        cobroEstado:'Pendiente',
+        cobro:{precio:'78.62', cargos:'12.58', total:'91.20'}
+      },
+      timeline:[
+        {f:'27/08/2026', hito:true, t:'Guía generada', guia:'T1EC0459812337', monto:'96.40', h:'8:55:14 AM'},
+        {f:'28/08/2026', t:'Recolectado', h:'1:40:22 PM'},
+        {f:'29/08/2026', t:'En camino', h:'9:05:47 AM', dot:true},
+        {f:'01/09/2026', t:'Llegada al centro de clasificación', h:'11:22:38 PM'},
+        {f:'03/09/2026', t:'Intento de entrega — sin quien reciba', h:'2:15:03 PM'},
+        {f:'05/09/2026', t:'En espera de ser recogido por el destinatario', h:'10:08:44 AM'},
+        {f:'07/09/2026', t:'Devuelto al remitente', h:'2:50:17 PM'},
+        {f:'07/09/2026', hito:true, ret:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'T1EC0459812337', monto:'91.20', h:'3:18:29 PM'}
+      ]
+    },
+    {
+      id:'e-ampm', guia:'AMP0459812774', logo:'logo-ampm', carrier:'AMPM', servicio:'Punto de entrega / 3 días',
+      fecha:'26 de Ago', hora:'11:40 hrs', canal:'Amazon', cliente:'Sofía Herrera',
       costo:'145.20', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
-      creado:'19 de julio 2026 a las 11:40 hrs',
-      destino:{t:'Av. Patriotismo', d:'Av. Patriotismo 615, San Juan, Benito Juárez, México, Ciudad de México, 03730', c:['sofia.herrera@gmail.com','55 6620 7734']},
-      paquete:['3 paquetes','(28 × 20 × 15 cm)','2.6 kg'],
-      creadaOrig:'19 de julio · 11:40 hrs',
-      estimadaOrig:'21 de julio',
+      creado:'26 de agosto, 2026 a las 11:40hrs', entrega:'31 ago',
+      destino:{t:'Av. Patriotismo 615', d:'Av. Patriotismo 615, San Juan, Benito Juárez, México, Ciudad de México, 03730', c:['sofia.herrera@gmail.com','5566207734']},
+      paquete:['3 paquetes','(28 x 20 x 15 cm)','2.6kg'],
+      cobro:{precio:'125.17', cargos:'20.03', total:'145.20'},
       retorno:{
-        tipo:'nueva', guia:'AMP0461377', fecha:'22 de Jul', hora:'9:35 hrs',
-        creada:'22 de julio · 9:35 hrs', costo:'138.60', rastreo:{t:'En tránsito', c:'transito'},
-        intentos:3, estimada:'25 de julio'
+        tipo:'misma', fecha:'04 de Sep', hora:'09:35 hrs',
+        costo:'138.60', rastreo:{t:'En camino', c:'transito'}, entrega:'08 sep',
+        cobroEstado:'$138.60 MXN',
+        cobro:{precio:'119.48', cargos:'19.12', total:'138.60'}
       },
       timeline:[
-        {fecha:'22 de julio 2026'},
-        {hito:'retorno', t:'Guía de retorno generada', d:'La paquetería generó una nueva guía tras 3 intentos de entrega sin éxito · 9:35 hrs', guia:'AMP0461377'},
-        {t:'Recibido en sucursal AMPM', d:'Paquete en resguardo para su retorno · 8:50 hrs'},
-        {fecha:'21 de julio 2026'},
-        {t:'Intento de entrega (3 de 3)', d:'Sin quien reciba en el domicilio · 16:12 hrs', link:'Ver evidencia'},
-        {fecha:'20 de julio 2026'},
-        {t:'Intento de entrega (2 de 3)', d:'El cliente pidió reprogramar · 14:05 hrs', link:'Ver evidencia'},
-        {fecha:'19 de julio 2026'},
-        {t:'Intento de entrega (1 de 3)', d:'Domicilio cerrado · 13:28 hrs', link:'Ver evidencia'},
-        {t:'Envío en camino', d:'12:10 hrs', link:'Ver seguimiento', dot:true},
-        {t:'Recolectado por paquetería', d:'Escaneado por AMPM · 11:58 hrs', link:'Ver / Imprimir guía'},
-        {hito:'original', t:'Guía creada (Original)', d:'11:40 hrs', guia:'AMP0459812'}
-      ],
-      cobros:[
-        {lbl:'Guía original', guia:'AMP0459812', fecha:'19 de julio 2026', total:'145.20',
-         bl:[['Tarifa base','$125.17'],['IVA (16%)','$20.03']]},
-        {lbl:'Guía de retorno', guia:'AMP0461377', fecha:'22 de julio 2026', total:'138.60',
-         bl:[['Tarifa de retorno','$119.48'],['IVA (16%)','$19.12']]}
-      ],
-      total:'283.80'
+        {f:'26/08/2026', hito:true, t:'Guía generada', guia:'AMP0459812774', monto:'145.20', h:'11:40:52 AM'},
+        {f:'26/08/2026', t:'Recolectado', h:'4:58:13 PM'},
+        {f:'27/08/2026', t:'En camino', h:'7:22:40 AM', dot:true},
+        {f:'29/08/2026', t:'Disponible en punto de entrega', h:'10:15:06 AM'},
+        {f:'31/08/2026', t:'En espera de ser recogido por el destinatario', h:'12:04:31 PM'},
+        {f:'03/09/2026', t:'No recogido en el plazo — se inicia retorno', h:'6:30:18 PM'},
+        {f:'04/09/2026', t:'Devuelto al remitente', h:'9:10:44 AM'},
+        {f:'04/09/2026', hito:true, ret:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'AMP0459812774', monto:'138.60', h:'9:35:27 AM'}
+      ]
     },
 
-    /* CASO 2 · DHL — retorno con guía nueva, 3 intentos */
+    /* ── Envíos sin retorno (contraste) ────────────────────────── */
     {
-      id:'e-dhl', guia:'43567890082', logo:'logo-dhl', carrier:'DHL', servicio:'Mismo día 24H',
-      fecha:'10 de Jul', hora:'18:21 hrs', canal:'Shopify', cliente:'JAVIER MENA',
-      costo:'92.33', estado:'Activa', rastreo:{t:'Retornado', c:'retornado', ret:true},
-      creado:'10 de julio 2026 a las 18:21 hrs',
-      destino:{t:'Calle Lago Zurich', d:'Calle Lago Zurich, Depto. 4B, México, Ciudad de México, 11529', c:['alonsocharbel@gmail.com','74 4123 4567']},
-      paquete:['6 paquetes','(24 × 10 × 30 cm)','2 kg'],
-      creadaOrig:'10 de julio · 18:21 hrs',
-      estimadaOrig:'13 de julio',
-      retorno:{
-        tipo:'nueva', guia:'7374310930', fecha:'18 de Jul', hora:'17:05 hrs',
-        creada:'18 de julio · 17:05 hrs', costo:'87.45', rastreo:{t:'En tránsito', c:'transito'},
-        intentos:3, estimada:'21 de julio'
-      },
-      timeline:[
-        {fecha:'18 de julio 2026'},
-        {hito:'retorno', t:'Guía de retorno generada', d:'La paquetería generó una nueva guía tras 3 intentos de entrega sin éxito · 17:05 hrs', guia:'7374310930'},
-        {t:'Recibido en sucursal DHL', d:'Paquete en resguardo para su retorno · 16:40 hrs'},
-        {fecha:'16 de julio 2026'},
-        {t:'Intento de entrega (3 de 3)', d:'Sin quien reciba en el domicilio · 17:34 hrs', link:'Ver evidencia'},
-        {fecha:'15 de julio 2026'},
-        {t:'Intento de entrega (2 de 3)', d:'Domicilio cerrado · 13:12 hrs', link:'Ver evidencia'},
-        {fecha:'14 de julio 2026'},
-        {t:'Intento de entrega (1 de 3)', d:'Sin quien reciba en el domicilio · 11:03 hrs', link:'Ver evidencia'},
-        {t:'Envío en camino', d:'8:15 hrs', link:'Ver seguimiento', dot:true},
-        {fecha:'13 de julio 2026'},
-        {t:'Recolectado por paquetería', d:'Escaneado por DHL · 17:34 hrs', link:'Ver / Imprimir guía'},
-        {fecha:'10 de julio 2026'},
-        {hito:'original', t:'Guía creada (Original)', d:'18:21 hrs', guia:'43567890082'}
-      ],
-      cobros:[
-        {lbl:'Guía original', guia:'43567890082', fecha:'10 de julio 2026', total:'92.33',
-         bl:[['Tarifa base','$70.11'],['Cargos adicionales (sobrepeso)','$9.49'],['IVA (16%)','$12.73']]},
-        {lbl:'Guía de retorno', guia:'7374310930', fecha:'18 de julio 2026', total:'87.45',
-         bl:[['Tarifa base','$75.39'],['IVA (16%)','$12.06']]}
-      ],
-      total:'179.78'
-    },
-
-    /* CASO 3 · 99 minutos — retorno SOBRE LA MISMA GUÍA (2 intentos) + segundo cobro */
-    {
-      id:'e-99min', guia:'99M240815330', logo:'logo-99min', carrier:'99 minutos', servicio:'Mismo día 24H',
-      fecha:'17 de Jul', hora:'9:12 hrs', canal:'T1tienda', cliente:'REGINA TORRES',
-      costo:'64.90', estado:'Activa', rastreo:{t:'Retornado', c:'retornado', ret:true},
-      creado:'17 de julio 2026 a las 9:12 hrs',
-      destino:{t:'Calle Ámsterdam', d:'Calle Ámsterdam 240, Hipódromo Condesa, México, Ciudad de México, 06100', c:['regina.torres@gmail.com','55 2214 8890']},
-      paquete:['1 paquete','(20 × 15 × 10 cm)','0.8 kg'],
-      creadaOrig:'17 de julio · 9:12 hrs',
-      estimadaOrig:'18 de julio',
-      retorno:{
-        tipo:'misma', fecha:'19 de Jul', hora:'14:20 hrs',
-        creada:'19 de julio · 14:20 hrs', costo:'58.00', rastreo:{t:'En tránsito', c:'transito'},
-        intentos:2, estimada:'20 de julio'
-      },
-      timeline:[
-        {fecha:'19 de julio 2026'},
-        {hito:'misma', t:'Retorno iniciado en la misma guía', d:'99 minutos no generó una guía nueva: el paquete regresa con el mismo número y se aplicó un cobro por el retorno · 14:20 hrs', guia:'99M240815330'},
-        {t:'Recibido en bodega 99 minutos', d:'Paquete en resguardo para su retorno · 13:05 hrs'},
-        {fecha:'18 de julio 2026'},
-        {t:'Intento de entrega (2 de 2)', d:'El cliente no aceptó el paquete · 16:48 hrs', link:'Ver evidencia'},
-        {fecha:'17 de julio 2026'},
-        {t:'Intento de entrega (1 de 2)', d:'Sin quien reciba en el domicilio · 12:30 hrs', link:'Ver evidencia'},
-        {t:'Envío en camino', d:'10:05 hrs', link:'Ver seguimiento', dot:true},
-        {t:'Recolectado por paquetería', d:'Escaneado por 99 minutos · 9:48 hrs', link:'Ver / Imprimir guía'},
-        {hito:'original', t:'Guía creada (Original)', d:'9:12 hrs', guia:'99M240815330'}
-      ],
-      cobros:[
-        {lbl:'Cobro inicial · Guía 99M240815330', guia:'99M240815330', fecha:'17 de julio 2026', total:'64.90',
-         bl:[['Tarifa base','$55.95'],['IVA (16%)','$8.95']]},
-        {lbl:'Cobro por retorno · Misma guía 99M240815330', guia:'99M240815330', fecha:'19 de julio 2026', total:'58.00',
-         bl:[['Tarifa de retorno','$50.00'],['IVA (16%)','$8.00']]}
-      ],
-      total:'122.90'
-    },
-
-    /* CASO 4 · FedEx — retorno SOBRE LA MISMA GUÍA (domicilio incorrecto) + segundo cobro */
-    {
-      id:'e-fedex', guia:'794658219873', logo:'logo-fedex', carrier:'FedEx', servicio:'Express nacional',
-      fecha:'16 de Jul', hora:'13:45 hrs', canal:'Amazon', cliente:'LUIS DAMIÁN',
-      costo:'118.00', estado:'Activa', rastreo:{t:'Retornado', c:'retornado', ret:true},
-      creado:'16 de julio 2026 a las 13:45 hrs',
-      destino:{t:'Blvd. Manuel Ávila Camacho', d:'Blvd. Manuel Ávila Camacho 5, Lomas de Sotelo, Naucalpan, Estado de México, 53390', c:['luis.damian@outlook.com','55 3390 1147']},
-      paquete:['2 paquetes','(30 × 22 × 18 cm)','3.4 kg'],
-      creadaOrig:'16 de julio · 13:45 hrs',
-      estimadaOrig:'18 de julio',
-      retorno:{
-        tipo:'misma', fecha:'20 de Jul', hora:'10:12 hrs',
-        creada:'20 de julio · 10:12 hrs', costo:'112.30', rastreo:{t:'En tránsito', c:'transito'},
-        intentos:2, estimada:'23 de julio'
-      },
-      timeline:[
-        {fecha:'20 de julio 2026'},
-        {hito:'misma', t:'Retorno iniciado en la misma guía', d:'FedEx no generó una guía nueva: el paquete regresa con el mismo número y se aplicó un cobro por el retorno · 10:12 hrs', guia:'794658219873'},
-        {fecha:'19 de julio 2026'},
-        {t:'Paquete retenido en sucursal', d:'Sucursal FedEx Naucalpan · 18:22 hrs'},
-        {t:'Intento de entrega (2 de 2)', d:'Domicilio incorrecto o incompleto · 15:40 hrs', link:'Ver evidencia'},
-        {fecha:'18 de julio 2026'},
-        {t:'Intento de entrega (1 de 2)', d:'Sin quien reciba en el domicilio · 11:18 hrs', link:'Ver evidencia'},
-        {fecha:'17 de julio 2026'},
-        {t:'Envío en camino', d:'7:40 hrs', link:'Ver seguimiento', dot:true},
-        {fecha:'16 de julio 2026'},
-        {t:'Recolectado por paquetería', d:'Escaneado por FedEx · 16:05 hrs', link:'Ver / Imprimir guía'},
-        {hito:'original', t:'Guía creada (Original)', d:'13:45 hrs', guia:'794658219873'}
-      ],
-      cobros:[
-        {lbl:'Cobro inicial · Guía 794658219873', guia:'794658219873', fecha:'16 de julio 2026', total:'118.00',
-         bl:[['Tarifa base','$92.24'],['Cargos adicionales (zona extendida)','$9.52'],['IVA (16%)','$16.24']]},
-        {lbl:'Cobro por retorno · Misma guía 794658219873', guia:'794658219873', fecha:'20 de julio 2026', total:'112.30',
-         bl:[['Tarifa de retorno','$96.81'],['IVA (16%)','$15.49']]}
-      ],
-      total:'230.30'
-    },
-
-    {
-      id:'e-dhl-generada', guia:'5512045589', logo:'logo-dhl', carrier:'DHL', servicio:'Estándar nacional',
-      fecha:'16 de Jul', hora:'8:03 hrs', canal:'T1envíos', cliente:'CARLOS PEÑA',
-      costo:'102.50', estado:'Activa', rastreo:{t:'Guía generada', c:'generada'}
-    },
-
-    {
-      id:'e-ml-exc', guia:'794658198010', logo:'logo-fedex', carrier:'FedEx', servicio:'Express nacional',
-      fecha:'15 de Jul', hora:'16:28 hrs', canal:'Mercado Libre', cliente:'ANA SALAS',
-      costo:'131.75', estado:'Activa', rastreo:{t:'Excepción', c:'excepcion'}
+      id:'e-dhl-generada', guia:'2521900290', logo:'logo-dhl', carrier:'DHL', servicio:'Economico / 2 días',
+      fecha:'07 de Sep', hora:'23:02 hrs', canal:'—', cliente:'Angel',
+      costo:'119.01', estado:'Activa', rastreo:{t:'Guía generada', c:'generada'}
     },
     {
-      id:'e-99-cancel', guia:'99M240811207', logo:'logo-99min', carrier:'99 minutos', servicio:'Mismo día 24H',
-      fecha:'14 de Jul', hora:'10:55 hrs', canal:'Mercado Libre', cliente:'MARIANA RUIZ',
-      costo:'58.00', estado:'Cancelada', rastreo:{t:'Cancelado', c:'cancelado'}
+      id:'e-fedex-transito', guia:'794658203145', logo:'logo-fedex', carrier:'FedEx', servicio:'Express nacional / 1 día',
+      fecha:'07 de Sep', hora:'11:40 hrs', canal:'Amazon', cliente:'Osbaldo',
+      costo:'140.25', estado:'Activa', rastreo:{t:'En camino', c:'transito'}
     },
     {
-      id:'e-dhl-dev', guia:'5511998231', logo:'logo-dhl', carrier:'DHL', servicio:'Estándar nacional',
-      fecha:'12 de Jul', hora:'14:17 hrs', canal:'Shopify', cliente:'DIEGO LARA',
-      costo:'96.40', estado:'Activa', rastreo:{t:'Devuelto', c:'devuelto'}
+      id:'e-99-entregado', guia:'99M240811207', logo:'logo-99min', carrier:'99 minutos', servicio:'Mismo día / 24H',
+      fecha:'06 de Sep', hora:'10:55 hrs', canal:'Mercado Libre', cliente:'Mariana Ruiz',
+      costo:'58.00', estado:'Activa', rastreo:{t:'Entregado', c:'entregado'}
+    },
+    {
+      id:'e-ups-cancel', guia:'1Z999AA10998877665', logo:'logo-ups', carrier:'UPS', servicio:'Terrestre / 3 días',
+      fecha:'05 de Sep', hora:'14:17 hrs', canal:'Shopify', cliente:'Jessica',
+      costo:'119.01', estado:'Cancelada', rastreo:{t:'Cancelado', c:'cancelado'}
     }
   ];
 
   const byId = id => ENVIOS.find(e => e.id === id);
   const logoSvg = (e, cls) => `<svg class="${cls}" role="img" aria-label="${e.carrier}"><use href="#${e.logo}"/></svg>`;
   const chip = r => `<span class="chip ${r.c}">${r.t}</span>`;
+  const esMisma = e => e.retorno && e.retorno.tipo === 'misma';
+  const guiaRet = e => esMisma(e) ? e.guia : e.retorno.guia;
 
   /* ===================== LISTADO ===================== */
   function acciones(e){
-    const verRet = e.retorno && e.retorno.tipo === 'nueva'
-      ? `<button onclick="abrirDetalle('${e.id}')">Ver guía de retorno</button>` : '';
     return `<div class="cell rowacts"><button class="btn-ghost-icon" onclick="toggleActs(event,this)" aria-label="Acciones">
         <svg class="ic" style="width:18px;height:18px"><use href="#i-dots"/></svg></button>
-      <div class="menu-acts">
-        <button onclick="abrirDetalle('${e.id}')">Ver detalle</button>${verRet}
-        <button>Imprimir guía</button><button>Rastrear</button>
-        ${e.estado === 'Activa' ? '<button class="danger">Cancelar envío</button>' : ''}
-      </div></div>`;
+      <div class="menu-acts"><button onclick="abrirDetalle('${e.id}')">Ver detalle</button></div></div>`;
   }
 
   function filaEnvio(e){
-    const toggle = (e.retorno && e.retorno.tipo === 'nueva')
-      ? `<button class="toggle-ret" onclick="toggleThread('${e.id}')" aria-expanded="true" data-tip="Este envío generó una guía de retorno">
+    const toggle = e.retorno
+      ? `<button class="toggle-ret" onclick="toggleThread('${e.id}')" aria-expanded="true"
+           data-tip="${esMisma(e) ? 'El retorno viaja con esta misma guía' : 'Este envío generó una guía de retorno'}">
            <svg class="ic ret-glyph"><use href="#i-return"/></svg> <span class="tlabel">Ver menos</span>
            <svg class="ic chev"><use href="#i-chev-u"/></svg></button>` : '';
     return `<div class="grid-row row" data-tipo="envio">
@@ -885,13 +1011,20 @@
       ${acciones(e)}</div>`;
   }
 
+  /* Subfila del retorno. Cuando es la misma guía, el número se repite y se marca
+     como derivado de la original — el punto que pidió el Owner.                */
   function filaRetorno(e){
-    const r = e.retorno;
+    const r = e.retorno, misma = esMisma(e);
+    const num = misma
+      ? `<div class="gnum">${e.guia}</div>
+         <div style="margin-top:4px"><span class="tag-misma">Misma guía</span></div>
+         <div class="gsub der">Deriva de la guía original</div>`
+      : `<div class="gnum">${r.guia}</div><div style="margin-top:4px"><span class="tag-ret">Retorno</span></div>`;
     return `<div class="grid-row subrow" data-tipo="retorno">
       <div class="cell"><span class="ck" style="visibility:hidden"></span></div>
       <div class="cell">${logoSvg(e,'carrier brand')}</div>
       <span class="loopbadge" data-tip="Guía de retorno"><svg class="ic"><use href="#i-return"/></svg></span>
-      <div class="cell gcell"><div class="gnum">${r.guia}</div><div style="margin-top:4px"><span class="tag-ret">Retorno</span></div></div>
+      <div class="cell gcell">${num}</div>
       <div class="cell fecha"><b>${r.fecha}</b><span>${r.hora}</span></div>
       <div class="cell canal">${e.canal}</div>
       <div class="cell cliente">${e.cliente} <svg class="ic"><use href="#i-chev-d"/></svg></div>
@@ -903,106 +1036,98 @@
 
   function renderListado(){
     document.getElementById('tbody').innerHTML = ENVIOS.map(e =>
-      (e.retorno && e.retorno.tipo === 'nueva')
-        ? `<div class="thread" id="th-${e.id}">${filaEnvio(e)}${filaRetorno(e)}</div>`
-        : filaEnvio(e)
+      e.retorno ? `<div class="thread" id="th-${e.id}">${filaEnvio(e)}${filaRetorno(e)}</div>` : filaEnvio(e)
     ).join('');
   }
 
   /* ===================== DETALLE ===================== */
-  function evento(ev){
-    if (ev.fecha) return `<span class="datechip">${ev.fecha}</span>`;
-    if (ev.hito){
-      const ico = ev.hito === 'original' ? 'i-doc' : 'i-return';
-      const end = ev.hito === 'original' ? ' end' : '';
-      const cs  = window.__casoActual;
-      return `<div class="milestone${end}">
-        <span class="ico"><svg class="ic"><use href="#${ico}"/></svg></span>
-        <div class="t">${ev.t}</div><div class="d">${ev.d}</div>
-        <button class="gref">${logoSvg(cs,'brand')} <span>${ev.guia}</span></button></div>`;
-    }
-    const ico = ev.dot
-      ? '<svg class="ic" style="width:8px;height:8px"><use href="#i-truckdot"/></svg>'
-      : '<svg class="ic"><use href="#i-check"/></svg>';
-    return `<div class="ev"><span class="ico">${ico}</span>
-      <div class="t">${ev.t}</div><div class="d">${ev.d}</div>
-      ${ev.link ? `<a class="link" href="#" onclick="return false">${ev.link}</a>` : ''}</div>`;
+  /* Card de guía con la estructura del productivo:
+     [logo] Paquetería: número · servicio · referencia cruzada · cobro de retorno
+                                              Fecha estimada de entrega / fecha    */
+  function cardGuia(e, o){
+    return `<div class="card">
+      <div class="hd">${o.titulo}</div>
+      <div class="bd gcard">
+        ${logoSvg(e,'carrier brand')}
+        <div class="info">
+          <div class="num">${e.carrier}: <a href="#" onclick="return false">${o.guia}</a>${o.tag ? ` <span class="tag-misma">${o.tag}</span>` : ''} ${chip(o.rastreo)}</div>
+          <div class="svc">${e.servicio}</div>
+          ${o.ref ? `<div class="xref">${o.ref}</div>` : ''}
+          ${o.cobro ? `<div class="xref">Cobro de retorno: <b>${o.cobro}</b></div>` : ''}
+        </div>
+        <div class="right"><span class="tlab">Fecha estimada de entrega</span><span class="edate">${o.entrega}</span></div>
+      </div>
+    </div>`;
   }
 
   function cadenaGuias(e){
-    const r = e.retorno;
-    const misma = r.tipo === 'misma';
-
-    /* Bloque de guía con la estructura de Figma:
-       [logo]  Carrier: número  ·  servicio  ·  referencia cruzada     Fecha estimada de entrega */
-    const bloque = (o) => `<div class="gnode">
-      ${logoSvg(e,'carrier brand')}
-      <div class="info">
-        <div class="lbl">${o.lbl}</div>
-        <div class="num">${e.carrier}: ${o.guia} ${chip(o.rastreo)}</div>
-        <div class="svc">${e.servicio}</div>
-        ${o.refGuia ? `<div class="xref">${o.refLbl}: <a href="#" onclick="return false">${o.refGuia}</a></div>` : ''}
-      </div>
-      <div class="right"><span class="tlab">Fecha estimada de entrega</span><span class="edate">${o.entrega}</span></div>
-    </div>`;
-
-    const original = bloque({
-      lbl: 'Guía original',
-      guia: e.guia,
-      rastreo: e.rastreo,
-      refLbl: 'Guía retorno',
-      refGuia: misma ? '' : r.guia,
-      entrega: e.estimadaOrig
+    const r = e.retorno, misma = esMisma(e);
+    const original = cardGuia(e, {
+      titulo:'Guía original', guia:e.guia, rastreo:e.rastreo, entrega:e.entrega,
+      ref:`Guía retorno: <a href="#" onclick="return false">${guiaRet(e)}</a>${misma ? ' <span class="nota">(misma guía)</span>' : ''}`
     });
-
-    const retorno = bloque({
-      lbl: 'Guía retorno',
-      guia: misma ? e.guia : r.guia,
-      rastreo: r.rastreo,
-      refLbl: 'Guía original',
-      refGuia: misma ? '' : e.guia,
-      entrega: r.estimada
-    });
-
     const conector = `<div class="gconn">
       <span class="loop"><svg class="ic"><use href="#i-return"/></svg></span>
       <div><p class="gt1">${misma ? 'Retorno en la misma guía' : 'Retorno generado'}</p>
-      <p class="gt2">${misma ? `${e.carrier} no generó una guía nueva · ${r.creada}` : `Se creó la guía de retorno el ${r.creada}`}</p></div>
+      <p class="gt2">${misma
+        ? `${e.carrier} no generó una guía nueva: el retorno se deriva de la original y viaja con el mismo número · ${r.fecha}, ${r.hora}`
+        : `${e.carrier} generó la guía ${r.guia} · ${r.fecha}, ${r.hora}`}</p></div>
     </div>`;
-
+    const retorno = cardGuia(e, {
+      titulo:'Guía retorno', guia:guiaRet(e), rastreo:r.rastreo, entrega:r.entrega,
+      tag: misma ? 'Misma guía' : '',
+      ref:`Guía original: <a href="#" onclick="return false">${e.guia}</a>${misma ? ' <span class="nota">(misma guía)</span>' : ''}`,
+      cobro:r.cobroEstado
+    });
     return original + conector + retorno;
   }
 
-  function cobros(e){
-    return e.cobros.map((c,i) => `
-      <div class="cobro-acc${i === 0 ? ' open' : ''}" id="cb-${i}">
-        <button class="cobro-head" onclick="toggleCobro('cb-${i}')" aria-expanded="${i === 0}">
-          ${logoSvg(e,'brand')}
-          <div class="inf"><div class="n">${c.lbl}${c.lbl.includes(c.guia) ? '' : ' · ' + c.guia}</div>
-          <div class="m">Cobrada el ${c.fecha}</div></div>
-          <div class="val">$${c.total}</div>
-          <svg class="ic chev"><use href="#i-chev-u"/></svg>
-        </button>
-        <div class="cobro-body">${c.bl.map(l => `<div class="bl"><span>${l[0]}</span><span>${l[1]}</span></div>`).join('')}</div>
-      </div>`).join('');
+  /* Cronograma en orden ascendente, como el productivo */
+  function cronograma(e){
+    let out = '', fechaPrev = '';
+    e.timeline.forEach(ev => {
+      if (ev.f !== fechaPrev){ out += `<span class="datechip">${ev.f}</span>`; fechaPrev = ev.f; }
+      if (ev.hito){
+        out += `<div class="milestone${ev.ret ? ' ret' : ''}">
+          <span class="ico"><svg class="ic"><use href="#${ev.ret ? 'i-return' : 'i-truck'}"/></svg></span>
+          <div class="t">${ev.t}</div>
+          <button class="gref">${logoSvg(e,'brand')} <span>${ev.guia}</span></button>
+          <div class="d">$ ${ev.monto} MXN<br />${ev.h}</div>
+        </div>`;
+      } else {
+        const ico = ev.dot
+          ? '<svg class="ic" style="width:9px;height:9px"><use href="#i-truckdot"/></svg>'
+          : '<svg class="ic"><use href="#i-check"/></svg>';
+        out += `<div class="ev"><span class="ico">${ico}</span>
+          <div class="t">${ev.t}</div><div class="d">${ev.h}</div></div>`;
+      }
+    });
+    return out;
+  }
+
+  function bloqueCobro(titulo, c, sub){
+    return `<div class="cobro-blk">
+      <div class="cb-t">${titulo}${sub ? ` <span class="cb-s">${sub}</span>` : ''}</div>
+      <div class="cobro-line"><span>Precio guía</span><span>$${c.precio}</span></div>
+      <div class="cobro-line"><span>Cargos adicionales</span><span>$${c.cargos}</span></div>
+      <div class="cobro-line tot"><span>Total</span><span>$${c.total}</span></div>
+    </div>`;
   }
 
   function renderDetalle(e){
     window.__casoActual = e;
-    const r = e.retorno;
-    const nota = r.tipo === 'misma'
-      ? `${e.carrier} regresó el paquete con el mismo número de guía y aplicó un segundo cobro por el retorno, descontado automáticamente de tu saldo T1envíos.`
-      : 'El cobro de la guía de retorno se generó al no concretarse la entrega y se descontó automáticamente de tu saldo T1envíos.';
-    const meta = r.tipo === 'misma'
-      ? `Creado el ${e.creado} &nbsp;·&nbsp; 1 guía · 2 cobros`
-      : `Creado el ${e.creado} &nbsp;·&nbsp; 2 guías asociadas`;
+    const r = e.retorno, misma = esMisma(e);
+    const total = (parseFloat(e.cobro.total) + parseFloat(r.cobro.total)).toFixed(2);
+    const nota = misma
+      ? `${e.carrier} regresó el paquete con el mismo número de guía. El retorno se deriva de la guía original y genera su propio cobro, descontado de tu saldo T1envíos.`
+      : `${e.carrier} generó una guía nueva para el retorno. El cobro se aplicó al no concretarse la entrega y se descontó de tu saldo T1envíos.`;
 
     document.getElementById('detalle').innerHTML = `
       <div class="dethead">
         <div class="l">
           <h1><button class="backbtn" onclick="show('listado')" aria-label="Volver"><svg class="ic"><use href="#i-back"/></svg></button>
-            Envío ${e.guia} ${chip(e.rastreo)}</h1>
-          <p class="meta">${meta}</p>
+            ${e.guia} ${chip(e.rastreo)}</h1>
+          <p class="meta">Creado el ${e.creado}</p>
         </div>
         <div style="display:flex;gap:12px">
           <button class="btn btn-secondary">Más acciones <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button>
@@ -1012,19 +1137,13 @@
 
       <div class="detgrid">
         <div class="colcards">
-          <div class="card">
-            <div class="hd">Guías de envío</div>
-            <div class="bd">
-              <div class="cobro-note" style="margin:0 0 16px 0">
-                <svg class="ic"><use href="#i-info"/></svg> ${nota}
-              </div>
-              ${cadenaGuias(e)}
-            </div>
+          <div class="cobro-note" style="margin:0 0 16px 0">
+            <svg class="ic"><use href="#i-info"/></svg> ${nota}
           </div>
-
+          ${cadenaGuias(e)}
           <div class="card">
-            <div class="hd">Cronograma <span style="font-size:12px;font-weight:500;color:var(--sec)">Fecha estimada de entrega del retorno: ${r.estimada}</span></div>
-            <div class="bd"><div class="tl">${e.timeline.map(evento).join('')}</div></div>
+            <div class="hd">Cronograma</div>
+            <div class="bd"><div class="tl">${cronograma(e)}</div></div>
           </div>
         </div>
 
@@ -1047,9 +1166,10 @@
 
           <div class="card">
             <div class="hd">Resumen de cobro</div>
-            <div class="bd" style="padding-top:8px">
-              ${cobros(e)}
-              <div class="cobro-total"><span>Total del envío</span><span>$${e.total} MXN</span></div>
+            <div class="bd">
+              ${bloqueCobro('Guía original', e.cobro, e.guia)}
+              ${bloqueCobro('Guía retorno', r.cobro, misma ? 'misma guía' : r.guia)}
+              <div class="cobro-total"><span>Total del envío</span><span>$${total} MXN</span></div>
             </div>
           </div>
         </div>
@@ -1059,26 +1179,24 @@
   /* ===================== NOTIFICACIÓN WHATSAPP ===================== */
   function renderWA(e){
     const r = e.retorno;
-    const linea = r.tipo === 'misma'
-      ? `${e.carrier} regresa el paquete con el <b>mismo número de guía</b> y aplicó un cobro por el retorno de <b>$${r.costo} MXN</b>, descontado de tu saldo T1envíos. Saldo restante: <b>$9,456.00</b>.`
+    const linea = esMisma(e)
+      ? `${e.carrier} regresa el paquete con el <b>mismo número de guía</b> (${e.guia}). El retorno generó un cobro de <b>$${r.costo} MXN</b>, descontado de tu saldo T1envíos. Saldo restante: <b>$9,456.00</b>.`
       : `${e.carrier} generó la guía de retorno <b>${r.guia}</b> y el paquete va de regreso a tu dirección de origen. El retorno generó un cobro de <b>$${r.costo} MXN</b>, descontado de tu saldo T1envíos. Saldo restante: <b>$9,456.00</b>.`;
     document.getElementById('wabody').innerHTML = `
       <div class="wabubble">
-        <p>Hola, Chicos Olé 👋 Tu envío <b>${e.guia}</b> no se pudo entregar después de ${r.intentos} intentos.</p>
+        <p>Hola, Chicos Olé 👋 Tu envío <b>${e.guia}</b> no se pudo entregar y fue devuelto al remitente.</p>
         <p>${linea}</p>
-        <p>Revisa los intentos y el cobro en <b>T1envíos → Mis envíos</b>.</p>
+        <p>Revisa el detalle en <b>T1envíos → Mis envíos</b>.</p>
         <span class="watime">${r.fecha} · ${r.hora}</span>
       </div>
       <button class="wacta" onclick="abrirDetalle('${e.id}')">Rastrear retorno</button>`;
   }
 
   /* ===================== INTERACCIONES ===================== */
-  let casoWA = 'e-dhl';
-
   function abrirDetalle(id){
     const e = byId(id);
     if (!e || !e.retorno){ show('listado'); return; }
-    casoWA = id; renderWA(e); renderDetalle(e); show('detalle');
+    renderWA(e); renderDetalle(e); show('detalle');
     document.querySelectorAll('.demobar .vbtn[data-caso]').forEach(b => b.classList.toggle('on', b.dataset.caso === id));
   }
 
@@ -1095,17 +1213,11 @@
     const th = document.getElementById('th-' + id);
     th.classList.toggle('closed');
     const closed = th.classList.contains('closed');
-    th.querySelector('.tlabel').textContent = closed ? 'Ver retornos' : 'Ver menos';
+    th.querySelector('.tlabel').textContent = closed ? 'Ver retorno' : 'Ver menos';
     th.querySelector('.toggle-ret').setAttribute('aria-expanded', String(!closed));
   }
 
   function toggleWA(){ document.getElementById('wamock').classList.toggle('open'); }
-
-  function toggleCobro(id){
-    const acc = document.getElementById(id);
-    acc.classList.toggle('open');
-    acc.querySelector('.cobro-head').setAttribute('aria-expanded', String(acc.classList.contains('open')));
-  }
 
   function toggleActs(e, btn){
     e.stopPropagation();
@@ -1128,8 +1240,7 @@
     btn.setAttribute('aria-checked','true');
     const label = document.getElementById('fTipoBtn');
     label.classList.toggle('applied', tipo !== 'todas');
-    label.firstChild.textContent = tipo === 'todas' ? 'Tipo de guía '
-      : (tipo === 'envio' ? 'Tipo de guía: Envío ' : 'Tipo de guía: Retorno ');
+    label.firstChild.textContent = tipo === 'todas' ? 'Tipo de guía ' : (tipo === 'envio' ? 'Envío ' : 'Retorno ');
     document.querySelectorAll('#tbody [data-tipo]').forEach(r => {
       r.style.display = (tipo === 'todas' || r.dataset.tipo === tipo) ? '' : 'none';
     });
@@ -1147,5 +1258,5 @@
 
   document.addEventListener('click', closeMenus);
   renderListado();
-  renderWA(byId(casoWA));
+  renderWA(byId('e-ups'));
 </script>

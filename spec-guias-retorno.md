@@ -102,3 +102,15 @@ Conectadas al KPI de Dirección de reducción de incidencias/costo de soporte. *
 - **2026-08-28 · v1.10** — Nombres de servicio en español en todo el prototipo ("Mismo día" en 99 minutos, antes "Same day"). Estructura fija del bloque de guía: título "Guía original"/"Guía retorno" → "{Paquetería}: {número}" + chip → nombre del servicio → referencia cruzada.
 - **2026-08-28 · v1.11** — En el retorno sobre la misma guía se elimina la línea de referencia cruzada (era redundante: mismo número en ambos bloques; el conector "Retorno en la misma guía" ya lo explica). Se conserva en el caso de guía nueva, donde es el vínculo entre guías. Servicio de 99 minutos: "Mismo día 24H".
 - **2026-08-28 · v1.12** — Los dos primeros envíos del listado ahora tienen retorno con **guía nueva**: AMPM (AMP0459812 → AMP0461377, 3 intentos) y DHL (43567890082 → 7374310930). Se añade el logo AMPM como `<symbol>` en cuadro redondeado, consistente con los demás. La barra de demo suma el caso "AMPM · guía nueva".
+
+## 10. Comportamiento por paquetería (video del productivo, 2026-09-08)
+
+Del recorrido grabado en `shipping.t1.com` se replicaron: columnas y filtros del listado (el 5º filtro es **Tipo de guía**, cuya etiqueta cambia a "Retorno" al aplicarse), el ⟳ junto al número de guía con tooltip "Guía de retorno", el chip **Retornado en gris** (el verde es "Entregado"), el menú ⋯ con **una sola acción "Ver detalle"**, el cronograma en **orden ascendente** con chips de fecha `dd/mm/aaaa` y el hito "Guía generada" en banda gris con logo, número, monto y hora, y el bloque de guía con `[logo] {Paquetería}: {número}` + servicio + referencia cruzada + **"Cobro de retorno: {monto | Pendiente}"** + "Fecha estimada de entrega" a la derecha.
+
+| Comportamiento | Paqueterías | Cómo se resuelve |
+|---|---|---|
+| **Guía nueva** | DHL, FedEx, 99 minutos | Subfila anidada con el número nuevo + tag "Retorno". Cronograma con hito "Guía de retorno generada". |
+| **Misma guía** | UPS, Paquete Express, T1envíos, T1 Economic, AMPM | Subfila anidada con **el mismo número**, tag azul **"Misma guía"** y la leyenda "Deriva de la guía original". Hito "Retorno iniciado en la misma guía" en banda azul. Ambos bloques del detalle muestran el mismo número, uno como "Guía original" y otro como "Guía retorno · Misma guía", con la referencia cruzada anotada "(misma guía)". |
+
+En los dos casos el retorno se despliega desde el mismo control ("Ver retorno / Ver menos"), que es el patrón que aprobó el Owner, y el resumen de cobro lista los dos cargos con el desglose del productivo (Precio guía · Cargos adicionales · Total).
+- **2026-09-08 · v2.0** — Iteración contra el video del productivo: 8 paqueterías (3 con guía nueva, 5 con misma guía), estructura de cards, cronograma ascendente, chips, menú de acciones y wording alineados a `shipping.t1.com`. Nuevos logos: UPS, Paquete Express, T1envíos, T1 Economic y AMPM (asset actualizado por el equipo).
