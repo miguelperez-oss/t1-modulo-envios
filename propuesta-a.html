@@ -228,20 +228,21 @@
   .tl{position:relative;padding-left:6px}
   .tl::before{content:"";position:absolute;left:19px;top:10px;bottom:10px;border-left:1.5px dashed var(--g-300)}
   .datechip{display:inline-block;background:var(--g-100);color:var(--sec);font-size:11px;font-weight:600;border-radius:20px;padding:4px 12px;margin:18px 0 14px 40px;position:relative}
-  .ev{position:relative;padding:0 0 6px 46px}
-  .ev .ico{position:absolute;left:0;top:-2px;width:28px;height:28px;border-radius:50%;background:#fff;border:1.5px solid var(--g-300);display:flex;align-items:center;justify-content:center;color:var(--sec)}
+  .ev{position:relative;margin:0 -20px 0 -26px;padding:10px 20px 12px 72px;background:#fff;transition:background-color .12s}
+  .ev:hover{background:var(--g-50)}
+  .ev .ico{position:absolute;left:26px;top:8px;width:28px;height:28px;border-radius:50%;background:inherit;border:1.5px solid var(--g-300);display:flex;align-items:center;justify-content:center;color:var(--sec)}
   .ev .ico svg{width:14px;height:14px;stroke-width:2}
-  .ev.camion .ico,.ev.punto .ico{border:none;background:#fff}
+  .ev.camion .ico,.ev.punto .ico{border:none;background:inherit}
   .ev.camion .ico svg{width:19px;height:19px;stroke-width:1.5;color:var(--oxford)}
   .ev.punto .ico svg{color:var(--dark)}
   .ev .t{font-weight:600;font-size:14px;color:var(--dark)}
   .ev .d{font-size:13px;color:var(--ter);margin-top:3px}
   .ev .link{display:inline-block;margin-top:6px;font-size:12px;font-weight:600;color:var(--oxford)}
   .ev .link:hover{text-decoration:underline}
-  .milestone{position:relative;margin:2px -20px 0 -26px;background:var(--g-50);padding:14px 20px 18px 72px}
-  .milestone .ico{position:absolute;left:26px;top:12px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--oxford);background:var(--g-50)}
+  .milestone{position:relative;margin:2px -20px 0 -26px;background:var(--g-50);padding:14px 20px 18px 72px;transition:background-color .12s}
+  .milestone:hover{background:var(--g-100)}
+  .milestone .ico{position:absolute;left:26px;top:12px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--oxford);background:inherit}
   .milestone .ico svg{width:19px;height:19px;stroke-width:1.5}
-  .milestone.ret .ico{color:var(--blue-700)}
   .milestone .t{font-weight:600;font-size:14px;color:var(--dark)}
   .milestone .gref{display:inline-flex;align-items:center;gap:8px;margin-top:10px;padding:0;border:none;background:none;font-size:13px;font-weight:700;color:var(--dark)}
   .milestone .gref img,.milestone .gref svg.brand{width:22px;height:22px;border-radius:5px}
@@ -307,8 +308,6 @@
   .milestone .d{font-size:14px;color:var(--dark);margin-top:8px;line-height:1.7}
   .milestone .gref{display:flex;align-items:center;gap:10px;margin-top:8px;padding:0;border:none;background:none;font-size:14px;font-weight:500;color:var(--dark)}
   .milestone .gref svg{width:26px;height:26px;border-radius:6px}
-  .milestone.ret{background:var(--blue-100)}
-  .milestone.ret .ico{color:var(--blue-700)}
 
   /* bloques del resumen de cobro */
   .cobro-blk{padding:2px 0 12px}
