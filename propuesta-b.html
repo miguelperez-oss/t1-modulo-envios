@@ -1,5 +1,5 @@
-<!-- Propuesta B · Guías vinculadas — Módulo de envíos T1envíos · NEXUS V2.0 (dashboard) -->
-<title>Envíos · Guías vinculadas</title>
+<!-- Propuesta B · Retorno como texto desplegable — Módulo de envíos T1envíos · NEXUS V2.0 (dashboard) -->
+<title>Envíos · Retorno en texto</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" />
@@ -59,7 +59,7 @@
   }
   .cta-crear{display:flex;align-items:center;justify-content:center;width:100%;height:40px;border-radius:10px;background:var(--red-500);color:#fff;font-weight:700;font-size:14px;margin-bottom:16px;transition:background-color .15s}
   .cta-crear:hover{background:var(--red-700)}
-  .nav a{display:flex;align-items:center;gap:10px;height:38px;padding:0 12px;border-radius:18px;font-size:14px;color:var(--oxford);white-space:nowrap}
+  .nav a,.nav .navrow{display:flex;align-items:center;gap:10px;height:38px;padding:0 12px;border-radius:18px;font-size:14px;color:var(--oxford);white-space:nowrap}
   .nav a:hover{background:var(--g-50)}
   .nav .sub{padding-left:36px;height:36px}
   .nav .active{background:var(--g-100);font-weight:700}
@@ -83,7 +83,7 @@
   .chip svg{width:13px;height:13px;stroke-width:2}
   .chip.transito{background:var(--blue-100);color:var(--blue-700)}
   .chip.entregado{background:var(--green-100);color:var(--green-700)}
-  .chip.retornado{background:var(--green-100);color:var(--green-700);border:1px solid var(--green-300)}
+  .chip.retornado{background:var(--g-100);color:#525252}
   .chip.intento{background:var(--yellow-100);color:var(--yellow-700)}
   .chip.generada{background:var(--g-100);color:#525252}
   .chip.cancelado{background:var(--red-50);color:var(--red-700)}
@@ -133,6 +133,7 @@
   .ck svg{width:11px;height:11px;color:#fff;stroke-width:3}
   .carrier{width:40px;height:40px;border-radius:9px;display:block}
   .gnum{font-weight:700;font-size:14px;color:var(--dark);display:flex;align-items:center;gap:6px}
+  .gnum .n{display:inline-block;width:112px;font-variant-numeric:tabular-nums}
   .gsub{font-size:13px;color:var(--sec);margin-top:2px}
   .fecha b{display:block;font-weight:600;font-size:13px}
   .fecha span{font-size:12px;color:var(--sec)}
@@ -143,36 +144,29 @@
   .costo small{font-size:11px;font-weight:600;color:var(--sec);margin-left:3px}
   .cell.estado{font-size:13px;color:var(--oxford)}
 
-  /* ★ vínculo visual entre filas origen ↔ retorno */
-  .thread{position:relative}
-  .thread .linkline{position:absolute;left:75px;top:52px;bottom:52px;width:2px;background:var(--g-300);z-index:1;pointer-events:none}
-  .thread .linkloop{position:absolute;left:63px;top:calc(50% - 13px);width:26px;height:26px;border-radius:50%;background:#fff;border:1px solid var(--g-300);display:flex;align-items:center;justify-content:center;color:var(--sec);z-index:2}
-  .thread .linkloop svg{width:13px;height:13px;stroke-width:2}
-  .refline{display:inline-flex;align-items:center;gap:5px;margin-top:6px;font-size:12px;font-weight:600;color:var(--oxford)}
-  .refline svg{width:13px;height:13px;stroke-width:2;color:var(--sec)}
-  .refline:hover{text-decoration:underline}
-  .loop-inline{display:inline-flex;color:var(--sec)}
-  .loop-inline svg{width:15px;height:15px;stroke-width:2}
-  .tag-ret{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:4px;background:var(--g-100);color:#525252;font-size:11px;font-weight:600}
+  /* toggle "guías de retorno" de la fila padre */
+  .toggle-ret{display:inline-flex;align-items:center;gap:5px;margin-top:8px;font-size:12.5px;font-weight:600;color:var(--oxford);border:none;padding:0;background:none;white-space:nowrap}
+  .toggle-ret:hover{color:#000;text-decoration:underline}
+  .toggle-ret svg{width:13px;height:13px;stroke-width:2;transition:transform .15s}
+  .thread.closed .toggle-ret .chev{transform:rotate(180deg)}
 
-  /* tooltip enriquecido (chip Retornado / icono de retorno) */
-  .richtip{position:relative;display:inline-flex}
-  .richtip .tipcard{
-    position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
-    width:230px;background:#fff;border:1px solid var(--g-200);border-radius:10px;
-    box-shadow:0 0 5px 1px rgba(0,0,0,0.1);padding:12px 14px;z-index:60;display:none;text-align:left;cursor:default;
-  }
-  .richtip:hover .tipcard{display:block}
-  .tipcard .tt{font-size:13px;font-weight:800;color:var(--dark)}
-  .tipcard .ts{font-size:12px;color:var(--sec);margin-top:1px}
-  .tipcard .tg{display:flex;align-items:center;gap:8px;margin-top:9px;border-top:1px solid var(--g-100);padding-top:9px}
-  .tipcard .tg img,.tipcard .tg svg.brand{width:22px;height:22px;border-radius:5px}
-  .tipcard .tg b{font-size:13px;color:var(--dark)}
+  /* subfila de retorno (hija) — sin fondo fijo; gris solo en hover */
+  .subrow{border-bottom:1px solid var(--g-200);min-height:76px;position:relative}
+  .subrow:hover{background:var(--g-50)}
+  /* divisor interno angosto: solo separa guía original de guía de retorno */
+  .thread:not(.closed) .row{border-bottom:none}
+  .subrow::before{content:"";position:absolute;top:0;left:112px;right:16px;border-top:1px solid var(--g-200)}
+  .thread.standalone .subrow::before{display:none}
+  .subrow .gcell{grid-column:3}
+  .subrow .tag-ret{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:4px;background:var(--g-100);color:#525252;font-size:11px;font-weight:600;margin-left:6px}
+  .thread.closed .subrow{display:none}
 
   .rowacts{position:relative;display:flex;justify-content:flex-end;padding-right:16px}
-  .menu-acts{position:absolute;right:8px;top:calc(100% - 6px);width:170px;background:#fff;border:1px solid var(--g-200);border-radius:10px;padding:4px;z-index:40;display:none}
+  .menu-acts{position:absolute;right:8px;top:calc(100% - 6px);width:190px;background:#fff;border:1px solid var(--g-200);border-radius:10px;padding:4px;z-index:40;display:none}
   .menu-acts.open{display:block}
-  .menu-acts button{display:block;width:100%;text-align:left;padding:9px 12px;border-radius:8px;font-size:13px}
+  .menu-acts button{display:block;width:100%;text-align:left;padding:11px 14px;border-radius:8px;font-size:13px}
+  .menu-acts button+button{border-top:1px solid var(--g-100);border-radius:0}
+  .menu-acts button:last-child{border-bottom-left-radius:8px;border-bottom-right-radius:8px}
   .menu-acts button:hover{background:var(--g-50)}
   .menu-acts button.danger{color:var(--red-700)}
 
@@ -189,7 +183,8 @@
   [data-tip]{position:relative}
   [data-tip]:hover::after{
     content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);
-    background:var(--oxford);color:#fff;font-size:12px;font-weight:500;padding:5px 10px;border-radius:4px;white-space:nowrap;z-index:60;pointer-events:none;
+    background:#fff;color:var(--dark);font-size:12px;font-weight:600;padding:6px 11px;border-radius:6px;white-space:nowrap;z-index:60;pointer-events:none;
+    border:1px solid var(--g-200);box-shadow:0 4px 12px rgba(0,0,0,.10);
   }
 
   /* ============ Detalle ============ */
@@ -200,66 +195,58 @@
   .dethead .meta{margin-top:6px;font-size:13px;color:var(--sec)}
   .detgrid{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:24px;align-items:start}
   .card{border:1px solid var(--g-200);border-radius:10px;background:#fff}
-  .card .hd{padding:16px 20px;border-bottom:1px solid var(--g-200);font-size:15px;font-weight:700;color:var(--dark);display:flex;align-items:center;justify-content:space-between}
+  .card+.card{margin-top:16px}
+  .card .hd{padding:16px 20px 0;font-size:15px;font-weight:700;color:var(--dark);display:flex;align-items:center;justify-content:space-between}
   .card .bd{padding:20px}
   .colcards>.card+.card{margin-top:16px}
 
-  /* ★ Recorrido del envío (stepper horizontal) */
-  .journey{display:flex;align-items:stretch;gap:0}
-  .jnode{flex:1;display:flex;flex-direction:column;gap:10px;border:1px solid var(--g-200);border-radius:10px;padding:14px 16px;min-width:0;text-align:left;transition:background-color .15s}
-  .jnode:hover{background:var(--g-50)}
-  .jnode.cur{border:2px solid var(--red-500);box-shadow:0 0 4.5px 0.9px var(--red-200);padding:13px 15px;cursor:default}
-  .jnode.cur:hover{background:#fff}
-  .jnode .jtop{display:flex;align-items:center;gap:10px;min-width:0}
-  .jnode img,.jnode svg.brand{width:36px;height:36px;border-radius:9px;flex:none}
-  .jnode .lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ter);white-space:nowrap}
-  .jnode .num{font-size:15px;font-weight:800;color:var(--dark);margin-top:1px;white-space:nowrap}
-  .jnode .svc{font-size:12px;color:var(--sec)}
-  .jnode .jfoot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px}
-  .jnode .vg{font-size:12px;font-weight:700;color:var(--oxford);white-space:nowrap}
-  .jnode:hover .vg{text-decoration:underline}
-  .jbridge{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0 14px;min-width:170px}
-  .jbridge .line{display:flex;align-items:center;width:100%}
-  .jbridge .line::before,.jbridge .line::after{content:"";flex:1;border-top:2px dashed var(--g-300)}
-  .jbridge .loop{width:30px;height:30px;border-radius:50%;background:var(--g-100);display:flex;align-items:center;justify-content:center;color:var(--oxford);margin:0 6px}
-  .jbridge .loop svg{width:15px;height:15px;stroke-width:2}
-  .jbridge p{font-size:11px;color:var(--sec);text-align:center;line-height:1.45}
-  .jbridge b{color:var(--oxford)}
+  /* cadena de guías — filas planas dentro del card, sin sub-cards */
+  .gnode{display:flex;align-items:center;gap:14px;padding:10px 0}
+  .gnode .info{flex:1;min-width:0}
+  .gnode .lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ter)}
+  .gnode .num{font-size:15px;font-weight:800;color:var(--dark);margin-top:2px;display:flex;align-items:center;gap:10px}
+  .gnode .svc{font-size:12.5px;color:var(--sec);margin-top:3px}
+  .gnode .xref{font-size:12.5px;color:var(--sec);margin-top:3px}
+  .gnode .xref a{color:var(--oxford);font-weight:600;text-decoration:underline}
+  .gnode .xref a:hover{color:#000}
+  .gnode .xref .nota{color:var(--ter)}
+  .gnode .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+  .gnode .tlab{font-size:11px;font-weight:600;color:var(--ter)}
+  .gnode .amt{font-size:14px;font-weight:800;color:var(--dark)}
+  .gnode .edate{font-size:15px;font-weight:600;color:var(--dark);margin-top:2px}
+  .gnode .right{align-self:flex-start;padding-top:16px}
+  .gconn{display:flex;align-items:center;gap:12px;padding:8px 0 8px 34px;position:relative}
+  .gconn::before{content:"";position:absolute;left:20px;top:-10px;bottom:-10px;border-left:2px dashed var(--g-300)}
+  .gconn .loop{width:30px;height:30px;border-radius:50%;background:var(--g-100);display:flex;align-items:center;justify-content:center;color:var(--oxford);position:relative;z-index:1;margin-left:-29px}
+  .gconn .loop svg{width:15px;height:15px;stroke-width:2}
+  .gconn .gt1{font-size:13.5px;font-weight:700;color:var(--dark)}
+  .gconn .gt2{font-size:12.5px;color:var(--sec);margin-top:1px}
 
   /* cronograma */
+  /* cronograma — estilo del productivo */
   .tl{position:relative;padding-left:6px}
-  .datechip{display:inline-block;background:var(--g-100);color:var(--sec);font-size:11px;font-weight:600;border-radius:6px;padding:3px 10px;margin:16px 0 12px 34px}
-  .datechip:first-child{margin-top:0}
-  .ev{position:relative;padding:0 0 18px 46px}
-  .ev::before{content:"";position:absolute;left:13px;top:24px;bottom:-2px;border-left:1.5px dashed var(--g-300)}
-  .ev:last-child::before{display:none}
-  .ev .ico{position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:#fff;border:1.5px solid var(--g-300);display:flex;align-items:center;justify-content:center;color:var(--sec)}
+  .tl::before{content:"";position:absolute;left:19px;top:10px;bottom:10px;border-left:1.5px dashed var(--g-300)}
+  .datechip{display:inline-block;background:var(--g-100);color:var(--sec);font-size:11px;font-weight:600;border-radius:20px;padding:4px 12px;margin:18px 0 14px 40px;position:relative}
+  .ev{position:relative;margin:0 -20px 0 -26px;padding:10px 20px 12px 72px;background:#fff;transition:background-color .12s}
+  .ev:hover{background:var(--g-50)}
+  .ev .ico{position:absolute;left:26px;top:8px;width:28px;height:28px;border-radius:50%;background:inherit;border:1.5px solid var(--g-300);display:flex;align-items:center;justify-content:center;color:var(--sec)}
   .ev .ico svg{width:14px;height:14px;stroke-width:2}
-  .ev.ok .ico{border-color:var(--green-300);color:var(--green-700);background:var(--green-100)}
-  .ev.warn .ico{border-color:#EDBD55;color:var(--yellow-700);background:var(--yellow-100)}
-  .ev .t{font-weight:700;font-size:14px;color:var(--dark)}
-  .ev .d{font-size:12px;color:var(--sec);margin-top:2px}
+  .ev.camion .ico,.ev.punto .ico{border:none;background:inherit}
+  .ev.camion .ico svg{width:19px;height:19px;stroke-width:1.5;color:var(--oxford)}
+  .ev.punto .ico svg{color:var(--dark)}
+  .ev .t{font-weight:600;font-size:14px;color:var(--dark)}
+  .ev .d{font-size:13px;color:var(--ter);margin-top:3px}
   .ev .link{display:inline-block;margin-top:6px;font-size:12px;font-weight:600;color:var(--oxford)}
   .ev .link:hover{text-decoration:underline}
-  .milestone{position:relative;margin:2px 0 18px 0;border:1px solid var(--g-200);background:var(--g-50);border-radius:10px;padding:14px 16px 14px 52px}
-  .milestone .ico{position:absolute;left:12px;top:14px;width:28px;height:28px;border-radius:50%;background:#fff;border:1.5px solid var(--g-300);display:flex;align-items:center;justify-content:center;color:var(--oxford)}
-  .milestone .ico svg{width:14px;height:14px;stroke-width:2}
-  .milestone .t{font-weight:800;font-size:14px;color:var(--dark)}
-  .milestone .d{font-size:12px;color:var(--sec);margin-top:3px}
-  .milestone .gref{display:inline-flex;align-items:center;gap:7px;margin-top:10px;border:1px solid var(--g-200);background:#fff;border-radius:8px;padding:5px 10px;font-size:12px;font-weight:700}
-  .milestone .gref img,.milestone .gref svg.brand{width:18px;height:18px;border-radius:4px}
-  .milestone .gref:hover{background:var(--g-100)}
-  .milestone .amt{position:absolute;right:16px;top:14px;font-size:14px;font-weight:800;color:var(--dark)}
-
-  /* historial de la otra guía (colapsable) */
-  .xhist{border:1px solid var(--g-200);border-radius:10px;margin-top:4px}
-  .xhist>button{display:flex;align-items:center;gap:8px;width:100%;padding:13px 16px;font-size:13px;font-weight:700;color:var(--dark)}
-  .xhist>button:hover{background:var(--g-50);border-radius:10px}
-  .xhist>button svg{width:15px;height:15px;stroke-width:2;color:var(--sec);transition:transform .15s}
-  .xhist>button .cnt-int{margin-left:auto;font-size:11px;font-weight:700;background:var(--yellow-100);color:var(--yellow-700);border-radius:10px;padding:2px 9px}
-  .xhist .body{padding:6px 16px 16px 16px;border-top:1px solid var(--g-100)}
-  .xhist.closed .body{display:none}
-  .xhist.closed>button svg.chev{transform:rotate(180deg)}
+  .milestone{position:relative;margin:2px -20px 0 -26px;background:var(--g-50);padding:14px 20px 18px 72px;transition:background-color .12s}
+  .milestone:hover{background:var(--g-100)}
+  .milestone .ico{position:absolute;left:26px;top:12px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--oxford);background:inherit}
+  .milestone .ico svg{width:19px;height:19px;stroke-width:1.5}
+  .milestone .t{font-weight:600;font-size:14px;color:var(--dark)}
+  .milestone .gref{display:inline-flex;align-items:center;gap:8px;margin-top:10px;padding:0;border:none;background:none;font-size:13px;font-weight:700;color:var(--dark)}
+  .milestone .gref img,.milestone .gref svg.brand{width:22px;height:22px;border-radius:5px}
+  .milestone .gref span{text-decoration:none}
+  .milestone .gref:hover span{color:#000}
 
   /* resumen de envío */
   .addr{position:relative;padding-left:26px;padding-bottom:18px}
@@ -275,29 +262,66 @@
   .dims p{font-size:13px;color:var(--sec)}
   .dims b{color:var(--oxford)}
 
-  /* resumen de cobro con bloques */
-  .cobro-block{border:1px solid var(--g-200);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:12px}
-  .cobro-block+.cobro-block{margin-top:10px}
-  .cobro-block img,.cobro-block svg.brand{width:28px;height:28px;border-radius:7px}
-  .cobro-block .inf{flex:1;min-width:0}
-  .cobro-block .k{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ter)}
-  .cobro-block .n{font-size:13px;font-weight:700;color:var(--dark);margin-top:1px}
-  .cobro-block .m{font-size:12px;color:var(--sec);margin-top:1px}
-  .cobro-block .val{font-size:14px;font-weight:800;color:var(--dark);white-space:nowrap}
-  .cobro-block.cur{border-color:var(--g-300);background:var(--g-50)}
-  .cobro-line{display:flex;justify-content:space-between;padding:10px 0;font-size:13px;color:var(--sec);border-bottom:1px solid var(--g-100)}
-  .cobro-line span:last-child{color:var(--oxford);font-weight:600}
+  /* resumen de cobro — cobros desplegables con desglose */
+  .cobro-acc{border-bottom:1px solid var(--g-100)}
+  .cobro-head{display:flex;align-items:center;gap:12px;width:100%;padding:12px 0;text-align:left}
+  .cobro-head:hover .n{color:#000}
+  .cobro-head img,.cobro-head svg.brand{width:28px;height:28px;border-radius:7px}
+  .cobro-head .inf{flex:1;min-width:0}
+  .cobro-head .n{font-size:13px;font-weight:700;color:var(--dark)}
+  .cobro-head .m{font-size:12px;color:var(--sec);margin-top:2px}
+  .cobro-head .val{font-size:14px;font-weight:800;color:var(--dark);white-space:nowrap}
+  .cobro-head .chev{width:14px;height:14px;stroke-width:2;color:var(--sec);transition:transform .15s}
+  .cobro-acc:not(.open) .chev{transform:rotate(180deg)}
+  .cobro-acc .cobro-body{display:none;padding:0 22px 12px 40px}
+  .cobro-acc.open .cobro-body{display:block}
+  .cobro-body .bl{display:flex;justify-content:space-between;padding:5px 0;font-size:12.5px;color:var(--sec)}
+  .cobro-body .bl span:last-child{color:var(--oxford);font-weight:600}
   .cobro-total{display:flex;justify-content:space-between;padding-top:14px;font-size:15px;font-weight:800;color:var(--dark)}
   .cobro-note{margin-top:14px;background:var(--blue-100);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--blue-700);display:flex;gap:8px;align-items:flex-start}
   .cobro-note svg{width:15px;height:15px;stroke-width:2;flex:none;margin-top:1px}
   .count-pill{font-size:11px;font-weight:700;background:var(--g-100);color:var(--sec);border-radius:10px;padding:2px 9px}
 
+
+  /* card de guía — estructura del productivo */
+  .gcard{display:flex;align-items:flex-start;gap:16px;padding:20px}
+  .gcard .info{flex:1;min-width:0}
+  .gcard .num{font-size:16px;font-weight:700;color:var(--dark);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .gcard .num a{color:var(--dark);text-decoration:underline;text-underline-offset:2px}
+  .gcard .ref-plano{color:var(--oxford);font-weight:600}
+  .gcard .num a:hover{color:#000}
+  .gcard .svc{font-size:13px;color:var(--sec);margin-top:4px}
+  .gcard .xref{font-size:13px;color:var(--sec);margin-top:3px}
+  .gcard .xref a{color:var(--oxford);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+  .gcard .xref b{color:var(--oxford);font-weight:700}
+  .gcard .xref .nota{color:var(--ter)}
+  .gcard .right{text-align:right;flex:none}
+  .gcard .right.dos{display:flex;flex-direction:column;gap:12px}
+  .gcard .right.dos .tlab{white-space:nowrap}
+  .gcard .tlab{display:block;font-size:12px;color:var(--sec);white-space:nowrap}
+  .gcard .edate{display:block;font-size:15px;font-weight:600;color:var(--dark);margin-top:2px}
+  .tag-misma{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:4px;background:var(--blue-100);color:var(--blue-700);font-size:11px;font-weight:700}
+  .subrow .gnum{font-size:13.5px;letter-spacing:-0.2px}
+
+  /* hito del cronograma */
+  .milestone .d{font-size:14px;color:var(--dark);margin-top:8px;line-height:1.7}
+  .milestone .gref{display:flex;align-items:center;gap:10px;margin-top:8px;padding:0;border:none;background:none;font-size:14px;font-weight:500;color:var(--dark)}
+  .milestone .gref svg{width:26px;height:26px;border-radius:6px}
+
+  /* bloques del resumen de cobro */
+  .cobro-blk{padding:2px 0 12px}
+  .cobro-blk+.cobro-blk{border-top:1px solid var(--g-100);padding-top:14px}
+  .cobro-blk .cb-t{font-size:13px;font-weight:700;color:var(--dark);margin-bottom:8px}
+  .cobro-blk .cb-s{font-weight:500;color:var(--ter)}
+  .cobro-line{display:flex;justify-content:space-between;padding:5px 0;font-size:13px;color:var(--sec)}
+  .cobro-line span:last-child{color:var(--oxford);font-weight:600}
+  .cobro-line .sub-link{text-decoration:underline;text-underline-offset:2px}
+  .cobro-line.tot{border-top:1px solid var(--g-100);margin-top:6px;padding-top:9px;color:var(--dark);font-weight:700}
+  .cobro-line.tot span:last-child{color:var(--dark);font-weight:800}
+
   @media (max-width:1180px){
     .detgrid{grid-template-columns:1fr}
     .grid-row{grid-template-columns:44px 52px minmax(140px,1.1fr) 92px 96px minmax(104px,1fr) 94px 78px 132px 60px}
-    .journey{flex-direction:column}
-    .jbridge{padding:10px 0;min-width:0}
-    .jbridge .line{width:120px}
   }
 
   /* ============ Barra de demo (control de prototipo — no es parte de la UI) ============ */
@@ -334,11 +358,22 @@
 
 <div class="demobar" role="region" aria-label="Controles del prototipo">
   <span class="dtag">Prototipo</span>
-  <span class="dlabel">Propuesta B · Guías vinculadas</span>
+  <span class="dlabel">Propuesta B · Retorno en texto</span>
   <span class="dsep"></span>
   <button class="vbtn on" data-view="listado" onclick="show('listado')">Listado</button>
-  <button class="vbtn" data-view="det-original" onclick="show('det-original')">Detalle guía origen</button>
-  <button class="vbtn" data-view="det-retorno" onclick="show('det-retorno')">Detalle guía retorno</button>
+  <span class="dsep"></span>
+  <span style="color:#9CA3AF;font-weight:500">Guía nueva:</span>
+  <button class="vbtn" data-caso="e-dhl:original" onclick="abrirDetalle('e-dhl','original')">DHL origen</button>
+  <button class="vbtn" data-caso="e-dhl:retorno" onclick="abrirDetalle('e-dhl','retorno')">DHL retorno</button>
+  <button class="vbtn" data-caso="e-fedex:retorno" onclick="abrirDetalle('e-fedex','retorno')">FedEx</button>
+  <button class="vbtn" data-caso="e-99min:retorno" onclick="abrirDetalle('e-99min','retorno')">99 min</button>
+  <span class="dsep"></span>
+  <span style="color:#9CA3AF;font-weight:500">Misma guía:</span>
+  <button class="vbtn" data-caso="e-ups:original" onclick="abrirDetalle('e-ups','original')">UPS</button>
+  <button class="vbtn" data-caso="e-express:original" onclick="abrirDetalle('e-express','original')">Paquete Express</button>
+  <button class="vbtn" data-caso="e-t1envios:original" onclick="abrirDetalle('e-t1envios','original')">T1envíos</button>
+  <button class="vbtn" data-caso="e-t1economic:original" onclick="abrirDetalle('e-t1economic','original')">T1 Economic</button>
+  <button class="vbtn" data-caso="e-ampm:original" onclick="abrirDetalle('e-ampm','original')">AMPM</button>
   <span class="dsep"></span>
   <button class="wabtn" onclick="toggleWA()">Notificación WhatsApp</button>
   <span class="dnote">Los datos son de ejemplo</span>
@@ -372,6 +407,7 @@
     <symbol id="i-truckdot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-return" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
     <symbol id="i-printer" viewBox="0 0 24 24"><path d="M7 8V3h10v5"/><rect x="4" y="8" width="16" height="9" rx="2"/><path d="M7 14h10v7H7z"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/></symbol>
     <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H6v18h12V7l-4-4Z"/><path d="M14 3v4h4"/></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.8" r=".7" fill="currentColor" stroke="none"/></symbol>
 
@@ -456,6 +492,33 @@
 <rect width="43" height="42" fill="white"/>
 </clipPath>
 </defs></symbol>
+    <symbol id="logo-ups" viewBox="0 0 77 77"><rect x="6.9" y="6.9" width="63.2" height="63.2" rx="12.4" fill="#ffffff" stroke="#E7E7E7" stroke-width="1.8"/><g transform="translate(38.5,38.5) scale(0.21570) translate(-173.27,-173.27)"><defs> <style> .cls-1 { fill: #fff; } .cls-2 { fill: #2b190f; } .cls-3 { fill: #f3d634; } </style> </defs> <g> <path fill="#2b190f" d="M173.06,292.17c2.08-.83,54-23.26,70.2-36.55,17.03-14.12,26.17-34.06,26.17-57.73v-112.98l-1.25-.83c-41.54-22.43-93.04-20.77-95.12-20.77s-53.17-1.66-94.7,20.77l-1.25.83v112.56c0,24.09,9.14,44.03,26.17,57.73,15.78,13.71,67.7,36.14,69.78,36.97Z"/> <path fill="#f3d634" d="M173.08,289.26s-52.34-22.43-68.53-35.72c-17.03-13.71-24.92-33.23-24.92-56.07v-110.9c41.54-22.43,93.87-20.35,93.87-20.35,0,0,52.34-1.66,93.87,20.35v110.9c0,22.43-8.31,41.95-24.92,56.07-17.03,13.29-69.36,35.72-69.36,35.72ZM86.68,197.47c0,20.77,7.89,38.21,22.43,50.26,13.29,10.8,52.75,28.66,63.97,33.64,11.21-4.98,50.67-22.84,63.96-33.64,14.54-12.05,22.43-29.49,22.43-50.26v-109.24c-55.24-4.98-120.87-2.08-172.37,45.69v63.55h-.42Z"/> <path fill="#f3d634" d="M119.89,217.4c9.97,0,18.69-2.49,24.92-6.65v-71.86h-16.61v62.3c-1.66,1.25-4.57,2.08-7.89,2.08-7.48,0-8.72-7.06-8.72-11.63v-52.75h-16.61v51.92c.42,17.45,8.72,26.58,24.92,26.58Z"/> <path fill="#f3d634" d="M169.74,216.16c1.66.42,4.15.83,7.48.83,18.28,0,29.08-16.61,29.08-40.71s-10.8-39.04-30.74-39.04c-9.14,0-16.2,2.08-22.43,5.82v107.58h16.61v-34.47ZM169.74,151.78c1.25-.83,3.74-1.25,5.81-1.25,9.55,0,13.71,7.48,13.71,26.17s-4.57,26.58-14.12,26.58c-2.08,0-4.15-.42-5.4-.83v-50.67Z"/> <path fill="#f3d634" d="M225.79,182.1c7.48,4.15,10.38,7.06,10.38,12.46,0,5.81-3.74,9.14-9.97,9.14-5.4,0-11.63-2.91-15.78-6.65v14.95c4.98,2.91,11.63,4.98,18.28,4.98,16.2,0,23.68-11.63,24.09-22.01.42-9.55-2.49-17.03-16.2-24.92-6.23-3.74-11.21-5.82-10.8-12.05,0-5.81,4.98-7.89,9.55-7.89,5.82,0,11.21,3.32,14.95,6.65v-14.54c-2.91-2.08-9.14-5.82-18.28-5.4-10.8.42-22.43,8.31-22.01,21.6,0,9.14,2.49,15.78,15.78,23.68Z"/> <path fill="#f3d634" d="M239.08,273.06v10.8h2.08v-4.57h.42c0,.42,2.91,4.57,2.91,4.57h2.49s-2.91-4.15-3.32-4.57c1.25-.42,2.49-1.25,2.49-2.91s-.83-3.32-3.74-3.32h-3.32ZM241.99,274.31c1.66,0,1.66.83,1.66,1.66s-.42,1.66-2.49,1.66h-.42v-3.32h1.25Z"/> <path fill="#f3d634" d="M249.47,278.47c0,4.15-3.32,7.48-7.48,7.48s-7.48-3.32-7.48-7.48,3.32-7.48,7.48-7.48c4.57,0,7.48,3.32,7.48,7.48ZM242.41,269.33c-4.98,0-8.72,4.15-8.72,8.72,0,4.98,4.15,8.72,8.72,8.72,4.98,0,8.72-4.15,8.72-8.72s-3.74-8.72-8.72-8.72Z"/> </g></g></symbol>
+    <symbol id="logo-express" viewBox="0 0 77 77"><rect x="6" y="6" width="65" height="65" rx="13" fill="#002a52"/><g transform="translate(38.5,38.5) scale(0.20800) translate(-173.27,-173.27)"><defs> <style> .cls-1 { fill: #002a52; } .cls-2 { fill: #fff; } </style> </defs> <g> <g> <path fill="#fff" d="M56.95,181.78v-32.71h6.55c3.38,0,5.95.81,7.71,2.37,1.56,1.56,2.57,3.98,2.57,7.16s-.81,5.54-2.57,7.16c-1.56,1.76-3.78,2.57-6.75,2.57h-1.41l-.2,13.46h-5.95.05ZM62.9,163.33h.81c1.41,0,2.37-.4,2.97-1.21.81-.81,1.21-1.97,1.21-3.38,0-1.56-.4-2.77-1.01-3.58-.81-.81-1.76-1.01-3.18-1.01h-.81v9.17ZM115.61,181.17l-3.38,2.97-2.97-3.38c-.6.4-1.41.81-2.17,1.01-.81.2-1.76.4-2.77.4-3.58,0-6.35-1.56-8.32-4.54-1.76-2.97-2.77-7.16-2.77-12.7,0-4.94,1.01-8.92,2.97-11.89,1.97-2.97,4.54-4.38,8.11-4.38s6.15,1.41,8.11,4.54c1.97,2.97,2.97,7.16,2.97,12.7,0,2.57-.2,4.94-.81,6.96-.4,1.76-1.21,3.38-2.17,4.54l3.18,3.78ZM105.33,169.28l2.97,3.38c.2-.81.4-1.97.6-2.97.2-1.21.2-2.57.2-4.18,0-3.58-.4-6.15-1.21-7.91-.81-1.76-1.97-2.77-3.58-2.77-1.76,0-2.97,1.01-3.78,2.77-.81,1.76-1.21,4.74-1.21,8.52,0,3.18.4,5.75,1.21,7.51,1.01,1.56,2.17,2.57,3.58,2.57.2,0,.4,0,.6-.2h.4l-3.18-3.78,3.38-2.97v.05ZM137.99,149.07v20.61c0,2.57,0,4.38-.2,5.34-.2.96-.4,1.97-.81,2.57-.81,1.56-1.76,2.77-3.38,3.58-1.41.6-3.18,1.01-5.54,1.01-2.17,0-4.18-.4-5.54-1.01-1.56-.81-2.57-1.97-3.38-3.58-.4-.81-.6-1.56-.81-2.57,0-1.21-.2-2.97-.2-5.34v-20.61h6.35v21.02c0,2.77.2,4.54.81,5.34.6.6,1.41,1.01,2.77,1.01s2.37-.4,2.77-1.21c.6-.81.81-2.37.81-5.14v-21.02h6.35ZM142.17,181.78v-32.71h13.25v6.15h-7.31v6.55h6.55v5.95h-6.55v7.71h7.31v6.35h-13.25ZM163.59,181.78v-26.56h-4.74v-6.15h16.03v6.15h-4.94v26.56h-6.35ZM177.66,181.78v-32.71h13.25v6.15h-7.31v6.55h6.55v5.95h-6.55v7.71h7.31v6.35h-13.25ZM207.39,181.78l-2.57-6.55-.6-2.37c-.2-.81-.4-1.56-.6-2.57-.2,1.01-.4,1.76-.6,2.57-.2,1.01-.4,1.56-.6,2.37l-2.17,6.55h-7.16l7.31-16.43-6.75-16.23h6.75l2.37,6.96c0,.4.2.81.4,1.41.2.81.4,1.56.6,2.57.2-1.01.2-1.56.4-2.37.2-.6.4-1.21.6-1.56l2.37-6.96h6.55l-6.75,16.23,7.16,16.43h-6.75l.05-.05ZM216.11,181.78v-32.71h6.55c3.58,0,6.15.81,7.71,2.37,1.76,1.56,2.57,3.98,2.57,7.16s-.81,5.54-2.37,7.16c-1.76,1.76-3.98,2.57-6.96,2.57h-1.41v13.46h-6.15.05ZM222.26,163.33h.6c1.41,0,2.37-.4,3.18-1.21.6-.81,1.01-1.97,1.01-3.38,0-1.56-.4-2.77-1.01-3.58s-1.76-1.01-3.18-1.01h-.6v9.17ZM235.36,181.78v-32.71h6.55c3.58,0,6.15.81,7.91,2.17,1.56,1.56,2.37,3.78,2.37,7.16,0,2.17-.4,4.18-1.21,5.54-1.01,1.41-2.17,2.37-3.78,2.97l5.95,14.87h-6.55l-5.14-13.46v13.46h-6.15.05ZM241.51,163.33h.6c1.41,0,2.37-.4,3.18-1.21.6-.81,1.01-1.97,1.01-3.58s-.2-2.57-1.01-3.38c-.6-.81-1.56-1.01-2.97-1.01h-.81v9.17ZM255.98,181.78v-32.71h13.25v6.15h-7.16v6.55h6.55v5.95h-6.55v7.71h7.16v6.35h-13.25ZM273.01,180.77v-6.96c.81.81,1.56,1.41,2.37,1.56.81.4,1.56.6,2.37.6,1.01,0,1.97-.2,2.57-.81s.81-1.41.81-2.37c0-1.41-.81-2.57-2.37-4.18-.6-.4-.81-.6-1.01-.81-1.97-1.97-3.38-3.58-4.18-4.94-.6-1.41-1.01-2.97-1.01-4.74,0-2.97.81-5.14,2.37-6.96,1.41-1.76,3.58-2.57,5.95-2.57,1.01,0,1.76.2,2.57.4,1.01.2,1.76.6,2.77,1.21v5.75c-1.21-.6-1.97-.81-2.57-1.21-.6-.2-1.21-.2-1.56-.2-1.01,0-1.76.2-2.37.81-.6.6-.81,1.41-.81,2.37,0,.81.2,1.56.6,2.37.6.81,1.56,1.76,3.18,3.18,1.97,1.97,3.38,3.58,3.98,4.74.6,1.21,1.01,2.77,1.01,4.54,0,2.97-.81,5.34-2.37,6.96-1.76,1.76-3.98,2.57-6.75,2.57-1.01,0-1.97,0-2.97-.4-.81-.2-1.76-.6-2.57-1.01M289.64,180.67v-6.96c.81.81,1.56,1.41,2.37,1.56.81.4,1.56.6,2.37.6,1.01,0,1.97-.2,2.57-.81.6-.6.81-1.41.81-2.37,0-1.41-.81-2.57-2.37-4.18-.6-.4-.81-.6-1.01-.81-1.97-1.97-3.38-3.58-4.18-4.94-.6-1.41-1.01-2.97-1.01-4.74,0-2.97.81-5.14,2.37-6.96,1.41-1.76,3.58-2.57,5.95-2.57,1.01,0,1.76.2,2.57.4,1.01.2,1.76.6,2.77,1.21v5.75c-1.21-.6-1.97-.81-2.57-1.21-.6-.2-1.21-.2-1.56-.2-1.01,0-1.76.2-2.37.81s-.81,1.41-.81,2.37c0,.81.2,1.56.6,2.37.6.81,1.56,1.76,3.18,3.18,1.97,1.97,3.38,3.58,3.98,4.74.6,1.21,1.01,2.77,1.01,4.54,0,2.97-.81,5.34-2.37,6.96-1.76,1.76-3.98,2.57-6.75,2.57-1.01,0-1.97,0-2.97-.4-.81-.2-1.76-.6-2.57-1.01M310.66,181.57v-5.14h1.56l.81,3.58,1.01-3.58h1.56v5.14h-1.01v-3.98l-1.01,3.98h-1.01l-1.01-3.98v3.98h-1.01.1Z"/> <path fill="#fff" d="M37.95,142.52h-15.88v52.92c0,6.96,5.34,12.5,12.1,12.5h290.3v-6.55H48.84c-6.15,0-10.89-4.94-10.89-11.09v-47.78ZM44.3,185.3c0,5.34,4.18,9.53,9.32,9.53h270.84v-6.55H52.97c-1.41,0-2.37-1.01-2.37-2.37v-43.39h-6.35v42.79h.05ZM82.7,162.52l-.81-4.94-.6,4.94-1.41,8.72h4.38l-1.56-8.72ZM85.48,149.07l7.51,32.71h-6.55l-1.21-5.54h-6.35l-1.21,5.54h-6.15l7.31-32.71h6.65ZM316.55,181.78h1.01v-1.01h-1.01v1.01ZM319.53,178.8h1.56l.4-.2v-.81s-.2-.2-.4-.2c-.2-.2-.4-.2-.81-.2h-.81v1.41h.05ZM318.52,181.78v-5.14h2.17c.4,0,.81,0,1.21.2.2,0,.4.2.6.4,0,.2.2.6.2.81,0,.4-.2.81-.4,1.01-.2.4-.6.4-1.01.6.2,0,.4.2.6.4,0,.2.2.4.6.81l.6,1.01h-1.21l-.81-1.01c-.2-.4-.4-.81-.6-.81,0-.2-.2-.2-.2-.2-.2-.2-.4-.2-.6-.2h-.2v2.17h-1.01l.05-.05ZM323.66,181.78h.81v-1.01h-.81v1.01Z"/> </g> </g></g></symbol>
+    <symbol id="logo-ampm" viewBox="0 0 134 132"><g>
+<rect x="9" y="9" width="115.5" height="114" rx="23" fill="#0D298E" shape-rendering="crispEdges"/>
+<g>
+<g>
+<path d="M102.59 80.8058H30.9053C22.949 80.8058 16.5 74.3273 16.5 66.3348C16.5 58.3423 22.949 51.8639 30.9053 51.8639H102.595C110.551 51.8639 117 58.3423 117 66.3348C117 74.3273 110.551 80.8058 102.595 80.8058" fill="white"/> <path d="M112.131 71.7204V71.7139C112.131 71.1548 112.582 70.6849 113.152 70.6849C113.721 70.6849 114.17 71.1483 114.17 71.7106V71.7172C114.17 72.2763 113.718 72.7462 113.152 72.7462C112.586 72.7462 112.131 72.2828 112.131 71.7237M114.052 71.7139V71.7074C114.052 71.2125 113.663 70.7937 113.15 70.7937C112.637 70.7937 112.248 71.2114 112.248 71.7106V71.7172C112.248 72.2121 112.637 72.6309 113.15 72.6309C113.663 72.6309 114.052 72.2132 114.052 71.7139ZM112.75 71.1722H113.219C113.446 71.1722 113.618 71.2843 113.618 71.5029V71.5094C113.618 71.6671 113.516 71.7803 113.376 71.8216L113.652 72.2153H113.411L113.163 71.8575H112.946V72.2153H112.747V71.1722H112.75ZM113.202 71.6889C113.335 71.6889 113.412 71.6182 113.412 71.517V71.5105C113.412 71.4083 113.335 71.3387 113.202 71.3452H112.949V71.6856H113.202V71.6889Z" fill="#0D298E"/>
+<path d="M66.7471 66.7145C63.4739 66.7145 60.8232 69.3772 60.8232 72.6654H72.6721C72.6721 69.3805 70.0214 66.7145 66.7482 66.7145" fill="#0D298E"/>
+<path d="M66.7482 65.9659C70.0214 65.9659 72.6721 63.3032 72.6721 60.015H60.8232C60.8232 63.2999 63.4739 65.9659 66.7471 65.9659" fill="#2861C6"/>
+<path d="M42.7441 72.665H38.4185V60.0138H42.7441V60.7871C42.8145 60.7164 42.8557 60.6849 42.8914 60.6468C43.7024 59.7723 44.7137 59.3394 45.895 59.3078C47.046 59.2796 48.1504 59.4906 49.1509 60.1476C49.466 60.3553 49.7345 60.6251 49.9836 60.9133C50.0085 60.9448 50.0399 60.9731 50.0713 61.0079C50.1135 60.9731 50.1482 60.9448 50.1796 60.9133C50.9559 60.116 51.9033 59.6483 52.9883 59.4373C53.9953 59.2371 55.0022 59.2437 55.9962 59.5004C57.7308 59.9463 58.8396 61.071 59.2727 62.8799C59.3886 63.3607 59.434 63.8567 59.434 64.3516V72.6563H55.0943C55.0975 70.1447 55.0943 67.6256 55.0943 65.1097C55.0943 64.7377 55.0694 64.369 54.9405 64.01C54.7023 63.3639 53.9162 62.8614 53.2265 62.8647C52.2293 62.8712 51.5579 63.402 51.2504 64.4386C51.1108 64.9128 51.0718 65.3979 51.0718 65.8896V72.6519C49.6273 72.6519 48.1797 72.6519 46.732 72.6552C46.7353 70.1393 46.732 67.6212 46.732 65.1053C46.732 64.729 46.7039 64.3603 46.5783 64.0024C46.34 63.3346 45.7629 62.9136 45.057 62.8647C43.8605 62.7798 43.161 63.4792 42.8784 64.5408C42.7626 64.977 42.7355 65.4186 42.7355 65.8689V72.653" fill="#2861C6"/>
+<path d="M32.3129 61.1041V60.0153H36.6495V72.6665L32.3097 72.6556V71.5668C32.2848 71.5494 32.261 71.532 32.2361 71.5103C32.2112 71.5625 32.1971 71.6223 32.1592 71.6647C31.3439 72.561 30.3271 73.0766 29.1372 73.2702C28.102 73.4388 27.0777 73.3866 26.0772 73.0559C24.7173 72.61 23.7374 71.7137 23.0769 70.453C22.6329 69.5992 22.3947 68.6822 22.2799 67.7305C22.1641 66.7744 22.1641 65.8194 22.2864 64.8676C22.4543 63.5711 22.843 62.3517 23.6605 61.3086C24.5029 60.234 25.6149 59.6151 26.9554 59.3975C28.1064 59.2115 29.2357 59.2953 30.3228 59.7238C31.0331 60.0045 31.6416 60.433 32.1549 60.9954C32.1863 61.0302 32.2209 61.0661 32.2523 61.0976C32.2588 61.1009 32.2729 61.0976 32.3086 61.1041M26.532 66.447C26.5428 66.5873 26.5602 66.8505 26.5883 67.1105C26.6056 67.2617 26.6403 67.4129 26.6793 67.5597C27.0225 68.9476 28.0219 69.7732 29.3895 69.7939C30.6487 69.8145 31.6243 69.1369 32.0433 67.9426C32.3822 66.9767 32.3866 65.9967 32.1375 65.009C31.8019 63.6951 30.8014 62.8869 29.4696 62.876C28.2807 62.8695 27.4134 63.3992 26.9023 64.4847C26.6295 65.0678 26.5418 65.6899 26.5353 66.4481" fill="#2861C6"/>
+<path d="M74.0013 59.9999H78.3237V60.9626C78.3237 61.0289 78.4039 61.0648 78.4537 61.0148C78.4753 60.993 78.4753 60.993 78.4537 61.0148C79.3729 59.9999 80.5272 59.4757 81.8709 59.3386C82.8324 59.2364 83.7766 59.3179 84.6894 59.6475C86.1544 60.1783 87.144 61.2182 87.7525 62.6333C88.3188 63.9538 88.4726 65.3493 88.4239 66.772C88.3892 67.8054 88.2279 68.8137 87.85 69.7796C87.2306 71.3535 86.1858 72.5021 84.5551 73.047C83.5795 73.3734 82.5758 73.4267 81.558 73.2755C80.6939 73.1449 79.8938 72.8469 79.1943 72.3161C78.8965 72.0877 78.628 71.8212 78.3237 71.5504V78.0951H73.998V60.0043L74.0013 60.001V59.9999ZM78.3281 66.3174C78.3281 66.3174 78.3844 67.1603 78.4786 67.565C78.7969 68.9496 79.8071 69.7709 81.1714 69.7883C82.4231 69.8057 83.4128 69.1248 83.8329 67.9402C84.1718 66.9809 84.1826 66.0041 83.9303 65.0208C83.5914 63.696 82.5845 62.8813 81.2407 62.8671C80.1352 62.8563 79.2993 63.3207 78.772 64.304C78.4363 64.9294 78.3313 65.6147 78.3313 66.3174" fill="#0D298E"/>
+<path d="M102.646 64.4477C102.506 64.922 102.467 65.4071 102.467 65.8987V72.661C101.023 72.661 99.5751 72.661 98.1274 72.6643C98.1306 70.1484 98.1274 67.6304 98.1274 65.1145C98.1274 64.7381 98.0992 64.3694 97.9736 64.0116C97.7354 63.3437 97.1583 62.9228 96.4523 62.8738C95.2559 62.789 94.5564 63.4884 94.2738 64.55C94.1579 64.9861 94.1265 65.4278 94.1309 65.8781V72.6621H89.8052V60.0153H94.1309V60.7887C94.2045 60.718 94.2424 60.6864 94.2781 60.6483C95.0891 59.7738 96.1004 59.3409 97.2817 59.3094C98.4327 59.2811 99.5372 59.4921 100.538 60.1523C100.853 60.3601 101.121 60.6299 101.37 60.9181C101.395 60.9496 101.427 60.9779 101.461 61.016C101.5 60.9812 101.538 60.9529 101.57 60.9214C102.346 60.1241 103.293 59.6563 104.378 59.4453C105.385 59.2452 106.392 59.2517 107.386 59.5084C109.121 59.9544 110.23 61.0791 110.663 62.8879C110.779 63.3687 110.824 63.8647 110.824 64.3596V72.6643H106.484C106.488 70.1528 106.484 67.6336 106.488 65.1178C106.488 64.7458 106.463 64.377 106.331 64.0181C106.092 63.372 105.306 62.8695 104.616 62.8727C103.619 62.8792 102.948 63.41 102.64 64.4466" fill="#0D298E"/>
+</g>
+</g>
+</g>
+<defs> </defs></symbol>
+    <symbol id="logo-t1envios-iso" viewBox="0 0 77 77"><rect x="6" y="6" width="65" height="65" rx="13" fill="#DB3B2B"/><g transform="translate(38.5,38.5) scale(1.0233) translate(-21.5,-21)"><g >
+    <path d="M26.9684 18.6174H30.6027C30.7408 18.6174 30.8328 18.6174 30.9248 18.7094C30.9248 18.7094 30.9248 18.7094 30.9248 18.7554V36.7433C30.9248 37.5253 31.6609 38.0774 32.4429 37.8474C34.1451 37.1573 36.3533 36.2832 37.9635 35.5471C38.2395 35.4091 38.6076 35.2711 38.6076 34.7191V18.7554C38.6076 18.7554 38.6076 18.7094 38.6076 18.6634C38.6076 18.6174 38.6076 18.6174 38.6076 18.6174V7.66831C38.6076 7.02424 38.1015 6.51819 37.4574 6.51819H34.7432C34.2371 6.51819 33.8231 6.84022 33.6391 7.30027C32.5349 10.3826 30.4187 12.6828 27.2444 13.2349C24.0701 13.7869 26.9684 13.2809 26.7844 13.2809C26.1863 13.3729 25.7723 13.8329 25.7723 14.431V17.4213C25.7723 18.0654 26.2783 18.5714 26.9224 18.5714L26.9684 18.6174Z" fill="#FFFFFF"/>
+    <path d="M31.7529 5.27603C31.6149 5.13802 31.3849 5 31.1549 5H4.51815C3.69007 5 3 5.59806 3 6.38014V10.4286C3 11.3947 3.18402 11.8547 4.38014 11.8547H13.259C13.4891 11.8547 13.6731 12.0387 13.6731 12.2687V15.6731V34.627C13.6731 35.0411 13.9491 35.3631 14.3632 35.5471C15.1452 35.8691 17.8595 37.2033 18.7796 37.7093C19.6997 38.2154 21.3099 37.3413 21.3099 36.0532V12.9128C21.3099 12.8668 21.3099 12.7288 21.3099 12.7288C21.2639 12.4068 21.3099 12.0847 21.6319 11.9467C21.7239 11.9467 21.7699 11.9467 21.8619 11.9467H24.7602C31.1089 11.3486 31.7529 6.42615 31.7989 5.87409C31.7989 5.87409 31.7989 5.82808 31.7989 5.78208V5.64407C31.7989 5.50605 31.7989 5.41404 31.6609 5.32203L31.7529 5.27603Z" fill="#FFFFFF"/>
+    </g>
+    <defs> </defs></g></symbol>
+    <symbol id="logo-t1economic" viewBox="0 0 77 77"><rect x="6" y="6" width="65" height="65" rx="13" fill="#1F2937"/><g transform="translate(38.5,38.5) scale(1.0233) translate(-21.5,-21)"><g >
+    <path d="M26.9684 18.6174H30.6027C30.7408 18.6174 30.8328 18.6174 30.9248 18.7094C30.9248 18.7094 30.9248 18.7094 30.9248 18.7554V36.7433C30.9248 37.5253 31.6609 38.0774 32.4429 37.8474C34.1451 37.1573 36.3533 36.2832 37.9635 35.5471C38.2395 35.4091 38.6076 35.2711 38.6076 34.7191V18.7554C38.6076 18.7554 38.6076 18.7094 38.6076 18.6634C38.6076 18.6174 38.6076 18.6174 38.6076 18.6174V7.66831C38.6076 7.02424 38.1015 6.51819 37.4574 6.51819H34.7432C34.2371 6.51819 33.8231 6.84022 33.6391 7.30027C32.5349 10.3826 30.4187 12.6828 27.2444 13.2349C24.0701 13.7869 26.9684 13.2809 26.7844 13.2809C26.1863 13.3729 25.7723 13.8329 25.7723 14.431V17.4213C25.7723 18.0654 26.2783 18.5714 26.9224 18.5714L26.9684 18.6174Z" fill="#FFFFFF"/>
+    <path d="M31.7529 5.27603C31.6149 5.13802 31.3849 5 31.1549 5H4.51815C3.69007 5 3 5.59806 3 6.38014V10.4286C3 11.3947 3.18402 11.8547 4.38014 11.8547H13.259C13.4891 11.8547 13.6731 12.0387 13.6731 12.2687V15.6731V34.627C13.6731 35.0411 13.9491 35.3631 14.3632 35.5471C15.1452 35.8691 17.8595 37.2033 18.7796 37.7093C19.6997 38.2154 21.3099 37.3413 21.3099 36.0532V12.9128C21.3099 12.8668 21.3099 12.7288 21.3099 12.7288C21.2639 12.4068 21.3099 12.0847 21.6319 11.9467C21.7239 11.9467 21.7699 11.9467 21.8619 11.9467H24.7602C31.1089 11.3486 31.7529 6.42615 31.7989 5.87409C31.7989 5.87409 31.7989 5.82808 31.7989 5.78208V5.64407C31.7989 5.50605 31.7989 5.41404 31.6609 5.32203L31.7529 5.27603Z" fill="#FFFFFF"/>
+    </g>
+    <defs> </defs></g></symbol>
   </defs>
 </svg>
 
@@ -556,181 +619,7 @@
         <div class="th" style="justify-content:flex-end;padding-right:16px">Acciones</div>
       </div>
 
-      <div id="tbody">
-
-        <div class="grid-row row" data-tipo="envio">
-          <div class="cell"><span class="ck"></span></div>
-          <div class="cell"><svg class="carrier brand" role="img" aria-label="FedEx"><use href="#logo-fedex"/></svg></div>
-          <div class="cell"><div class="gnum">794658203145</div><div class="gsub">FedEx</div></div>
-          <div class="cell fecha"><b>19 de Jul</b><span>11:40 hrs</span></div>
-          <div class="cell canal">Amazon</div>
-          <div class="cell cliente">SOFÍA HERRERA <svg class="ic"><use href="#i-chev-d"/></svg></div>
-          <div class="cell costo">$145.20<small>MXN</small></div>
-          <div class="cell estado">Activa</div>
-          <div class="cell"><span class="chip transito">En tránsito</span></div>
-          <div class="cell rowacts"><button class="btn-ghost-icon" onclick="toggleActs(event,this)"><svg class="ic" style="width:18px;height:18px"><use href="#i-dots"/></svg></button>
-            <div class="menu-acts"><button onclick="show('det-original')">Ver detalle</button><button>Imprimir guía</button><button>Rastrear</button><button class="danger">Cancelar envío</button></div>
-          </div>
-        </div>
-
-        <!-- ★ Guías vinculadas: origen y retorno como filas hermanas con conector -->
-        <div class="thread">
-          <span class="linkline" aria-hidden="true"></span>
-          <span class="linkloop" data-tip="Guía de retorno generada de este envío"><svg class="ic"><use href="#i-return"/></svg></span>
-
-          <div class="grid-row row" data-tipo="envio">
-            <div class="cell"><span class="ck"></span></div>
-            <div class="cell"><svg class="carrier brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg></div>
-            <div class="cell">
-              <div class="gnum">43567890082</div>
-              <div class="gsub">DHL</div>
-              <a class="refline" href="#" onclick="show('det-retorno');return false">
-                <svg class="ic"><use href="#i-return"/></svg> Generó retorno · 7374310930
-              </a>
-            </div>
-            <div class="cell fecha"><b>10 de Jul</b><span>18:21 hrs</span></div>
-            <div class="cell canal">Shopify</div>
-            <div class="cell cliente">JAVIER MENA <svg class="ic"><use href="#i-chev-d"/></svg></div>
-            <div class="cell costo">$92.33<small>MXN</small></div>
-            <div class="cell estado">Activa</div>
-            <div class="cell">
-              <span class="richtip">
-                <span class="chip retornado">Retornado</span>
-                <span class="tipcard">
-                  <span class="tt">Guía de retorno</span>
-                  <span class="ts">Retornado — el paquete regresa al remitente</span>
-                  <span class="tg"><svg class="brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg><b>7374310930</b></span>
-                </span>
-              </span>
-            </div>
-            <div class="cell rowacts"><button class="btn-ghost-icon" onclick="toggleActs(event,this)"><svg class="ic" style="width:18px;height:18px"><use href="#i-dots"/></svg></button>
-              <div class="menu-acts"><button onclick="show('det-original')">Ver detalle</button><button onclick="show('det-retorno')">Ver guía de retorno</button><button>Imprimir guía</button><button>Rastrear</button></div>
-            </div>
-          </div>
-
-          <div class="grid-row row" data-tipo="retorno">
-            <div class="cell"><span class="ck"></span></div>
-            <div class="cell"><svg class="carrier brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg></div>
-            <div class="cell">
-              <div class="gnum">7374310930
-                <span class="richtip">
-                  <span class="loop-inline"><svg class="ic"><use href="#i-return"/></svg></span>
-                  <span class="tipcard">
-                    <span class="tt">Guía de retorno</span>
-                    <span class="ts">Generada de la guía original</span>
-                    <span class="tg"><svg class="brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg><b>43567890082</b></span>
-                  </span>
-                </span>
-                <span class="tag-ret">Retorno</span>
-              </div>
-              <div class="gsub">DHL</div>
-              <a class="refline" href="#" onclick="show('det-original');return false">
-                <svg class="ic" style="transform:scaleX(-1)"><use href="#i-return"/></svg> Retorno de · 43567890082
-              </a>
-            </div>
-            <div class="cell fecha"><b>18 de Jul</b><span>17:05 hrs</span></div>
-            <div class="cell canal">Shopify</div>
-            <div class="cell cliente">JAVIER MENA <svg class="ic"><use href="#i-chev-d"/></svg></div>
-            <div class="cell costo">$87.45<small>MXN</small></div>
-            <div class="cell estado">Activa</div>
-            <div class="cell"><span class="chip transito">En tránsito</span></div>
-            <div class="cell rowacts"><button class="btn-ghost-icon" onclick="toggleActs(event,this)"><svg class="ic" style="width:18px;height:18px"><use href="#i-dots"/></svg></button>
-              <div class="menu-acts"><button onclick="show('det-retorno')">Ver detalle</button><button onclick="show('det-original')">Ver guía original</button><button>Imprimir guía</button><button>Rastrear</button></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-row row" data-tipo="envio">
-          <div class="cell"><span class="ck"></span></div>
-          <div class="cell"><svg class="carrier brand" role="img" aria-label="99 minutos"><use href="#logo-99min"/></svg></div>
-          <div class="cell"><div class="gnum">99M240815330</div><div class="gsub">99 minutos</div></div>
-          <div class="cell fecha"><b>17 de Jul</b><span>9:12 hrs</span></div>
-          <div class="cell canal">T1tienda</div>
-          <div class="cell cliente">REGINA TORRES <svg class="ic"><use href="#i-chev-d"/></svg></div>
-          <div class="cell costo">$64.90<small>MXN</small></div>
-          <div class="cell estado">Activa</div>
-          <div class="cell"><span class="chip entregado">Entregado</span></div>
-          <div class="cell rowacts"><button class="btn-ghost-icon" onclick="toggleActs(event,this)"><svg class="ic" style="width:18px;height:18px"><use href="#i-dots"/></svg></button>
-            <div class="menu-acts"><button onclick="show('det-original')">Ver detalle</button><button>Imprimir guía</button><button>Rastrear</button></div>
-          </div>
-        </div>
-
-        <div class="grid-row row" data-tipo="envio">
-          <div class="cell"><span class="ck"></span></div>
-          <div class="cell"><svg class="carrier brand" role="img" aria-label="FedEx"><use href="#logo-fedex"/></svg></div>
-          <div class="cell"><div class="gnum">794658219873</div><div class="gsub">FedEx</div></div>
-          <div class="cell fecha"><b>16 de Jul</b><span>13:45 hrs</span></div>
-          <div class="cell canal">Amazon</div>
-          <div class="cell cliente">LUIS DAMIÁN <svg class="ic"><use href="#i-chev-d"/></svg></div>
-          <div class="cell costo">$118.00<small>MXN</small></div>
-          <div class="cell estado">Activa</div>
-          <div class="cell"><span class="chip intento">Intento de entrega</span></div>
-          <div class="cell rowacts"><button class="btn-ghost-icon" onclick="toggleActs(event,this)"><svg class="ic" style="width:18px;height:18px"><use href="#i-dots"/></svg></button>
-            <div class="menu-acts"><button onclick="show('det-original')">Ver detalle</button><button>Imprimir guía</button><button>Rastrear</button><button class="danger">Cancelar envío</button></div>
-          </div>
-        </div>
-
-        <div class="grid-row row" data-tipo="envio">
-          <div class="cell"><span class="ck"></span></div>
-          <div class="cell"><svg class="carrier brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg></div>
-          <div class="cell"><div class="gnum">5512045589</div><div class="gsub">DHL</div></div>
-          <div class="cell fecha"><b>16 de Jul</b><span>8:03 hrs</span></div>
-          <div class="cell canal">T1envíos</div>
-          <div class="cell cliente">CARLOS PEÑA <svg class="ic"><use href="#i-chev-d"/></svg></div>
-          <div class="cell costo">$102.50<small>MXN</small></div>
-          <div class="cell estado">Activa</div>
-          <div class="cell"><span class="chip generada">Guía generada</span></div>
-          <div class="cell rowacts"><button class="btn-ghost-icon" onclick="toggleActs(event,this)"><svg class="ic" style="width:18px;height:18px"><use href="#i-dots"/></svg></button>
-            <div class="menu-acts"><button onclick="show('det-original')">Ver detalle</button><button>Imprimir guía</button><button>Rastrear</button><button class="danger">Cancelar envío</button></div>
-          </div>
-        </div>
-
-        <div class="grid-row row" data-tipo="envio">
-          <div class="cell"><span class="ck"></span></div>
-          <div class="cell"><svg class="carrier brand" role="img" aria-label="FedEx"><use href="#logo-fedex"/></svg></div>
-          <div class="cell"><div class="gnum">794658198010</div><div class="gsub">FedEx</div></div>
-          <div class="cell fecha"><b>15 de Jul</b><span>16:28 hrs</span></div>
-          <div class="cell canal">Mercado Libre</div>
-          <div class="cell cliente">ANA SALAS <svg class="ic"><use href="#i-chev-d"/></svg></div>
-          <div class="cell costo">$131.75<small>MXN</small></div>
-          <div class="cell estado">Activa</div>
-          <div class="cell"><span class="chip excepcion">Excepción</span></div>
-          <div class="cell rowacts"><button class="btn-ghost-icon" onclick="toggleActs(event,this)"><svg class="ic" style="width:18px;height:18px"><use href="#i-dots"/></svg></button>
-            <div class="menu-acts"><button onclick="show('det-original')">Ver detalle</button><button>Imprimir guía</button><button>Rastrear</button><button class="danger">Cancelar envío</button></div>
-          </div>
-        </div>
-
-        <div class="grid-row row" data-tipo="envio">
-          <div class="cell"><span class="ck"></span></div>
-          <div class="cell"><svg class="carrier brand" role="img" aria-label="99 minutos"><use href="#logo-99min"/></svg></div>
-          <div class="cell"><div class="gnum">99M240811207</div><div class="gsub">99 minutos</div></div>
-          <div class="cell fecha"><b>14 de Jul</b><span>10:55 hrs</span></div>
-          <div class="cell canal">Mercado Libre</div>
-          <div class="cell cliente">MARIANA RUIZ <svg class="ic"><use href="#i-chev-d"/></svg></div>
-          <div class="cell costo">$58.00<small>MXN</small></div>
-          <div class="cell estado">Cancelada</div>
-          <div class="cell"><span class="chip cancelado">Cancelado</span></div>
-          <div class="cell rowacts"><button class="btn-ghost-icon" onclick="toggleActs(event,this)"><svg class="ic" style="width:18px;height:18px"><use href="#i-dots"/></svg></button>
-            <div class="menu-acts"><button onclick="show('det-original')">Ver detalle</button><button>Imprimir guía</button></div>
-          </div>
-        </div>
-
-        <div class="grid-row row" data-tipo="envio">
-          <div class="cell"><span class="ck"></span></div>
-          <div class="cell"><svg class="carrier brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg></div>
-          <div class="cell"><div class="gnum">5511998231</div><div class="gsub">DHL</div></div>
-          <div class="cell fecha"><b>12 de Jul</b><span>14:17 hrs</span></div>
-          <div class="cell canal">Shopify</div>
-          <div class="cell cliente">DIEGO LARA <svg class="ic"><use href="#i-chev-d"/></svg></div>
-          <div class="cell costo">$96.40<small>MXN</small></div>
-          <div class="cell estado">Activa</div>
-          <div class="cell"><span class="chip devuelto">Devuelto</span></div>
-          <div class="cell rowacts"><button class="btn-ghost-icon" onclick="toggleActs(event,this)"><svg class="ic" style="width:18px;height:18px"><use href="#i-dots"/></svg></button>
-            <div class="menu-acts"><button onclick="show('det-original')">Ver detalle</button><button>Imprimir guía</button></div>
-          </div>
-        </div>
-
-      </div>
+      <div id="tbody"></div>
 
       <div class="pag">
         <span>En total 23,456 registro(s)</span>
@@ -745,377 +634,83 @@
     </div>
   </section>
 
-  <!-- ================= VISTA: DETALLE GUÍA ORIGINAL ================= -->
-  <section id="det-original" class="view">
-    <div class="dethead">
-      <div class="l">
-        <h1>
-          <button class="backbtn" onclick="show('listado')" aria-label="Volver"><svg class="ic"><use href="#i-back"/></svg></button>
-          43567890082
-          <span class="richtip">
-            <span class="chip retornado">Retornado</span>
-            <span class="tipcard">
-              <span class="tt">Guía de retorno</span>
-              <span class="ts">Retornado — el paquete regresa al remitente</span>
-              <span class="tg"><svg class="brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg><b>7374310930</b></span>
-            </span>
-          </span>
-        </h1>
-        <p class="meta">Guía original · Creada el 10 de julio 2026 a las 18:21 hrs</p>
-      </div>
-      <div style="display:flex;gap:12px">
-        <button class="btn btn-secondary">Más acciones <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button>
-        <button class="btn btn-primary">Imprimir guía</button>
+  <!-- ================= VISTA: DETALLE (render por datos) ================= -->
+  <section id="detalle" class="view"></section>
+
+</main>
+
+<aside class="wamock" id="wamock" aria-label="Notificación de WhatsApp (mock)">
+  <div class="wahead">
+    <span class="waav">T1</span>
+    <div><div class="wt">T1envíos</div><div class="ws">mock · se envía al generarse el retorno</div></div>
+    <button onclick="toggleWA()" aria-label="Cerrar">×</button>
+  </div>
+  <div class="wabody" id="wabody"></div>
+</aside>
+
+<main class="main">
+
+  <!-- ================= VISTA: LISTADO ================= -->
+  <section id="listado" class="view on">
+    <div class="pagehead">
+      <h1>Mis envíos</h1>
+      <div class="acts">
+        <button class="btn btn-secondary">Exportar</button>
+        <button class="btn btn-secondary">Crear guías masivas</button>
+        <button class="btn btn-primary">Crear envío</button>
       </div>
     </div>
 
-    <div class="detgrid">
-      <div class="colcards">
+    <div class="search">
+      <input type="text" placeholder="Búsqueda" aria-label="Búsqueda" />
+      <svg class="ic" style="width:18px;height:18px"><use href="#i-search"/></svg>
+    </div>
 
-        <!-- Recorrido del envío -->
-        <div class="card">
-          <div class="hd">Recorrido del envío</div>
-          <div class="bd">
-            <div class="journey">
-              <div class="jnode cur">
-                <div class="jtop">
-                  <svg class="brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg>
-                  <div><div class="lbl">Guía original</div><div class="num">43567890082</div></div>
-                </div>
-                <div class="svc">DHL — Mismo día 24H · Creada el 10 jul · 18:21 hrs</div>
-                <div class="jfoot"><span class="chip retornado">Retornado</span></div>
-              </div>
-              <div class="jbridge">
-                <div class="line"><span class="loop"><svg class="ic"><use href="#i-return"/></svg></span></div>
-                <p><b>Retorno generado</b><br />18 jul · 17:05 hrs<br />tras 3 intentos de entrega</p>
-              </div>
-              <button class="jnode" onclick="show('det-retorno')">
-                <div class="jtop">
-                  <svg class="brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg>
-                  <div><div class="lbl">Guía de retorno</div><div class="num">7374310930</div></div>
-                </div>
-                <div class="svc">DHL — Mismo día 24H · Creada el 18 jul · 17:05 hrs</div>
-                <div class="jfoot"><span class="chip transito">En tránsito</span><span class="vg">Ver guía →</span></div>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cronograma de la guía original -->
-        <div class="card">
-          <div class="hd">Cronograma</div>
-          <div class="bd">
-            <div class="tl">
-              <span class="datechip">18/07/2026</span>
-              <div class="milestone">
-                <span class="ico"><svg class="ic"><use href="#i-return"/></svg></span>
-                <div class="t">Se generó la guía de retorno</div>
-                <div class="d">La paquetería creó una nueva guía tras 3 intentos de entrega sin éxito · 17:05 hrs</div>
-                <span class="amt">$87.45</span>
-                <button class="gref" onclick="show('det-retorno')"><svg class="brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg> 7374310930 — Ver guía de retorno</button>
-              </div>
-
-              <span class="datechip">16/07/2026</span>
-              <div class="ev warn">
-                <span class="ico"><svg class="ic"><use href="#i-alert"/></svg></span>
-                <div class="t">Intento de entrega (3 de 3)</div>
-                <div class="d">Sin quien reciba en el domicilio · 17:34 hrs</div>
-                <a class="link" href="#" onclick="return false">Ver evidencia</a>
-              </div>
-
-              <span class="datechip">15/07/2026</span>
-              <div class="ev warn">
-                <span class="ico"><svg class="ic"><use href="#i-alert"/></svg></span>
-                <div class="t">Intento de entrega (2 de 3)</div>
-                <div class="d">Domicilio cerrado · 13:12 hrs</div>
-                <a class="link" href="#" onclick="return false">Ver evidencia</a>
-              </div>
-
-              <span class="datechip">14/07/2026</span>
-              <div class="ev warn">
-                <span class="ico"><svg class="ic"><use href="#i-alert"/></svg></span>
-                <div class="t">Intento de entrega (1 de 3)</div>
-                <div class="d">Sin quien reciba en el domicilio · 11:03 hrs</div>
-                <a class="link" href="#" onclick="return false">Ver evidencia</a>
-              </div>
-              <div class="ev">
-                <span class="ico"><svg class="ic" style="width:8px;height:8px"><use href="#i-truckdot"/></svg></span>
-                <div class="t">Envío en camino</div>
-                <div class="d">8:15 hrs</div>
-                <a class="link" href="#" onclick="return false">Ver seguimiento</a>
-              </div>
-
-              <span class="datechip">13/07/2026</span>
-              <div class="ev ok">
-                <span class="ico"><svg class="ic"><use href="#i-check"/></svg></span>
-                <div class="t">Recolectado por paquetería</div>
-                <div class="d">Escaneado por DHL · 17:34 hrs</div>
-                <a class="link" href="#" onclick="return false">Ver / Imprimir guía</a>
-              </div>
-
-              <span class="datechip">10/07/2026</span>
-              <div class="milestone" style="margin-bottom:0">
-                <span class="ico"><svg class="ic"><use href="#i-doc"/></svg></span>
-                <div class="t">Guía creada (Original)</div>
-                <div class="d">18:21 hrs</div>
-                <span class="amt">$92.33</span>
-                <button class="gref"><svg class="brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg> 43567890082</button>
-              </div>
-            </div>
+    <div class="tablecard">
+      <div class="filters">
+        <div class="fpill"><button>Paquetería <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button></div>
+        <div class="fpill"><button>Estatus <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button></div>
+        <div class="fpill"><button>Fecha <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button></div>
+        <div class="fpill"><button>Estado de envío <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button></div>
+        <div class="fpill" id="fTipo">
+          <button id="fTipoBtn" onclick="toggleTipoMenu(event)">Tipo de guía <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button>
+          <div class="menu" id="tipoMenu" role="menu">
+            <button role="menuitemradio" aria-checked="true" onclick="filtraTipo('todas',this)"><span class="radio"></span> Todas</button>
+            <button role="menuitemradio" aria-checked="false" onclick="filtraTipo('envio',this)"><span class="radio"></span> Envío</button>
+            <button role="menuitemradio" aria-checked="false" onclick="filtraTipo('retorno',this)"><span class="radio"></span> Retorno</button>
           </div>
         </div>
       </div>
 
-      <div class="colcards">
-        <div class="card">
-          <div class="hd">Resumen de envío</div>
-          <div class="bd">
-            <div class="subhd">Direcciones</div>
-            <div class="addr">
-              <span class="pin"><svg class="ic"><use href="#i-pin"/></svg></span>
-              <h4>Av. Insurgentes Sur</h4>
-              <p>Av. Insurgentes Sur, San José Insurgentes, México, Ciudad de México, 03900</p>
-              <p class="c">monadic_chicos@claroshop.com · Chicos Olé</p>
-              <p class="c">55 4879 0021</p>
-            </div>
-            <div class="addr">
-              <span class="pin"><svg class="ic"><use href="#i-pin"/></svg></span>
-              <h4>Calle Lago Zurich</h4>
-              <p>Calle Lago Zurich, Depto. 4B, México, Ciudad de México, 11529</p>
-              <p class="c">alonsocharbel@gmail.com</p>
-              <p class="c">74 4123 4567</p>
-            </div>
-            <hr style="border:none;border-top:1px solid var(--g-100);margin:18px 0" />
-            <div class="subhd">Dimensiones del paquete</div>
-            <div class="dims">
-              <p><b>6 paquetes</b></p>
-              <p>(24 × 10 × 30 cm)</p>
-              <p>2 kg</p>
-            </div>
-          </div>
-        </div>
+      <div class="grid-row thead">
+        <div class="th"><span class="ck on"><svg class="ic"><use href="#i-check"/></svg></span></div>
+        <div class="th" style="grid-column:2/4">Guía</div>
+        <div class="th">Fecha <span class="sort"><svg class="ic"><use href="#i-chev-u"/></svg><svg class="ic"><use href="#i-chev-d"/></svg></span></div>
+        <div class="th">Canal de venta</div>
+        <div class="th">Cliente</div>
+        <div class="th">Costo <span class="sort"><svg class="ic"><use href="#i-chev-u"/></svg><svg class="ic"><use href="#i-chev-d"/></svg></span></div>
+        <div class="th">Estado</div>
+        <div class="th">Estado de rastreo</div>
+        <div class="th" style="justify-content:flex-end;padding-right:16px">Acciones</div>
+      </div>
 
-        <div class="card">
-          <div class="hd">Resumen de cobro <span class="count-pill">2 cobros</span></div>
-          <div class="bd">
-            <div class="cobro-block cur">
-              <svg class="brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg>
-              <div class="inf">
-                <div class="k">Cobro 1 · Guía original</div>
-                <div class="n">43567890082</div>
-                <div class="m">Cobrada el 10 jul 2026</div>
-              </div>
-              <div class="val">$92.33</div>
-            </div>
-            <div class="cobro-block">
-              <svg class="brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg>
-              <div class="inf">
-                <div class="k">Cobro 2 · Guía de retorno</div>
-                <div class="n">7374310930</div>
-                <div class="m">Cobrada el 18 jul 2026</div>
-              </div>
-              <div class="val">$87.45</div>
-            </div>
-            <div style="margin-top:6px">
-              <div class="cobro-line"><span>Cargos adicionales (sobrepeso)</span><span>$96.00</span></div>
-              <div class="cobro-line"><span>Impuestos (IVA)</span><span>Incluidos</span></div>
-              <div class="cobro-total"><span>Total del envío</span><span>$275.78 MXN</span></div>
-              <div class="cobro-note">
-                <svg class="ic"><use href="#i-info"/></svg>
-                El cobro de la guía de retorno se generó al no concretarse la entrega después de 3 intentos y se descontó automáticamente de tu saldo T1envíos.
-              </div>
-            </div>
-          </div>
+      <div id="tbody"></div>
+
+      <div class="pag">
+        <span>En total 23,456 registro(s)</span>
+        <div class="pages">
+          <button class="arrow"><svg class="ic" style="width:14px;height:14px;transform:rotate(180deg)"><use href="#i-chev-r"/></svg></button>
+          <button class="pg cur">1</button><button class="pg">2</button><button class="pg">3</button><button class="pg">4</button><button class="pg">5</button>
+          <span style="color:var(--sec)">…</span><button class="pg">68</button>
+          <button class="arrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-chev-r"/></svg></button>
         </div>
+        <span style="display:flex;align-items:center;gap:8px">Saltar a página <input type="text" value="1" aria-label="Página" /> <button class="arrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-chev-r"/></svg></button></span>
       </div>
     </div>
   </section>
 
-  <!-- ================= VISTA: DETALLE GUÍA DE RETORNO ================= -->
-  <section id="det-retorno" class="view">
-    <div class="dethead">
-      <div class="l">
-        <h1>
-          <button class="backbtn" onclick="show('listado')" aria-label="Volver"><svg class="ic"><use href="#i-back"/></svg></button>
-          7374310930
-          <span class="tag-ret" style="height:24px;font-size:12px">Retorno</span>
-          <span class="chip transito">En tránsito</span>
-        </h1>
-        <p class="meta">Guía de retorno de <a href="#" style="font-weight:700;text-decoration:underline" onclick="show('det-original');return false">43567890082</a> · Creada el 18 de julio 2026 a las 17:05 hrs</p>
-      </div>
-      <div style="display:flex;gap:12px">
-        <button class="btn btn-secondary">Más acciones <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button>
-        <button class="btn btn-primary">Imprimir guía</button>
-      </div>
-    </div>
-
-    <div class="detgrid">
-      <div class="colcards">
-
-        <!-- Recorrido del envío -->
-        <div class="card">
-          <div class="hd">Recorrido del envío</div>
-          <div class="bd">
-            <div class="journey">
-              <button class="jnode" onclick="show('det-original')">
-                <div class="jtop">
-                  <svg class="brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg>
-                  <div><div class="lbl">Guía original</div><div class="num">43567890082</div></div>
-                </div>
-                <div class="svc">DHL — Mismo día 24H · Creada el 10 jul · 18:21 hrs</div>
-                <div class="jfoot"><span class="chip retornado">Retornado</span><span class="vg">Ver guía →</span></div>
-              </button>
-              <div class="jbridge">
-                <div class="line"><span class="loop"><svg class="ic"><use href="#i-return"/></svg></span></div>
-                <p><b>Retorno generado</b><br />18 jul · 17:05 hrs<br />tras 3 intentos de entrega</p>
-              </div>
-              <div class="jnode cur">
-                <div class="jtop">
-                  <svg class="brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg>
-                  <div><div class="lbl">Guía de retorno</div><div class="num">7374310930</div></div>
-                </div>
-                <div class="svc">DHL — Mismo día 24H · Creada el 18 jul · 17:05 hrs</div>
-                <div class="jfoot"><span class="chip transito">En tránsito</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cronograma de la guía de retorno -->
-        <div class="card">
-          <div class="hd">Cronograma <span style="font-size:12px;font-weight:500;color:var(--sec)">Fecha estimada de entrega: 21 de jul</span></div>
-          <div class="bd">
-            <div class="tl">
-              <span class="datechip">19/07/2026</span>
-              <div class="ev">
-                <span class="ico"><svg class="ic" style="width:8px;height:8px"><use href="#i-truckdot"/></svg></span>
-                <div class="t">Retorno en camino</div>
-                <div class="d">El paquete viaja de regreso al remitente · 9:20 hrs</div>
-                <a class="link" href="#" onclick="return false">Ver seguimiento</a>
-              </div>
-
-              <span class="datechip">18/07/2026</span>
-              <div class="ev ok">
-                <span class="ico"><svg class="ic"><use href="#i-check"/></svg></span>
-                <div class="t">Recibido en sucursal DHL</div>
-                <div class="d">Paquete en resguardo para su retorno · 16:40 hrs</div>
-                <a class="link" href="#" onclick="return false">Ver confirmación</a>
-              </div>
-              <div class="milestone">
-                <span class="ico"><svg class="ic"><use href="#i-return"/></svg></span>
-                <div class="t">Guía creada (Retorno)</div>
-                <div class="d">Generada automáticamente por la paquetería tras 3 intentos de entrega · 17:05 hrs</div>
-                <span class="amt">$87.45</span>
-                <button class="gref"><svg class="brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg> 7374310930</button>
-              </div>
-
-              <!-- historial de la guía original -->
-              <div class="xhist" id="xhist">
-                <button onclick="document.getElementById('xhist').classList.toggle('closed')">
-                  <svg class="ic chev"><use href="#i-chev-u"/></svg>
-                  Historial de la guía original · 43567890082
-                  <span class="cnt-int">3 intentos de entrega</span>
-                </button>
-                <div class="body">
-                  <div class="tl" style="padding-top:10px">
-                    <span class="datechip" style="margin-left:34px">16/07/2026</span>
-                    <div class="ev warn">
-                      <span class="ico"><svg class="ic"><use href="#i-alert"/></svg></span>
-                      <div class="t">Intento de entrega (3 de 3)</div>
-                      <div class="d">Sin quien reciba en el domicilio · 17:34 hrs</div>
-                    </div>
-                    <span class="datechip">15/07/2026</span>
-                    <div class="ev warn">
-                      <span class="ico"><svg class="ic"><use href="#i-alert"/></svg></span>
-                      <div class="t">Intento de entrega (2 de 3)</div>
-                      <div class="d">Domicilio cerrado · 13:12 hrs</div>
-                    </div>
-                    <span class="datechip">14/07/2026</span>
-                    <div class="ev warn">
-                      <span class="ico"><svg class="ic"><use href="#i-alert"/></svg></span>
-                      <div class="t">Intento de entrega (1 de 3)</div>
-                      <div class="d">Sin quien reciba en el domicilio · 11:03 hrs</div>
-                    </div>
-                    <span class="datechip">10/07/2026</span>
-                    <div class="milestone" style="margin-bottom:0">
-                      <span class="ico"><svg class="ic"><use href="#i-doc"/></svg></span>
-                      <div class="t">Guía creada (Original)</div>
-                      <div class="d">18:21 hrs</div>
-                      <span class="amt">$92.33</span>
-                      <button class="gref" onclick="show('det-original')"><svg class="brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg> 43567890082 — Ver guía original</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="colcards">
-        <div class="card">
-          <div class="hd">Resumen de envío</div>
-          <div class="bd">
-            <div class="subhd">Direcciones del retorno</div>
-            <div class="addr">
-              <span class="pin"><svg class="ic"><use href="#i-pin"/></svg></span>
-              <h4>Sucursal DHL Polanco</h4>
-              <p>Calle Lago Zurich, México, Ciudad de México, 11529</p>
-              <p class="c">Origen del retorno</p>
-            </div>
-            <div class="addr">
-              <span class="pin"><svg class="ic"><use href="#i-pin"/></svg></span>
-              <h4>Av. Insurgentes Sur</h4>
-              <p>Av. Insurgentes Sur, San José Insurgentes, México, Ciudad de México, 03900</p>
-              <p class="c">monadic_chicos@claroshop.com · Chicos Olé</p>
-              <p class="c">55 4879 0021</p>
-            </div>
-            <hr style="border:none;border-top:1px solid var(--g-100);margin:18px 0" />
-            <div class="subhd">Dimensiones del paquete</div>
-            <div class="dims">
-              <p><b>6 paquetes</b></p>
-              <p>(24 × 10 × 30 cm)</p>
-              <p>2 kg</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="hd">Resumen de cobro <span class="count-pill">2 cobros</span></div>
-          <div class="bd">
-            <div class="cobro-block">
-              <svg class="brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg>
-              <div class="inf">
-                <div class="k">Cobro 1 · Guía original</div>
-                <div class="n">43567890082</div>
-                <div class="m">Cobrada el 10 jul 2026</div>
-              </div>
-              <div class="val">$92.33</div>
-            </div>
-            <div class="cobro-block cur">
-              <svg class="brand" role="img" aria-label="DHL"><use href="#logo-dhl"/></svg>
-              <div class="inf">
-                <div class="k">Cobro 2 · Guía de retorno</div>
-                <div class="n">7374310930</div>
-                <div class="m">Cobrada el 18 jul 2026</div>
-              </div>
-              <div class="val">$87.45</div>
-            </div>
-            <div style="margin-top:6px">
-              <div class="cobro-line"><span>Cargos adicionales (sobrepeso)</span><span>$96.00</span></div>
-              <div class="cobro-line"><span>Impuestos (IVA)</span><span>Incluidos</span></div>
-              <div class="cobro-total"><span>Total del envío</span><span>$275.78 MXN</span></div>
-              <div class="cobro-note">
-                <svg class="ic"><use href="#i-info"/></svg>
-                El cobro de la guía de retorno se generó al no concretarse la entrega después de 3 intentos y se descontó automáticamente de tu saldo T1envíos.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- ================= VISTA: DETALLE (render por datos) ================= -->
+  <section id="detalle" class="view"></section>
 
 </main>
 
@@ -1132,52 +727,585 @@
       <p>Revisa los intentos y el cobro en <b>T1envíos → Mis envíos</b>.</p>
       <span class="watime">18 jul · 17:06</span>
     </div>
-    <button class="wacta" onclick="show('det-retorno')">Rastrear retorno</button>
+    <button class="wacta" onclick="show('detalle','retorno')">Rastrear retorno</button>
   </div>
 </aside>
 
 <script>
+  /* ===================== DATOS DE EJEMPLO =====================
+     Estructura replicada del productivo (shipping.t1.com).
+     Dos comportamientos de retorno según la paquetería:
+       · tipo 'nueva' → la paquetería genera una guía nueva (DHL, FedEx, 99 minutos)
+       · tipo 'misma' → el retorno viaja con el mismo número (UPS, Paquete Express,
+                        T1envíos, T1 Economic, AMPM)                                */
+
+  const DIR_ORIGEN = {
+    t:'Av. Adolfo López Mateos Sur 5550',
+    d:'Av. Adolfo López Mateos Sur 5550, Fraccionamiento La Rioja, México, Jalisco, 45640',
+    c:['info@essensorial.com','3342052870']
+  };
+
+  const ENVIOS = [
+    /* ── Retorno sobre la MISMA GUÍA ───────────────────────────── */
+    {
+      id:'e-ups', guia:'1Z9990123456', logo:'logo-ups', carrier:'UPS', servicio:'Terrestre / 3 días',
+      fecha:'30 de Ago', hora:'10:26 hrs', canal:'Mercado Libre', cliente:'Mauricio Beltrán',
+      costo:'269.52', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'30 de agosto, 2026 a las 10:26hrs', entrega:'02 sep',
+      destino:{t:'Av. Vallarta 1500', d:'Av. Vallarta 1500, Americana, Guadalajara, Jalisco, 44160', c:['mauricio.beltran@gmail.com','3312440087']},
+      paquete:['1 paquete','(40 x 30 x 20 cm)','5kg'],
+      cobro:{sub:'207.84', cargos:'24.50', iva:'37.18', total:'269.52'},
+      retorno:{
+        tipo:'misma', fecha:'04 de Sep', hora:'09:14 hrs',
+        costo:'241.10', rastreo:{t:'En camino', c:'transito'}, entrega:'07 sep',
+        cobroEstado:'$241.10 MXN',
+        cobro:{sub:'174.58', cargos:'33.26', iva:'33.26', total:'241.10'}
+      },
+      tlOrig:[
+        {f:'05/09/2026', t:'En camino', h:'7:45:11 AM', dot:true},
+        {f:'04/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'1Z9990123456', monto:'241.10', h:'9:14:26 AM'},
+        {f:'04/09/2026', t:'Devuelto al remitente', h:'8:58:03 AM'},
+        {f:'03/09/2026', t:'En espera de ser recogido por el destinatario', h:'9:30:12 AM'},
+        {f:'02/09/2026', t:'Intento de entrega — domicilio cerrado', h:'1:22:38 PM'},
+        {f:'01/09/2026', t:'Intento de entrega — sin quien reciba', h:'11:44:20 AM'},
+        {f:'31/08/2026', t:'En camino', h:'7:12:55 AM', dot:true},
+        {f:'30/08/2026', t:'Recolectado', h:'2:15:07 PM'},
+        {f:'30/08/2026', hito:true, t:'Guía creada (Original)', guia:'1Z9990123456', monto:'269.52', h:'10:26:41 AM'}
+      ]
+    },
+    {
+      id:'e-express', guia:'PEX009182736', logo:'logo-express', carrier:'Paquete Express', servicio:'Estándar / 4 días',
+      fecha:'29 de Ago', hora:'16:08 hrs', canal:'Shopify', cliente:'Carlos Peña',
+      costo:'102.50', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'29 de agosto, 2026 a las 16:08hrs', entrega:'03 sep',
+      destino:{t:'Calle Río Nazas 45', d:'Calle Río Nazas 45, Cuauhtémoc, México, Ciudad de México, 06500', c:['carlos.pena@gmail.com','5588112043']},
+      paquete:['1 paquete','(35 x 25 x 12 cm)','1.6kg'],
+      cobro:{sub:'74.22', cargos:'14.14', iva:'14.14', total:'102.50'},
+      retorno:{
+        tipo:'misma', fecha:'06 de Sep', hora:'09:30 hrs',
+        costo:'96.80', rastreo:{t:'En camino', c:'transito'}, entrega:'10 sep',
+        cobroEstado:'Pendiente',
+        cobro:{sub:'70.10', cargos:'13.35', iva:'13.35', total:'96.80'}
+      },
+      tlOrig:[
+        {f:'06/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'PEX009182736', monto:'96.80', h:'9:30:55 AM'},
+        {f:'06/09/2026', t:'Devuelto al remitente', h:'9:02:11 AM'},
+        {f:'05/09/2026', t:'En espera de ser recogido por el destinatario', h:'5:15:40 PM'},
+        {f:'04/09/2026', t:'Intento de entrega — domicilio cerrado', h:'12:47:19 PM'},
+        {f:'02/09/2026', t:'Intento de entrega — sin quien reciba', h:'10:21:36 AM'},
+        {f:'31/08/2026', t:'En camino', h:'7:55:02 AM', dot:true},
+        {f:'30/08/2026', t:'Recolectado', h:'11:30:44 AM'},
+        {f:'29/08/2026', hito:true, t:'Guía creada (Original)', guia:'PEX009182736', monto:'102.50', h:'4:08:20 PM'}
+      ]
+    },
+    {
+      id:'e-t1envios', guia:'T1E260903117', logo:'logo-t1envios-iso', carrier:'T1envíos', servicio:'Nacional / 3 días',
+      fecha:'28 de Ago', hora:'12:41 hrs', canal:'T1tienda', cliente:'Ana Salas',
+      costo:'131.75', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'28 de agosto, 2026 a las 12:41hrs', entrega:'01 sep',
+      destino:{t:'Calle Zaragoza 88', d:'Calle Zaragoza 88, Centro, Puebla, Puebla, 72000', c:['ana.salas@gmail.com','2224510098']},
+      paquete:['1 paquete','(25 x 18 x 14 cm)','1.2kg'],
+      cobro:{sub:'95.41', cargos:'18.17', iva:'18.17', total:'131.75'},
+      retorno:{
+        tipo:'misma', fecha:'05 de Sep', hora:'11:52 hrs',
+        costo:'124.40', rastreo:{t:'Entregado', c:'entregado'}, entrega:'08 sep',
+        cobroEstado:'$124.40 MXN',
+        cobro:{sub:'90.08', cargos:'17.16', iva:'17.16', total:'124.40'}
+      },
+      tlOrig:[
+        {f:'07/09/2026', t:'Entregado', h:'4:05:52 PM'},
+        {f:'05/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'T1E260903117', monto:'124.40', h:'11:52:33 AM'},
+        {f:'05/09/2026', t:'Devuelto al remitente', h:'11:20:06 AM'},
+        {f:'03/09/2026', t:'En espera de ser recogido por el destinatario', h:'9:45:18 AM'},
+        {f:'01/09/2026', t:'Intento de entrega — sin quien reciba', h:'1:12:25 PM'},
+        {f:'31/08/2026', t:'Llegada al centro de clasificación', h:'10:38:47 PM'},
+        {f:'29/08/2026', t:'En camino', h:'8:14:02 AM', dot:true},
+        {f:'28/08/2026', t:'Recolectado', h:'6:20:31 PM'},
+        {f:'28/08/2026', hito:true, t:'Guía creada (Original)', guia:'T1E260903117', monto:'131.75', h:'12:41:09 PM'}
+      ]
+    },
+    {
+      id:'e-t1economic', guia:'T1EC04598123', logo:'logo-t1economic', carrier:'T1 Economic', servicio:'Económico / 5 días',
+      fecha:'27 de Ago', hora:'08:55 hrs', canal:'Claroshop', cliente:'Diego Lara',
+      costo:'96.40', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'27 de agosto, 2026 a las 08:55hrs', entrega:'03 sep',
+      destino:{t:'Av. Chapultepec 320', d:'Av. Chapultepec 320, Americana, Guadalajara, Jalisco, 44160', c:['diego.lara@hotmail.com','3319887744']},
+      paquete:['1 paquete','(22 x 16 x 9 cm)','0.9kg'],
+      cobro:{sub:'69.80', cargos:'13.30', iva:'13.30', total:'96.40'},
+      retorno:{
+        tipo:'misma', fecha:'07 de Sep', hora:'15:18 hrs',
+        costo:'91.20', rastreo:{t:'En camino', c:'transito'}, entrega:'12 sep',
+        cobroEstado:'Pendiente',
+        cobro:{sub:'66.04', cargos:'12.58', iva:'12.58', total:'91.20'}
+      },
+      tlOrig:[
+        {f:'07/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'T1EC04598123', monto:'91.20', h:'3:18:29 PM'},
+        {f:'07/09/2026', t:'Devuelto al remitente', h:'2:50:17 PM'},
+        {f:'05/09/2026', t:'En espera de ser recogido por el destinatario', h:'10:08:44 AM'},
+        {f:'03/09/2026', t:'Intento de entrega — sin quien reciba', h:'2:15:03 PM'},
+        {f:'01/09/2026', t:'Llegada al centro de clasificación', h:'11:22:38 PM'},
+        {f:'29/08/2026', t:'En camino', h:'9:05:47 AM', dot:true},
+        {f:'28/08/2026', t:'Recolectado', h:'1:40:22 PM'},
+        {f:'27/08/2026', hito:true, t:'Guía creada (Original)', guia:'T1EC04598123', monto:'96.40', h:'8:55:14 AM'}
+      ]
+    },
+    {
+      id:'e-ampm', guia:'AMP045981277', logo:'logo-ampm', carrier:'AMPM', servicio:'Punto de entrega / 3 días',
+      fecha:'26 de Ago', hora:'11:40 hrs', canal:'Amazon', cliente:'Sofía Herrera',
+      costo:'145.20', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'26 de agosto, 2026 a las 11:40hrs', entrega:'31 ago',
+      destino:{t:'Av. Patriotismo 615', d:'Av. Patriotismo 615, San Juan, Benito Juárez, México, Ciudad de México, 03730', c:['sofia.herrera@gmail.com','5566207734']},
+      paquete:['3 paquetes','(28 x 20 x 15 cm)','2.6kg'],
+      cobro:{sub:'105.14', cargos:'20.03', iva:'20.03', total:'145.20'},
+      retorno:{
+        tipo:'misma', fecha:'04 de Sep', hora:'09:35 hrs',
+        costo:'138.60', rastreo:{t:'En camino', c:'transito'}, entrega:'08 sep',
+        cobroEstado:'$138.60 MXN',
+        cobro:{sub:'100.36', cargos:'19.12', iva:'19.12', total:'138.60'}
+      },
+      tlOrig:[
+        {f:'04/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'AMP045981277', monto:'138.60', h:'9:35:27 AM'},
+        {f:'04/09/2026', t:'Devuelto al remitente', h:'9:10:44 AM'},
+        {f:'03/09/2026', t:'No recogido en el plazo — se inicia retorno', h:'6:30:18 PM'},
+        {f:'31/08/2026', t:'En espera de ser recogido por el destinatario', h:'12:04:31 PM'},
+        {f:'29/08/2026', t:'Disponible en punto de entrega', h:'10:15:06 AM'},
+        {f:'27/08/2026', t:'En camino', h:'7:22:40 AM', dot:true},
+        {f:'26/08/2026', t:'Recolectado', h:'4:58:13 PM'},
+        {f:'26/08/2026', hito:true, t:'Guía creada (Original)', guia:'AMP045981277', monto:'145.20', h:'11:40:52 AM'}
+      ]
+    },
+
+    /* ── Retorno con GUÍA NUEVA ────────────────────────────────── */
+    {
+      id:'e-dhl', guia:'431697107624', logo:'logo-dhl', carrier:'DHL', servicio:'Economico / 2 días',
+      fecha:'26 de Ago', hora:'14:11 hrs', canal:'—', cliente:'Essensorial',
+      costo:'108.33', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'3 de septiembre, 2026 a las 11:03hrs', entrega:'29 ago',
+      destino:{t:'Av. San Ignacio 942', d:'Av. San Ignacio 942, Jardines de San Ignacio, México, Jalisco, 45040', c:['info@essensorial.com','3342052870']},
+      paquete:['1 paquete','(17 x 17 x 17 cm)','2kg'],
+      cobro:{sub:'88.05', cargos:'12.08', iva:'16.02', total:'116.15'},
+      retorno:{
+        tipo:'nueva', guia:'438427659995', fecha:'03 de Sep', hora:'11:03 hrs',
+        costo:'116.15', rastreo:{t:'Entregado', c:'entregado'}, entrega:'09 sep',
+        cobroEstado:'Pendiente',
+        cobro:{sub:'92.63', cargos:'12.08', iva:'16.02', total:'116.15'}
+      },
+      tlOrig:[
+        {f:'02/09/2026', t:'Devuelto al remitente', h:'5:27:44 PM'},
+        {f:'27/08/2026', t:'En espera de ser recogido por el destinatario', h:'12:08:20 PM'},
+        {f:'26/08/2026', t:'Llegada al centro de clasificación', h:'11:00:15 PM'},
+        {f:'26/08/2026', t:'En camino', h:'10:24:23 PM', dot:true},
+        {f:'26/08/2026', t:'Recolectado', h:'6:58:52 PM'},
+        {f:'26/08/2026', hito:true, t:'Guía creada (Original)', guia:'431697107624', monto:'116.15', h:'2:11:37 PM'}
+      ],
+      tlRet:[
+        {f:'03/09/2026', t:'RETORNADA', h:'5:04:15 PM'},
+        {f:'03/09/2026', t:'Entregado', h:'5:04:15 PM'},
+        {f:'03/09/2026', t:'En manos del courier para entrega', h:'11:01:48 AM'},
+        {f:'02/09/2026', hito:true, t:'Guía creada (Retorno)', guia:'438427659995', monto:'108.33', h:'5:30:02 PM'}
+      ]
+    },
+    {
+      id:'e-fedex', guia:'794658219873', logo:'logo-fedex', carrier:'FedEx', servicio:'Express nacional / 1 día',
+      fecha:'01 de Sep', hora:'13:45 hrs', canal:'Amazon', cliente:'Luis Damián',
+      costo:'118.00', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'1 de septiembre, 2026 a las 13:45hrs', entrega:'03 sep',
+      destino:{t:'Blvd. Manuel Ávila Camacho 5', d:'Blvd. Manuel Ávila Camacho 5, Lomas de Sotelo, Naucalpan, Estado de México, 53390', c:['luis.damian@outlook.com','5533901147']},
+      paquete:['2 paquetes','(30 x 22 x 18 cm)','3.4kg'],
+      cobro:{sub:'85.48', cargos:'16.24', iva:'16.28', total:'118.00'},
+      retorno:{
+        tipo:'nueva', guia:'794658331120', fecha:'05 de Sep', hora:'10:12 hrs',
+        costo:'112.30', rastreo:{t:'En camino', c:'transito'}, entrega:'08 sep',
+        cobroEstado:'$112.30 MXN',
+        cobro:{sub:'81.32', cargos:'15.49', iva:'15.49', total:'112.30'}
+      },
+      tlOrig:[
+        {f:'05/09/2026', t:'Devuelto al remitente', h:'9:58:11 AM'},
+        {f:'04/09/2026', t:'Intento de entrega — sin quien reciba', h:'3:40:05 PM'},
+        {f:'03/09/2026', t:'Intento de entrega — domicilio incorrecto', h:'11:18:40 AM'},
+        {f:'02/09/2026', t:'En camino', h:'7:40:12 AM', dot:true},
+        {f:'01/09/2026', t:'Recolectado', h:'4:05:33 PM'},
+        {f:'01/09/2026', hito:true, t:'Guía creada (Original)', guia:'794658219873', monto:'118.00', h:'1:45:10 PM'}
+      ],
+      tlRet:[
+        {f:'06/09/2026', t:'En camino', h:'8:22:19 AM', dot:true},
+        {f:'05/09/2026', hito:true, t:'Guía creada (Retorno)', guia:'794658331120', monto:'112.30', h:'10:12:47 AM'}
+      ]
+    },
+    {
+      id:'e-99min', guia:'99M240815330', logo:'logo-99min', carrier:'99 minutos', servicio:'Mismo día / 24H',
+      fecha:'31 de Ago', hora:'09:12 hrs', canal:'T1tienda', cliente:'Regina Torres',
+      costo:'64.90', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'31 de agosto, 2026 a las 09:12hrs', entrega:'01 sep',
+      destino:{t:'Calle Ámsterdam 240', d:'Calle Ámsterdam 240, Hipódromo Condesa, México, Ciudad de México, 06100', c:['regina.torres@gmail.com','5522148890']},
+      paquete:['1 paquete','(20 x 15 x 10 cm)','0.8kg'],
+      cobro:{sub:'47.00', cargos:'8.95', iva:'8.95', total:'64.90'},
+      retorno:{
+        tipo:'nueva', guia:'99M240816871', fecha:'02 de Sep', hora:'14:20 hrs',
+        costo:'58.00', rastreo:{t:'En camino', c:'transito'}, entrega:'03 sep',
+        cobroEstado:'$58.00 MXN',
+        cobro:{sub:'42.00', cargos:'8.00', iva:'8.00', total:'58.00'}
+      },
+      tlOrig:[
+        {f:'02/09/2026', t:'Devuelto al remitente', h:'1:05:09 PM'},
+        {f:'01/09/2026', t:'Intento de entrega — el cliente no aceptó el paquete', h:'4:48:52 PM'},
+        {f:'31/08/2026', t:'Intento de entrega — sin quien reciba', h:'12:30:18 PM'},
+        {f:'31/08/2026', t:'En camino', h:'10:05:22 AM', dot:true},
+        {f:'31/08/2026', t:'Recolectado', h:'9:48:31 AM'},
+        {f:'31/08/2026', hito:true, t:'Guía creada (Original)', guia:'99M240815330', monto:'64.90', h:'9:12:04 AM'}
+      ],
+      tlRet:[
+        {f:'02/09/2026', t:'En camino', h:'3:02:15 PM', dot:true},
+        {f:'02/09/2026', hito:true, t:'Guía creada (Retorno)', guia:'99M240816871', monto:'58.00', h:'2:20:44 PM'}
+      ]
+    },
+
+    /* ── Envíos sin retorno (contraste) ────────────────────────── */
+    {
+      id:'e-dhl-generada', guia:'432521900290', logo:'logo-dhl', carrier:'DHL', servicio:'Economico / 2 días',
+      fecha:'07 de Sep', hora:'23:02 hrs', canal:'—', cliente:'Angel',
+      costo:'119.01', estado:'Activa', rastreo:{t:'Guía generada', c:'generada'}
+    },
+    {
+      id:'e-fedex-transito', guia:'794658203145', logo:'logo-fedex', carrier:'FedEx', servicio:'Express nacional / 1 día',
+      fecha:'07 de Sep', hora:'11:40 hrs', canal:'Amazon', cliente:'Osbaldo',
+      costo:'140.25', estado:'Activa', rastreo:{t:'En camino', c:'transito'}
+    },
+    {
+      id:'e-99-entregado', guia:'99M240811207', logo:'logo-99min', carrier:'99 minutos', servicio:'Mismo día / 24H',
+      fecha:'06 de Sep', hora:'10:55 hrs', canal:'Mercado Libre', cliente:'Mariana Ruiz',
+      costo:'58.00', estado:'Activa', rastreo:{t:'Entregado', c:'entregado'}
+    },
+    {
+      id:'e-ups-cancel', guia:'1Z9998877665', logo:'logo-ups', carrier:'UPS', servicio:'Terrestre / 3 días',
+      fecha:'05 de Sep', hora:'14:17 hrs', canal:'Shopify', cliente:'Jessica',
+      costo:'119.01', estado:'Cancelada', rastreo:{t:'Cancelado', c:'cancelado'}
+    }
+  ];
+
+  const byId = id => ENVIOS.find(e => e.id === id);
+  const logoSvg = (e, cls) => `<svg class="${cls}" role="img" aria-label="${e.carrier}"><use href="#${e.logo}"/></svg>`;
+  const chip = r => `<span class="chip ${r.c}">${r.t}</span>`;
+  const esMisma = e => e.retorno && e.retorno.tipo === 'misma';
+  const PRIMER_MISMA = (ENVIOS.find(x => x.retorno && x.retorno.tipo === 'misma') || {}).id;
+  const guiaRet = e => esMisma(e) ? e.guia : e.retorno.guia;
+
+  /* ===================== LISTADO ===================== */
+  function acciones(e, foco){
+    return `<div class="cell rowacts"><button class="btn-ghost-icon" onclick="toggleActs(event,this)" aria-label="Acciones">
+        <svg class="ic" style="width:18px;height:18px"><use href="#i-dots"/></svg></button>
+      <div class="menu-acts">
+        <button>Descargar guía</button>
+        <button>Reportar incidencia</button>
+        <button>Rastrear guía</button>
+        <button onclick="abrirDetalle('${e.id}','${foco}')">Ver detalle</button>
+      </div></div>`;
+  }
+
+  /* Fila de la guía original. Solo las paqueterías que retornan sobre la misma
+     guía llevan el desplegable: ahí el retorno no existe como guía aparte.      */
+  function filaEnvio(e){
+    const abierto = esMisma(e) && e.id === PRIMER_MISMA;
+    const toggle = esMisma(e)
+      ? `<button class="toggle-ret" onclick="toggleThread('${e.id}')" aria-expanded="${abierto}">
+           <span class="tlabel">${abierto ? 'Ver menos' : 'Ver retorno'}</span>
+           <svg class="ic chev"><use href="#i-chev-u"/></svg></button>` : '';
+    return `<div class="grid-row row" data-tipo="envio">
+      <div class="cell"><span class="ck"></span></div>
+      <div class="cell">${logoSvg(e,'carrier brand')}</div>
+      <div class="cell"><div class="gnum"><span class="n">${e.guia}</span>${esMisma(e)
+          ? ` <span class="loop-inline" data-tip="Retorno sobre misma guía"><svg class="ic"><use href="#i-return"/></svg></span>` : ''}</div>
+        <div class="gsub">${e.carrier}</div>${toggle}</div>
+      <div class="cell fecha"><b>${e.fecha}</b><span>${e.hora}</span></div>
+      <div class="cell canal">${e.canal}</div>
+      <div class="cell cliente">${e.cliente} <svg class="ic"><use href="#i-chev-d"/></svg></div>
+      <div class="cell costo">$${e.costo}<small>MXN</small></div>
+      <div class="cell estado">${e.estado}</div>
+      <div class="cell">${chip(e.rastreo)}</div>
+      ${acciones(e,'original')}</div>`;
+  }
+
+  /* Guía de retorno con número propio: es una guía más del listado, marcada con ⟳ */
+  function filaRetornoIndependiente(e){
+    const r = e.retorno;
+    return `<div class="grid-row row" data-tipo="retorno">
+      <div class="cell"><span class="ck"></span></div>
+      <div class="cell">${logoSvg(e,'carrier brand')}</div>
+      <div class="cell"><div class="gnum"><span class="n">${r.guia}</span>
+          <span class="loop-inline" data-tip="Guía de retorno"><svg class="ic"><use href="#i-return"/></svg></span></div>
+        <div class="gsub">${e.carrier}</div></div>
+      <div class="cell fecha"><b>${r.fecha}</b><span>${r.hora}</span></div>
+      <div class="cell canal">${e.canal}</div>
+      <div class="cell cliente">${e.cliente} <svg class="ic"><use href="#i-chev-d"/></svg></div>
+      <div class="cell costo">$${r.costo}<small>MXN</small></div>
+      <div class="cell estado">Activa</div>
+      <div class="cell">${chip(r.rastreo)}</div>
+      ${acciones(e,'retorno')}</div>`;
+  }
+
+  /* Subfila del retorno sobre la misma guía: repite el número y avisa que deriva
+     de la original — el punto que pidió el Owner.                               */
+  function subfilaMismaGuia(e){
+    const r = e.retorno;
+    return `<div class="grid-row subrow" data-tipo="retorno">
+      <div class="cell"><span class="ck" style="visibility:hidden"></span></div>
+      <div class="cell"></div>
+      <div class="cell gcell"><div class="gnum"><span class="n">${e.guia}</span></div></div>
+      <div class="cell fecha"><b>${r.fecha}</b><span>${r.hora}</span></div>
+      <div class="cell canal">${e.canal}</div>
+      <div class="cell cliente">${e.cliente} <svg class="ic"><use href="#i-chev-d"/></svg></div>
+      <div class="cell costo">$${r.costo}<small>MXN</small></div>
+      <div class="cell estado">Activa</div>
+      <div class="cell">${chip(r.rastreo)}</div>
+      <div class="cell"></div></div>`;
+  }
+
+  function renderListado(){
+    let out = '';
+    ENVIOS.forEach(e => {
+      if (esMisma(e)) out += `<div class="thread${e.id === PRIMER_MISMA ? '' : ' closed'}" id="th-${e.id}">${filaEnvio(e)}${subfilaMismaGuia(e)}</div>`;
+      else if (e.retorno) out += filaEnvio(e) + filaRetornoIndependiente(e);
+      else out += filaEnvio(e);
+    });
+    document.getElementById('tbody').innerHTML = out;
+  }
+
+  /* ===================== DETALLE ===================== */
+  /* Card de guía con la estructura de Figma:
+     [logo] Paquetería: número · servicio · referencia cruzada (link)
+                                       Fecha estimada de entrega / fecha        */
+  function cardGuia(e, o){
+    return `<div class="card">
+      <div class="hd">${o.titulo}</div>
+      <div class="bd gcard">
+        ${logoSvg(e,'carrier brand')}
+        <div class="info">
+          <div class="num">${e.carrier}: ${o.guia}${o.tag ? ` <span class="tag-misma">${o.tag}</span>` : ''}</div>
+          <div class="svc">${e.servicio}</div>
+          <div class="xref">${o.refLbl}: ${o.link
+            ? `<a href="#" onclick="abrirDetalle('${e.id}','${o.link}');return false">${o.refGuia}</a>`
+            : `<span class="ref-plano">${o.refGuia}</span>`}</div>
+        </div>
+        <div class="right"><span class="tlab">Fecha estimada de entrega</span><span class="edate">${o.entrega}</span></div>
+      </div>
+    </div>`;
+  }
+
+  /* Cronograma con el estilo del productivo: chip de fecha antes de cada evento
+     —aunque se repita— y el hito con logo, número, monto y hora en ese orden.   */
+  function cronograma(e, eventos){
+    return eventos.map(ev => {
+      const chip = `<span class="datechip">${ev.f}</span>`;
+      if (ev.hito){
+        return chip + `<div class="milestone${ev.misma ? ' ret' : ''}">
+          <span class="ico"><svg class="ic"><use href="#${ev.misma ? 'i-return' : 'i-truck'}"/></svg></span>
+          <div class="t">${ev.t}</div>
+          <button class="gref">${logoSvg(e,'brand')} <span>${ev.guia}</span></button>
+          <div class="d">$ ${ev.monto} MXN<br />${ev.h}</div>
+        </div>`;
+      }
+      const camion = /^(Recolectado|Guía)/.test(ev.t);
+      const cls = ev.dot ? ' punto' : camion ? ' camion' : '';
+      const ico = ev.dot ? '<svg class="ic" style="width:9px;height:9px"><use href="#i-truckdot"/></svg>'
+                : camion ? '<svg class="ic"><use href="#i-truck"/></svg>'
+                : ev.alerta ? '<svg class="ic"><use href="#i-alert"/></svg>'
+                : '<svg class="ic"><use href="#i-check"/></svg>';
+      return chip + `<div class="ev${cls}"><span class="ico">${ico}</span>
+        <div class="t">${ev.t}</div>
+        ${ev.sub ? `<div class="d">${ev.sub}</div>` : ''}
+        <div class="d">${ev.h}</div>
+        ${ev.link ? `<a class="link" href="#" onclick="return false">${ev.link}</a>` : ''}</div>`;
+    }).join('');
+  }
+
+  function desglose(c, titulo){
+    return `${titulo ? `<div class="cb-t">${titulo}</div>` : ''}
+      <div class="cobro-line"><span>Subtotal</span><span>$${c.sub}</span></div>
+      <div class="cobro-line"><span class="sub-link">Cargos adicionales</span><span>$${c.cargos}</span></div>
+      <div class="cobro-line"><span>Impuestos (IVA)</span><span>$${c.iva}</span></div>
+      <div class="cobro-line tot"><span>Total</span><span>$${c.total}</span></div>`;
+  }
+
+  /* Una sola guía → un desglose. Misma guía → los dos cobros y el total del envío. */
+  function cobroCard(e, misma){
+    if (!misma) return `<div class="card"><div class="hd">Resumen de cobro</div>
+      <div class="bd">${desglose(e.cobro)}</div></div>`;
+    const total = (parseFloat(e.cobro.total) + parseFloat(e.retorno.cobro.total)).toFixed(2);
+    return `<div class="card"><div class="hd">Resumen de cobro</div>
+      <div class="bd">
+        <div class="cobro-blk">${desglose(e.cobro, 'Guía original')}</div>
+        <div class="cobro-blk">${desglose(e.retorno.cobro, 'Cobro por retorno')}</div>
+        <div class="cobro-total"><span>Total del envío</span><span>$${total} MXN</span></div>
+      </div></div>`;
+  }
+
+  function renderDetalle(e, foco){
+    window.__casoActual = e;
+    const r = e.retorno, misma = esMisma(e), esRet = foco === 'retorno';
+
+    /* Guía original → su propio cronograma.
+       Guía de retorno → cronograma unificado: primero el retorno, luego el origen. */
+    const eventos = misma ? e.tlOrig
+                  : esRet ? e.tlRet.concat(e.tlOrig)
+                  : e.tlOrig;
+
+    let cards;
+    if (misma){
+      /* Una sola guía → una sola card: número, paquetería y servicio no se repiten,
+         y las dos fechas estimadas conviven en la columna derecha.                */
+      cards = `<div class="card">
+        <div class="hd">Guía de envío / retorno</div>
+        <div class="bd gcard">
+          ${logoSvg(e,'carrier brand')}
+          <div class="info">
+            <div class="num">${e.carrier}: ${e.guia}</div>
+            <div class="svc">${e.servicio}</div>
+            <div class="xref">Guía retorno: <span class="ref-plano">${e.guia}</span> <span class="nota">(misma guía)</span></div>
+          </div>
+          <div class="right">
+            <span class="tlab">Fecha de entrega sobre el retorno</span>
+            <span class="edate">${r.entrega}</span>
+          </div>
+        </div>
+      </div>`;
+    } else if (esRet){
+      cards = cardGuia(e, {titulo:'Guía retorno', guia:r.guia, entrega:r.entrega,
+                           refLbl:'Guía original', refGuia:e.guia, link:'original'});
+    } else {
+      cards = cardGuia(e, {titulo:'Guía original', guia:e.guia, entrega:e.entrega,
+                           refLbl:'Guía retorno', refGuia:r.guia, link:'retorno'});
+    }
+
+    const num  = (esRet && !misma) ? r.guia : e.guia;
+    const est  = (esRet && !misma) ? r.rastreo : e.rastreo;
+
+
+    document.getElementById('detalle').innerHTML = `
+      <div class="dethead">
+        <div class="l">
+          <h1><button class="backbtn" onclick="show('listado')" aria-label="Volver"><svg class="ic"><use href="#i-back"/></svg></button>
+            ${num} ${chip(est)}</h1>
+          <p class="meta">Creado el ${e.creado}</p>
+        </div>
+        <div style="display:flex;gap:12px">
+          <button class="btn btn-secondary">Más acciones <svg class="ic" style="width:14px;height:14px"><use href="#i-chev-d"/></svg></button>
+          <button class="btn btn-primary">Imprimir guía</button>
+        </div>
+      </div>
+
+      <div class="detgrid">
+        <div class="colcards">
+          ${cards}
+          <div class="card">
+            <div class="hd">Cronograma</div>
+            <div class="bd"><div class="tl">${cronograma(e, eventos)}</div></div>
+          </div>
+        </div>
+
+        <div class="colcards">
+          <div class="card">
+            <div class="hd">Resumen de envío</div>
+            <div class="bd">
+              <div class="subhd">Direcciones</div>
+              <div class="addr"><span class="pin"><svg class="ic"><use href="#i-pin"/></svg></span>
+                <h4>${DIR_ORIGEN.t}</h4><p>${DIR_ORIGEN.d}</p>
+                ${DIR_ORIGEN.c.map(x => `<p class="c">${x}</p>`).join('')}</div>
+              <div class="addr"><span class="pin"><svg class="ic"><use href="#i-pin"/></svg></span>
+                <h4>${e.destino.t}</h4><p>${e.destino.d}</p>
+                ${e.destino.c.map(x => `<p class="c">${x}</p>`).join('')}</div>
+              <hr style="border:none;border-top:1px solid var(--g-100);margin:18px 0" />
+              <div class="subhd">Dimensiones del paquete</div>
+              <div class="dims"><p><b>${e.paquete[0]}</b></p>${e.paquete.slice(1).map(x => `<p>${x}</p>`).join('')}</div>
+            </div>
+          </div>
+          ${cobroCard(esRet && !misma ? {cobro:r.cobro} : e, misma)}
+        </div>
+      </div>`;
+  }
+
+  /* ===================== NOTIFICACIÓN WHATSAPP ===================== */
+  function renderWA(e){
+    const r = e.retorno;
+    const linea = esMisma(e)
+      ? `${e.carrier} regresa el paquete con el <b>mismo número de guía</b> (${e.guia}). El retorno generó un cobro de <b>$${r.costo} MXN</b>, descontado de tu saldo T1envíos. Saldo restante: <b>$9,456.00</b>.`
+      : `${e.carrier} generó la guía de retorno <b>${r.guia}</b> y el paquete va de regreso a tu dirección de origen. El retorno generó un cobro de <b>$${r.costo} MXN</b>, descontado de tu saldo T1envíos. Saldo restante: <b>$9,456.00</b>.`;
+    document.getElementById('wabody').innerHTML = `
+      <div class="wabubble">
+        <p>Hola, Chicos Olé 👋 Tu envío <b>${e.guia}</b> no se pudo entregar y fue devuelto al remitente.</p>
+        <p>${linea}</p>
+        <p>Revisa el detalle en <b>T1envíos → Mis envíos</b>.</p>
+        <span class="watime">${r.fecha} · ${r.hora}</span>
+      </div>
+      <button class="wacta" onclick="abrirDetalle('${e.id}','retorno')">Rastrear retorno</button>`;
+  }
+
+  /* ===================== INTERACCIONES ===================== */
+  function abrirDetalle(id, foco){
+    const e = byId(id);
+    if (!e || !e.retorno){ show('listado'); return; }
+    renderWA(e); renderDetalle(e, foco || 'original'); show('detalle');
+    const marca = id + ':' + (foco || 'original');
+    document.querySelectorAll('.demobar .vbtn[data-caso]').forEach(b => b.classList.toggle('on', b.dataset.caso === marca));
+  }
+
   function show(view){
-    document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('on'));
     document.getElementById(view).classList.add('on');
-    document.querySelectorAll('.demobar .vbtn').forEach(b=>b.classList.toggle('on', b.dataset.view===view));
+    document.querySelectorAll('.demobar .vbtn[data-view]').forEach(b => b.classList.toggle('on', b.dataset.view === view));
+    if (view === 'listado') document.querySelectorAll('.demobar .vbtn[data-caso]').forEach(b => b.classList.remove('on'));
     closeMenus();
     window.scrollTo({top:0});
   }
-  function toggleWA(){
-    document.getElementById('wamock').classList.toggle('open');
+
+  function toggleThread(id){
+    const th = document.getElementById('th-' + id);
+    th.classList.toggle('closed');
+    const closed = th.classList.contains('closed');
+    th.querySelector('.tlabel').textContent = closed ? 'Ver retorno' : 'Ver menos';
+    th.querySelector('.toggle-ret').setAttribute('aria-expanded', String(!closed));
   }
-  function toggleActs(e,btn){
+
+  function toggleWA(){ document.getElementById('wamock').classList.toggle('open'); }
+
+  function toggleActs(e, btn){
     e.stopPropagation();
     const menu = btn.nextElementSibling;
     const was = menu.classList.contains('open');
     closeMenus();
-    if(!was) menu.classList.add('open');
+    if (!was) menu.classList.add('open');
   }
+
   function toggleTipoMenu(e){
     e.stopPropagation();
     const m = document.getElementById('tipoMenu');
     const was = m.classList.contains('open');
     closeMenus();
-    if(!was) m.classList.add('open');
+    if (!was) m.classList.add('open');
   }
+
   function filtraTipo(tipo, btn){
-    document.querySelectorAll('#tipoMenu button').forEach(b=>b.setAttribute('aria-checked','false'));
+    document.querySelectorAll('#tipoMenu button').forEach(b => b.setAttribute('aria-checked','false'));
     btn.setAttribute('aria-checked','true');
     const label = document.getElementById('fTipoBtn');
-    label.classList.toggle('applied', tipo!=='todas');
-    label.firstChild.textContent = tipo==='todas' ? 'Tipo de guía ' : (tipo==='envio' ? 'Tipo de guía: Envío ' : 'Tipo de guía: Retorno ');
-    document.querySelectorAll('#tbody [data-tipo]').forEach(r=>{
-      r.style.display = (tipo==='todas' || r.dataset.tipo===tipo) ? '' : 'none';
+    label.classList.toggle('applied', tipo !== 'todas');
+    label.firstChild.textContent = tipo === 'todas' ? 'Tipo de guía ' : (tipo === 'envio' ? 'Envío ' : 'Retorno ');
+    document.querySelectorAll('#tbody [data-tipo]').forEach(r => {
+      r.style.display = (tipo === 'todas' || r.dataset.tipo === tipo) ? '' : 'none';
     });
-    // el conector solo tiene sentido cuando ambas filas del hilo están visibles
-    document.querySelectorAll('.thread .linkline,.thread .linkloop').forEach(el=>{
-      el.style.display = (tipo==='todas') ? '' : 'none';
+    document.querySelectorAll('.thread').forEach(th => {
+      const abrir = tipo !== 'todas' || th.id === 'th-' + PRIMER_MISMA;
+      th.classList.toggle('closed', !abrir);
+      th.classList.toggle('standalone', tipo === 'retorno');
+      const l = th.querySelector('.tlabel'); if (l) l.textContent = abrir ? 'Ver menos' : 'Ver retorno';
     });
     closeMenus();
   }
+
   function closeMenus(){
-    document.querySelectorAll('.menu-acts.open,.fpill .menu.open').forEach(m=>m.classList.remove('open'));
+    document.querySelectorAll('.menu-acts.open,.fpill .menu.open').forEach(m => m.classList.remove('open'));
   }
+
   document.addEventListener('click', closeMenus);
+  renderListado();
+  renderWA(byId('e-dhl'));
 </script>
