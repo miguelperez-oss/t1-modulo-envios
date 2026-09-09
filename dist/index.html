@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Módulo de envíos · Guías de retorno</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" />
+<style>
+  :root{color-scheme:light}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Manrope',-apple-system,'Segoe UI',sans-serif;background:#F8F8F8;color:#4C4C4C;
+       min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px}
+  .wrap{width:100%;max-width:760px}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9CA3AF}
+  h1{font-size:26px;font-weight:800;color:#1F2937;margin-top:8px}
+  p.lead{font-size:14px;color:#6B7280;margin-top:8px;max-width:52ch;line-height:1.6}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+  a.card{display:block;background:#fff;border:1px solid #E7E7E7;border-radius:10px;padding:20px;
+         text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
+  a.card:hover{border-color:#D4D4D4;transform:translateY(-2px)}
+  a.card:focus-visible{outline:2px solid #2180FF;outline-offset:2px}
+  .tag{display:inline-block;font-size:11px;font-weight:700;border-radius:4px;padding:3px 8px;background:#F2F2F2;color:#525252}
+  .tag.on{background:#FEF4F4;color:#CC0000}
+  h2{font-size:16px;font-weight:700;color:#1F2937;margin:10px 0 6px}
+  a.card p{font-size:13px;color:#6B7280;line-height:1.55}
+  .foot{margin-top:24px;font-size:12px;color:#9CA3AF}
+  .foot a{color:#4C4C4C}
+  @media (max-width:640px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="eyebrow">T1envíos · NEXUS V2.0</p>
+    <h1>Módulo de envíos — Guías de retorno</h1>
+    <p class="lead">Prototipos navegables del rediseño de <b>Mis envíos</b>: cómo se muestran las guías de
+      retorno, su vínculo con la guía original y los cobros que generan Datos de ejemplo.</p>
+
+    <div class="grid">
+      <a class="card" href="propuesta-a.html">
+        <span class="tag on">En iteración</span>
+        <h2>Propuesta A · Hilo agrupado</h2>
+        <p>Ocho paqueterías con los dos comportamientos: guía de retorno nueva (DHL, FedEx, 99 minutos)
+           y retorno sobre la misma guía (UPS, Paquete Express, T1envíos, T1 Economic, AMPM).</p>
+      </a>
+      <a class="card" href="propuesta-b.html">
+        <span class="tag">Referencia</span>
+        <h2>Propuesta B · Guías vinculadas</h2>
+        <p>Alternativa inicial: cada guía conserva su fila y su detalle, con vínculos cruzados y un
+           stepper de recorrido del envío.</p>
+      </a>
+    </div>
+
+    <p class="foot">Especificación funcional en <a href="https://github.com/miguelperez-oss/t1-modulo-envios">el repositorio</a>.</p>
+  </main>
+</body>
+</html>
