@@ -1010,15 +1010,14 @@
   function filaEnvio(e){
     const abierto = esMisma(e) && e.id === PRIMER_MISMA;
     const toggle = esMisma(e)
-      ? `<button class="toggle-ret" onclick="toggleThread('${e.id}')" aria-expanded="${abierto}"
-           data-tip="Guía de retorno">
+      ? `<button class="toggle-ret" onclick="toggleThread('${e.id}')" aria-expanded="${abierto}">
            <span class="tlabel">${abierto ? 'Ver menos' : 'Ver retorno'}</span>
            <svg class="ic chev"><use href="#i-chev-u"/></svg></button>` : '';
     return `<div class="grid-row row" data-tipo="envio">
       <div class="cell"><span class="ck"></span></div>
       <div class="cell">${logoSvg(e,'carrier brand')}</div>
       <div class="cell"><div class="gnum"><span class="n">${e.guia}</span>${esMisma(e)
-          ? ` <span class="loop-inline" data-tip="Guía de retorno"><svg class="ic"><use href="#i-return"/></svg></span>` : ''}</div>
+          ? ` <span class="loop-inline" data-tip="Retorno sobre misma guía"><svg class="ic"><use href="#i-return"/></svg></span>` : ''}</div>
         <div class="gsub">${e.carrier}</div>${toggle}</div>
       <div class="cell fecha"><b>${e.fecha}</b><span>${e.hora}</span></div>
       <div class="cell canal">${e.canal}</div>
@@ -1157,13 +1156,13 @@
       /* Una sola guía → una sola card: número, paquetería y servicio no se repiten,
          y las dos fechas estimadas conviven en la columna derecha.                */
       cards = `<div class="card">
-        <div class="hd">Guía de envío y retorno</div>
+        <div class="hd">Guía de envío / retorno</div>
         <div class="bd gcard">
           ${logoSvg(e,'carrier brand')}
           <div class="info">
             <div class="num">${e.carrier}: ${e.guia}</div>
             <div class="svc">${e.servicio}</div>
-            <div class="xref">El retorno viaja con esta misma guía</div>
+            <div class="xref">Guía retorno: <span class="ref-plano">${e.guia}</span> <span class="nota">(misma guía)</span></div>
           </div>
           <div class="right dos">
             <div><span class="tlab">Entrega original</span><span class="edate">${e.entrega}</span></div>
