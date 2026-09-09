@@ -147,7 +147,6 @@
   .toggle-ret{display:inline-flex;align-items:center;gap:4px;margin-top:6px;font-size:12px;font-weight:600;color:var(--oxford);border:1px solid var(--g-200);border-radius:12px;padding:3px 9px;background:#fff;white-space:nowrap}
   .toggle-ret:hover{background:var(--g-100)}
   .toggle-ret svg{width:13px;height:13px;stroke-width:2;transition:transform .15s}
-  .toggle-ret .ret-glyph{color:var(--sec)}
   .thread.closed .toggle-ret .chev{transform:rotate(180deg)}
   .thread:not(.closed) .toggle-ret{background:var(--g-100);border-color:var(--g-300)}
 
@@ -1002,7 +1001,7 @@
     const toggle = esMisma(e)
       ? `<button class="toggle-ret" onclick="toggleThread('${e.id}')" aria-expanded="true"
            data-tip="El retorno viaja con esta misma guía">
-           <svg class="ic ret-glyph"><use href="#i-return"/></svg> <span class="tlabel">Ver menos</span>
+           <span class="tlabel">Ver menos</span>
            <svg class="ic chev"><use href="#i-chev-u"/></svg></button>` : '';
     return `<div class="grid-row row" data-tipo="envio">
       <div class="cell"><span class="ck"></span></div>
