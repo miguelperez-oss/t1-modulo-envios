@@ -291,6 +291,7 @@
   .gcard .info{flex:1;min-width:0}
   .gcard .num{font-size:16px;font-weight:700;color:var(--dark);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
   .gcard .num a{color:var(--dark);text-decoration:underline;text-underline-offset:2px}
+  .gcard .ref-plano{color:var(--oxford);font-weight:600}
   .gcard .num a:hover{color:#000}
   .gcard .svc{font-size:13px;color:var(--sec);margin-top:4px}
   .gcard .xref{font-size:13px;color:var(--sec);margin-top:3px}
@@ -305,6 +306,7 @@
   .subrow .gnum{font-size:13.5px;letter-spacing:-0.2px}
 
   /* hito del cronograma */
+  .milestone .d{font-size:12px;color:var(--sec);margin-top:6px;line-height:1.5}
   .milestone .gref{display:inline-flex;align-items:center;gap:8px;margin-top:8px;padding:0;border:none;background:none;font-size:13px;font-weight:600;color:var(--dark)}
   .milestone .gref svg{width:20px;height:20px;border-radius:5px}
   .milestone.ret{background:var(--blue-100)}
@@ -317,6 +319,7 @@
   .cobro-blk .cb-s{font-weight:500;color:var(--ter)}
   .cobro-line{display:flex;justify-content:space-between;padding:5px 0;font-size:13px;color:var(--sec)}
   .cobro-line span:last-child{color:var(--oxford);font-weight:600}
+  .cobro-line .sub-link{text-decoration:underline;text-underline-offset:2px}
   .cobro-line.tot{border-top:1px solid var(--g-100);margin-top:6px;padding-top:9px;color:var(--dark);font-weight:700}
   .cobro-line.tot span:last-child{color:var(--dark);font-weight:800}
 
@@ -364,16 +367,17 @@
   <button class="vbtn on" data-view="listado" onclick="show('listado')">Listado</button>
   <span class="dsep"></span>
   <span style="color:#9CA3AF;font-weight:500">Guía nueva:</span>
-  <button class="vbtn" data-caso="e-dhl" onclick="abrirDetalle('e-dhl')">DHL</button>
-  <button class="vbtn" data-caso="e-fedex" onclick="abrirDetalle('e-fedex')">FedEx</button>
-  <button class="vbtn" data-caso="e-99min" onclick="abrirDetalle('e-99min')">99 min</button>
+  <button class="vbtn" data-caso="e-dhl:original" onclick="abrirDetalle('e-dhl','original')">DHL origen</button>
+  <button class="vbtn" data-caso="e-dhl:retorno" onclick="abrirDetalle('e-dhl','retorno')">DHL retorno</button>
+  <button class="vbtn" data-caso="e-fedex:retorno" onclick="abrirDetalle('e-fedex','retorno')">FedEx</button>
+  <button class="vbtn" data-caso="e-99min:retorno" onclick="abrirDetalle('e-99min','retorno')">99 min</button>
   <span class="dsep"></span>
   <span style="color:#9CA3AF;font-weight:500">Misma guía:</span>
-  <button class="vbtn" data-caso="e-ups" onclick="abrirDetalle('e-ups')">UPS</button>
-  <button class="vbtn" data-caso="e-express" onclick="abrirDetalle('e-express')">Paquete Express</button>
-  <button class="vbtn" data-caso="e-t1envios" onclick="abrirDetalle('e-t1envios')">T1envíos</button>
-  <button class="vbtn" data-caso="e-t1economic" onclick="abrirDetalle('e-t1economic')">T1 Economic</button>
-  <button class="vbtn" data-caso="e-ampm" onclick="abrirDetalle('e-ampm')">AMPM</button>
+  <button class="vbtn" data-caso="e-ups:original" onclick="abrirDetalle('e-ups','original')">UPS</button>
+  <button class="vbtn" data-caso="e-express:original" onclick="abrirDetalle('e-express','original')">Paquete Express</button>
+  <button class="vbtn" data-caso="e-t1envios:original" onclick="abrirDetalle('e-t1envios','original')">T1envíos</button>
+  <button class="vbtn" data-caso="e-t1economic:original" onclick="abrirDetalle('e-t1economic','original')">T1 Economic</button>
+  <button class="vbtn" data-caso="e-ampm:original" onclick="abrirDetalle('e-ampm','original')">AMPM</button>
   <span class="dsep"></span>
   <button class="wabtn" onclick="toggleWA()">Notificación WhatsApp</button>
   <span class="dnote">Los datos son de ejemplo</span>
@@ -756,24 +760,26 @@
       creado:'3 de septiembre, 2026 a las 11:03hrs', entrega:'09 sep',
       destino:{t:'Av. San Ignacio 942', d:'Av. San Ignacio 942, Jardines de San Ignacio, México, Jalisco, 45040', c:['info@essensorial.com','3342052870']},
       paquete:['1 paquete','(17 x 17 x 17 cm)','2kg'],
-      cobro:{precio:'104.07', cargos:'12.08', total:'116.15'},
+      cobro:{sub:'88.05', cargos:'12.08', iva:'16.02', total:'116.15'},
       retorno:{
         tipo:'nueva', guia:'1697107624', fecha:'26 de Ago', hora:'14:11 hrs',
         costo:'108.33', rastreo:{t:'Entregado', c:'entregado'}, entrega:'29 ago',
         cobroEstado:'Pendiente',
-        cobro:{precio:'101.12', cargos:'7.21', total:'108.33'}
+        cobro:{sub:'86.18', cargos:'7.21', iva:'14.94', total:'108.33'}
       },
-      timeline:[
-        {f:'26/08/2026', hito:true, t:'Guía generada', guia:'8427659995', monto:'116.15', h:'2:11:37 PM'},
-        {f:'26/08/2026', t:'Recolectado', h:'6:58:52 PM'},
-        {f:'26/08/2026', t:'En camino', h:'10:24:23 PM', dot:true},
-        {f:'26/08/2026', t:'Llegada al centro de clasificación', h:'11:00:15 PM'},
-        {f:'27/08/2026', t:'En espera de ser recogido por el destinatario', h:'12:08:20 PM'},
+      tlOrig:[
         {f:'02/09/2026', t:'Devuelto al remitente', h:'5:27:44 PM'},
-        {f:'02/09/2026', hito:true, ret:true, t:'Guía de retorno generada', guia:'1697107624', monto:'108.33', h:'5:30:02 PM'},
-        {f:'03/09/2026', t:'En manos del courier para entrega', h:'11:01:48 AM'},
+        {f:'27/08/2026', t:'En espera de ser recogido por el destinatario', h:'12:08:20 PM'},
+        {f:'26/08/2026', t:'Llegada al centro de clasificación', h:'11:00:15 PM'},
+        {f:'26/08/2026', t:'En camino', h:'10:24:23 PM', dot:true},
+        {f:'26/08/2026', t:'Recolectado', h:'6:58:52 PM'},
+        {f:'26/08/2026', hito:true, t:'Guía creada (Original)', guia:'8427659995', monto:'116.15', h:'2:11:37 PM'}
+      ],
+      tlRet:[
+        {f:'03/09/2026', t:'RETORNADA', h:'5:04:15 PM'},
         {f:'03/09/2026', t:'Entregado', h:'5:04:15 PM'},
-        {f:'03/09/2026', t:'RETORNADA', h:'5:04:15 PM'}
+        {f:'03/09/2026', t:'En manos del courier para entrega', h:'11:01:48 AM'},
+        {f:'02/09/2026', hito:true, t:'Guía creada (Retorno)', guia:'1697107624', monto:'108.33', h:'5:30:02 PM'}
       ]
     },
     {
@@ -783,22 +789,24 @@
       creado:'1 de septiembre, 2026 a las 13:45hrs', entrega:'03 sep',
       destino:{t:'Blvd. Manuel Ávila Camacho 5', d:'Blvd. Manuel Ávila Camacho 5, Lomas de Sotelo, Naucalpan, Estado de México, 53390', c:['luis.damian@outlook.com','5533901147']},
       paquete:['2 paquetes','(30 x 22 x 18 cm)','3.4kg'],
-      cobro:{precio:'101.76', cargos:'16.24', total:'118.00'},
+      cobro:{sub:'85.48', cargos:'16.24', iva:'16.28', total:'118.00'},
       retorno:{
         tipo:'nueva', guia:'794658331120', fecha:'05 de Sep', hora:'10:12 hrs',
         costo:'112.30', rastreo:{t:'En camino', c:'transito'}, entrega:'08 sep',
         cobroEstado:'$112.30 MXN',
-        cobro:{precio:'96.81', cargos:'15.49', total:'112.30'}
+        cobro:{sub:'81.32', cargos:'15.49', iva:'15.49', total:'112.30'}
       },
-      timeline:[
-        {f:'01/09/2026', hito:true, t:'Guía generada', guia:'794658219873', monto:'118.00', h:'1:45:10 PM'},
-        {f:'01/09/2026', t:'Recolectado', h:'4:05:33 PM'},
-        {f:'02/09/2026', t:'En camino', h:'7:40:12 AM', dot:true},
-        {f:'03/09/2026', t:'Intento de entrega — domicilio incorrecto', h:'11:18:40 AM'},
-        {f:'04/09/2026', t:'Intento de entrega — sin quien reciba', h:'3:40:05 PM'},
+      tlOrig:[
         {f:'05/09/2026', t:'Devuelto al remitente', h:'9:58:11 AM'},
-        {f:'05/09/2026', hito:true, ret:true, t:'Guía de retorno generada', guia:'794658331120', monto:'112.30', h:'10:12:47 AM'},
-        {f:'06/09/2026', t:'En camino', h:'8:22:19 AM', dot:true}
+        {f:'04/09/2026', t:'Intento de entrega — sin quien reciba', h:'3:40:05 PM'},
+        {f:'03/09/2026', t:'Intento de entrega — domicilio incorrecto', h:'11:18:40 AM'},
+        {f:'02/09/2026', t:'En camino', h:'7:40:12 AM', dot:true},
+        {f:'01/09/2026', t:'Recolectado', h:'4:05:33 PM'},
+        {f:'01/09/2026', hito:true, t:'Guía creada (Original)', guia:'794658219873', monto:'118.00', h:'1:45:10 PM'}
+      ],
+      tlRet:[
+        {f:'06/09/2026', t:'En camino', h:'8:22:19 AM', dot:true},
+        {f:'05/09/2026', hito:true, t:'Guía creada (Retorno)', guia:'794658331120', monto:'112.30', h:'10:12:47 AM'}
       ]
     },
     {
@@ -808,22 +816,24 @@
       creado:'31 de agosto, 2026 a las 09:12hrs', entrega:'01 sep',
       destino:{t:'Calle Ámsterdam 240', d:'Calle Ámsterdam 240, Hipódromo Condesa, México, Ciudad de México, 06100', c:['regina.torres@gmail.com','5522148890']},
       paquete:['1 paquete','(20 x 15 x 10 cm)','0.8kg'],
-      cobro:{precio:'55.95', cargos:'8.95', total:'64.90'},
+      cobro:{sub:'47.00', cargos:'8.95', iva:'8.95', total:'64.90'},
       retorno:{
         tipo:'nueva', guia:'99M240816871', fecha:'02 de Sep', hora:'14:20 hrs',
         costo:'58.00', rastreo:{t:'En camino', c:'transito'}, entrega:'03 sep',
         cobroEstado:'$58.00 MXN',
-        cobro:{precio:'50.00', cargos:'8.00', total:'58.00'}
+        cobro:{sub:'42.00', cargos:'8.00', iva:'8.00', total:'58.00'}
       },
-      timeline:[
-        {f:'31/08/2026', hito:true, t:'Guía generada', guia:'99M240815330', monto:'64.90', h:'9:12:04 AM'},
-        {f:'31/08/2026', t:'Recolectado', h:'9:48:31 AM'},
-        {f:'31/08/2026', t:'En camino', h:'10:05:22 AM', dot:true},
-        {f:'31/08/2026', t:'Intento de entrega — sin quien reciba', h:'12:30:18 PM'},
-        {f:'01/09/2026', t:'Intento de entrega — el cliente no aceptó el paquete', h:'4:48:52 PM'},
+      tlOrig:[
         {f:'02/09/2026', t:'Devuelto al remitente', h:'1:05:09 PM'},
-        {f:'02/09/2026', hito:true, ret:true, t:'Guía de retorno generada', guia:'99M240816871', monto:'58.00', h:'2:20:44 PM'},
-        {f:'02/09/2026', t:'En camino', h:'3:02:15 PM', dot:true}
+        {f:'01/09/2026', t:'Intento de entrega — el cliente no aceptó el paquete', h:'4:48:52 PM'},
+        {f:'31/08/2026', t:'Intento de entrega — sin quien reciba', h:'12:30:18 PM'},
+        {f:'31/08/2026', t:'En camino', h:'10:05:22 AM', dot:true},
+        {f:'31/08/2026', t:'Recolectado', h:'9:48:31 AM'},
+        {f:'31/08/2026', hito:true, t:'Guía creada (Original)', guia:'99M240815330', monto:'64.90', h:'9:12:04 AM'}
+      ],
+      tlRet:[
+        {f:'02/09/2026', t:'En camino', h:'3:02:15 PM', dot:true},
+        {f:'02/09/2026', hito:true, t:'Guía creada (Retorno)', guia:'99M240816871', monto:'58.00', h:'2:20:44 PM'}
       ]
     },
 
@@ -835,23 +845,23 @@
       creado:'30 de agosto, 2026 a las 10:26hrs', entrega:'02 sep',
       destino:{t:'Av. Vallarta 1500', d:'Av. Vallarta 1500, Americana, Guadalajara, Jalisco, 44160', c:['mauricio.beltran@gmail.com','3312440087']},
       paquete:['1 paquete','(40 x 30 x 20 cm)','5kg'],
-      cobro:{precio:'232.34', cargos:'37.18', total:'269.52'},
+      cobro:{sub:'195.16', cargos:'37.18', iva:'37.18', total:'269.52'},
       retorno:{
         tipo:'misma', fecha:'04 de Sep', hora:'09:14 hrs',
         costo:'241.10', rastreo:{t:'En camino', c:'transito'}, entrega:'07 sep',
         cobroEstado:'$241.10 MXN',
-        cobro:{precio:'207.84', cargos:'33.26', total:'241.10'}
+        cobro:{sub:'174.58', cargos:'33.26', iva:'33.26', total:'241.10'}
       },
-      timeline:[
-        {f:'30/08/2026', hito:true, t:'Guía generada', guia:'1Z999AA10123456784', monto:'269.52', h:'10:26:41 AM'},
-        {f:'30/08/2026', t:'Recolectado', h:'2:15:07 PM'},
-        {f:'31/08/2026', t:'En camino', h:'7:12:55 AM', dot:true},
-        {f:'01/09/2026', t:'Intento de entrega — sin quien reciba', h:'11:44:20 AM'},
-        {f:'02/09/2026', t:'Intento de entrega — domicilio cerrado', h:'1:22:38 PM'},
-        {f:'03/09/2026', t:'En espera de ser recogido por el destinatario', h:'9:30:12 AM'},
+      tlOrig:[
+        {f:'05/09/2026', t:'En camino', h:'7:45:11 AM', dot:true},
+        {f:'04/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'1Z999AA10123456784', monto:'241.10', h:'9:14:26 AM'},
         {f:'04/09/2026', t:'Devuelto al remitente', h:'8:58:03 AM'},
-        {f:'04/09/2026', hito:true, ret:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'1Z999AA10123456784', monto:'241.10', h:'9:14:26 AM'},
-        {f:'05/09/2026', t:'En camino', h:'7:45:11 AM', dot:true}
+        {f:'03/09/2026', t:'En espera de ser recogido por el destinatario', h:'9:30:12 AM'},
+        {f:'02/09/2026', t:'Intento de entrega — domicilio cerrado', h:'1:22:38 PM'},
+        {f:'01/09/2026', t:'Intento de entrega — sin quien reciba', h:'11:44:20 AM'},
+        {f:'31/08/2026', t:'En camino', h:'7:12:55 AM', dot:true},
+        {f:'30/08/2026', t:'Recolectado', h:'2:15:07 PM'},
+        {f:'30/08/2026', hito:true, t:'Guía creada (Original)', guia:'1Z999AA10123456784', monto:'269.52', h:'10:26:41 AM'}
       ]
     },
     {
@@ -861,22 +871,22 @@
       creado:'29 de agosto, 2026 a las 16:08hrs', entrega:'03 sep',
       destino:{t:'Calle Río Nazas 45', d:'Calle Río Nazas 45, Cuauhtémoc, México, Ciudad de México, 06500', c:['carlos.pena@gmail.com','5588112043']},
       paquete:['1 paquete','(35 x 25 x 12 cm)','1.6kg'],
-      cobro:{precio:'88.36', cargos:'14.14', total:'102.50'},
+      cobro:{sub:'74.22', cargos:'14.14', iva:'14.14', total:'102.50'},
       retorno:{
         tipo:'misma', fecha:'06 de Sep', hora:'09:30 hrs',
         costo:'96.80', rastreo:{t:'En camino', c:'transito'}, entrega:'10 sep',
         cobroEstado:'Pendiente',
-        cobro:{precio:'83.45', cargos:'13.35', total:'96.80'}
+        cobro:{sub:'70.10', cargos:'13.35', iva:'13.35', total:'96.80'}
       },
-      timeline:[
-        {f:'29/08/2026', hito:true, t:'Guía generada', guia:'PEX00918273645', monto:'102.50', h:'4:08:20 PM'},
-        {f:'30/08/2026', t:'Recolectado', h:'11:30:44 AM'},
-        {f:'31/08/2026', t:'En camino', h:'7:55:02 AM', dot:true},
-        {f:'02/09/2026', t:'Intento de entrega — sin quien reciba', h:'10:21:36 AM'},
-        {f:'04/09/2026', t:'Intento de entrega — domicilio cerrado', h:'12:47:19 PM'},
-        {f:'05/09/2026', t:'En espera de ser recogido por el destinatario', h:'5:15:40 PM'},
+      tlOrig:[
+        {f:'06/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'PEX00918273645', monto:'96.80', h:'9:30:55 AM'},
         {f:'06/09/2026', t:'Devuelto al remitente', h:'9:02:11 AM'},
-        {f:'06/09/2026', hito:true, ret:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'PEX00918273645', monto:'96.80', h:'9:30:55 AM'}
+        {f:'05/09/2026', t:'En espera de ser recogido por el destinatario', h:'5:15:40 PM'},
+        {f:'04/09/2026', t:'Intento de entrega — domicilio cerrado', h:'12:47:19 PM'},
+        {f:'02/09/2026', t:'Intento de entrega — sin quien reciba', h:'10:21:36 AM'},
+        {f:'31/08/2026', t:'En camino', h:'7:55:02 AM', dot:true},
+        {f:'30/08/2026', t:'Recolectado', h:'11:30:44 AM'},
+        {f:'29/08/2026', hito:true, t:'Guía creada (Original)', guia:'PEX00918273645', monto:'102.50', h:'4:08:20 PM'}
       ]
     },
     {
@@ -886,23 +896,23 @@
       creado:'28 de agosto, 2026 a las 12:41hrs', entrega:'01 sep',
       destino:{t:'Calle Zaragoza 88', d:'Calle Zaragoza 88, Centro, Puebla, Puebla, 72000', c:['ana.salas@gmail.com','2224510098']},
       paquete:['1 paquete','(25 x 18 x 14 cm)','1.2kg'],
-      cobro:{precio:'113.58', cargos:'18.17', total:'131.75'},
+      cobro:{sub:'95.41', cargos:'18.17', iva:'18.17', total:'131.75'},
       retorno:{
         tipo:'misma', fecha:'05 de Sep', hora:'11:52 hrs',
         costo:'124.40', rastreo:{t:'Entregado', c:'entregado'}, entrega:'08 sep',
         cobroEstado:'$124.40 MXN',
-        cobro:{precio:'107.24', cargos:'17.16', total:'124.40'}
+        cobro:{sub:'90.08', cargos:'17.16', iva:'17.16', total:'124.40'}
       },
-      timeline:[
-        {f:'28/08/2026', hito:true, t:'Guía generada', guia:'T1E20260903117', monto:'131.75', h:'12:41:09 PM'},
-        {f:'28/08/2026', t:'Recolectado', h:'6:20:31 PM'},
-        {f:'29/08/2026', t:'En camino', h:'8:14:02 AM', dot:true},
-        {f:'31/08/2026', t:'Llegada al centro de clasificación', h:'10:38:47 PM'},
-        {f:'01/09/2026', t:'Intento de entrega — sin quien reciba', h:'1:12:25 PM'},
-        {f:'03/09/2026', t:'En espera de ser recogido por el destinatario', h:'9:45:18 AM'},
+      tlOrig:[
+        {f:'07/09/2026', t:'Entregado', h:'4:05:52 PM'},
+        {f:'05/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'T1E20260903117', monto:'124.40', h:'11:52:33 AM'},
         {f:'05/09/2026', t:'Devuelto al remitente', h:'11:20:06 AM'},
-        {f:'05/09/2026', hito:true, ret:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'T1E20260903117', monto:'124.40', h:'11:52:33 AM'},
-        {f:'07/09/2026', t:'Entregado', h:'4:05:52 PM'}
+        {f:'03/09/2026', t:'En espera de ser recogido por el destinatario', h:'9:45:18 AM'},
+        {f:'01/09/2026', t:'Intento de entrega — sin quien reciba', h:'1:12:25 PM'},
+        {f:'31/08/2026', t:'Llegada al centro de clasificación', h:'10:38:47 PM'},
+        {f:'29/08/2026', t:'En camino', h:'8:14:02 AM', dot:true},
+        {f:'28/08/2026', t:'Recolectado', h:'6:20:31 PM'},
+        {f:'28/08/2026', hito:true, t:'Guía creada (Original)', guia:'T1E20260903117', monto:'131.75', h:'12:41:09 PM'}
       ]
     },
     {
@@ -912,22 +922,22 @@
       creado:'27 de agosto, 2026 a las 08:55hrs', entrega:'03 sep',
       destino:{t:'Av. Chapultepec 320', d:'Av. Chapultepec 320, Americana, Guadalajara, Jalisco, 44160', c:['diego.lara@hotmail.com','3319887744']},
       paquete:['1 paquete','(22 x 16 x 9 cm)','0.9kg'],
-      cobro:{precio:'83.10', cargos:'13.30', total:'96.40'},
+      cobro:{sub:'69.80', cargos:'13.30', iva:'13.30', total:'96.40'},
       retorno:{
         tipo:'misma', fecha:'07 de Sep', hora:'15:18 hrs',
         costo:'91.20', rastreo:{t:'En camino', c:'transito'}, entrega:'12 sep',
         cobroEstado:'Pendiente',
-        cobro:{precio:'78.62', cargos:'12.58', total:'91.20'}
+        cobro:{sub:'66.04', cargos:'12.58', iva:'12.58', total:'91.20'}
       },
-      timeline:[
-        {f:'27/08/2026', hito:true, t:'Guía generada', guia:'T1EC0459812337', monto:'96.40', h:'8:55:14 AM'},
-        {f:'28/08/2026', t:'Recolectado', h:'1:40:22 PM'},
-        {f:'29/08/2026', t:'En camino', h:'9:05:47 AM', dot:true},
-        {f:'01/09/2026', t:'Llegada al centro de clasificación', h:'11:22:38 PM'},
-        {f:'03/09/2026', t:'Intento de entrega — sin quien reciba', h:'2:15:03 PM'},
-        {f:'05/09/2026', t:'En espera de ser recogido por el destinatario', h:'10:08:44 AM'},
+      tlOrig:[
+        {f:'07/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'T1EC0459812337', monto:'91.20', h:'3:18:29 PM'},
         {f:'07/09/2026', t:'Devuelto al remitente', h:'2:50:17 PM'},
-        {f:'07/09/2026', hito:true, ret:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'T1EC0459812337', monto:'91.20', h:'3:18:29 PM'}
+        {f:'05/09/2026', t:'En espera de ser recogido por el destinatario', h:'10:08:44 AM'},
+        {f:'03/09/2026', t:'Intento de entrega — sin quien reciba', h:'2:15:03 PM'},
+        {f:'01/09/2026', t:'Llegada al centro de clasificación', h:'11:22:38 PM'},
+        {f:'29/08/2026', t:'En camino', h:'9:05:47 AM', dot:true},
+        {f:'28/08/2026', t:'Recolectado', h:'1:40:22 PM'},
+        {f:'27/08/2026', hito:true, t:'Guía creada (Original)', guia:'T1EC0459812337', monto:'96.40', h:'8:55:14 AM'}
       ]
     },
     {
@@ -937,22 +947,22 @@
       creado:'26 de agosto, 2026 a las 11:40hrs', entrega:'31 ago',
       destino:{t:'Av. Patriotismo 615', d:'Av. Patriotismo 615, San Juan, Benito Juárez, México, Ciudad de México, 03730', c:['sofia.herrera@gmail.com','5566207734']},
       paquete:['3 paquetes','(28 x 20 x 15 cm)','2.6kg'],
-      cobro:{precio:'125.17', cargos:'20.03', total:'145.20'},
+      cobro:{sub:'105.14', cargos:'20.03', iva:'20.03', total:'145.20'},
       retorno:{
         tipo:'misma', fecha:'04 de Sep', hora:'09:35 hrs',
         costo:'138.60', rastreo:{t:'En camino', c:'transito'}, entrega:'08 sep',
         cobroEstado:'$138.60 MXN',
-        cobro:{precio:'119.48', cargos:'19.12', total:'138.60'}
+        cobro:{sub:'100.36', cargos:'19.12', iva:'19.12', total:'138.60'}
       },
-      timeline:[
-        {f:'26/08/2026', hito:true, t:'Guía generada', guia:'AMP0459812774', monto:'145.20', h:'11:40:52 AM'},
-        {f:'26/08/2026', t:'Recolectado', h:'4:58:13 PM'},
-        {f:'27/08/2026', t:'En camino', h:'7:22:40 AM', dot:true},
-        {f:'29/08/2026', t:'Disponible en punto de entrega', h:'10:15:06 AM'},
-        {f:'31/08/2026', t:'En espera de ser recogido por el destinatario', h:'12:04:31 PM'},
-        {f:'03/09/2026', t:'No recogido en el plazo — se inicia retorno', h:'6:30:18 PM'},
+      tlOrig:[
+        {f:'04/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'AMP0459812774', monto:'138.60', h:'9:35:27 AM'},
         {f:'04/09/2026', t:'Devuelto al remitente', h:'9:10:44 AM'},
-        {f:'04/09/2026', hito:true, ret:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'AMP0459812774', monto:'138.60', h:'9:35:27 AM'}
+        {f:'03/09/2026', t:'No recogido en el plazo — se inicia retorno', h:'6:30:18 PM'},
+        {f:'31/08/2026', t:'En espera de ser recogido por el destinatario', h:'12:04:31 PM'},
+        {f:'29/08/2026', t:'Disponible en punto de entrega', h:'10:15:06 AM'},
+        {f:'27/08/2026', t:'En camino', h:'7:22:40 AM', dot:true},
+        {f:'26/08/2026', t:'Recolectado', h:'4:58:13 PM'},
+        {f:'26/08/2026', hito:true, t:'Guía creada (Original)', guia:'AMP0459812774', monto:'145.20', h:'11:40:52 AM'}
       ]
     },
 
@@ -986,16 +996,18 @@
   const guiaRet = e => esMisma(e) ? e.guia : e.retorno.guia;
 
   /* ===================== LISTADO ===================== */
-  function acciones(e){
+  function acciones(e, foco){
     return `<div class="cell rowacts"><button class="btn-ghost-icon" onclick="toggleActs(event,this)" aria-label="Acciones">
         <svg class="ic" style="width:18px;height:18px"><use href="#i-dots"/></svg></button>
-      <div class="menu-acts"><button onclick="abrirDetalle('${e.id}')">Ver detalle</button></div></div>`;
+      <div class="menu-acts"><button onclick="abrirDetalle('${e.id}','${foco}')">Ver detalle</button></div></div>`;
   }
 
+  /* Fila de la guía original. Solo las paqueterías que retornan sobre la misma
+     guía llevan el desplegable: ahí el retorno no existe como guía aparte.      */
   function filaEnvio(e){
-    const toggle = e.retorno
+    const toggle = esMisma(e)
       ? `<button class="toggle-ret" onclick="toggleThread('${e.id}')" aria-expanded="true"
-           data-tip="${esMisma(e) ? 'El retorno viaja con esta misma guía' : 'Este envío generó una guía de retorno'}">
+           data-tip="El retorno viaja con esta misma guía">
            <svg class="ic ret-glyph"><use href="#i-return"/></svg> <span class="tlabel">Ver menos</span>
            <svg class="ic chev"><use href="#i-chev-u"/></svg></button>` : '';
     return `<div class="grid-row row" data-tipo="envio">
@@ -1008,125 +1020,157 @@
       <div class="cell costo">$${e.costo}<small>MXN</small></div>
       <div class="cell estado">${e.estado}</div>
       <div class="cell">${chip(e.rastreo)}</div>
-      ${acciones(e)}</div>`;
+      ${acciones(e,'original')}</div>`;
   }
 
-  /* Subfila del retorno. Cuando es la misma guía, el número se repite y se marca
-     como derivado de la original — el punto que pidió el Owner.                */
-  function filaRetorno(e){
-    const r = e.retorno, misma = esMisma(e);
-    const num = misma
-      ? `<div class="gnum">${e.guia}</div>
-         <div style="margin-top:4px"><span class="tag-misma">Misma guía</span></div>
-         <div class="gsub der">Deriva de la guía original</div>`
-      : `<div class="gnum">${r.guia}</div><div style="margin-top:4px"><span class="tag-ret">Retorno</span></div>`;
-    return `<div class="grid-row subrow" data-tipo="retorno">
-      <div class="cell"><span class="ck" style="visibility:hidden"></span></div>
+  /* Guía de retorno con número propio: es una guía más del listado, marcada con ⟳ */
+  function filaRetornoIndependiente(e){
+    const r = e.retorno;
+    return `<div class="grid-row row" data-tipo="retorno">
+      <div class="cell"><span class="ck"></span></div>
       <div class="cell">${logoSvg(e,'carrier brand')}</div>
-      <span class="loopbadge" data-tip="Guía de retorno"><svg class="ic"><use href="#i-return"/></svg></span>
-      <div class="cell gcell">${num}</div>
+      <div class="cell"><div class="gnum">${r.guia}
+          <span class="loop-inline" data-tip="Guía de retorno"><svg class="ic"><use href="#i-return"/></svg></span></div>
+        <div class="gsub">${e.carrier}</div></div>
       <div class="cell fecha"><b>${r.fecha}</b><span>${r.hora}</span></div>
       <div class="cell canal">${e.canal}</div>
       <div class="cell cliente">${e.cliente} <svg class="ic"><use href="#i-chev-d"/></svg></div>
       <div class="cell costo">$${r.costo}<small>MXN</small></div>
       <div class="cell estado">Activa</div>
       <div class="cell">${chip(r.rastreo)}</div>
-      ${acciones(e)}</div>`;
+      ${acciones(e,'retorno')}</div>`;
+  }
+
+  /* Subfila del retorno sobre la misma guía: repite el número y avisa que deriva
+     de la original — el punto que pidió el Owner.                               */
+  function subfilaMismaGuia(e){
+    const r = e.retorno;
+    return `<div class="grid-row subrow" data-tipo="retorno">
+      <div class="cell"><span class="ck" style="visibility:hidden"></span></div>
+      <div class="cell">${logoSvg(e,'carrier brand')}</div>
+      <span class="loopbadge" data-tip="Guía de retorno"><svg class="ic"><use href="#i-return"/></svg></span>
+      <div class="cell gcell">
+        <div class="gnum">${e.guia}</div>
+        <div style="margin-top:4px"><span class="tag-misma">Misma guía</span></div>
+        <div class="gsub der">Deriva de la guía original</div>
+      </div>
+      <div class="cell fecha"><b>${r.fecha}</b><span>${r.hora}</span></div>
+      <div class="cell canal">${e.canal}</div>
+      <div class="cell cliente">${e.cliente} <svg class="ic"><use href="#i-chev-d"/></svg></div>
+      <div class="cell costo">$${r.costo}<small>MXN</small></div>
+      <div class="cell estado">Activa</div>
+      <div class="cell">${chip(r.rastreo)}</div>
+      ${acciones(e,'retorno')}</div>`;
   }
 
   function renderListado(){
-    document.getElementById('tbody').innerHTML = ENVIOS.map(e =>
-      e.retorno ? `<div class="thread" id="th-${e.id}">${filaEnvio(e)}${filaRetorno(e)}</div>` : filaEnvio(e)
-    ).join('');
+    let out = '';
+    ENVIOS.forEach(e => {
+      if (esMisma(e)) out += `<div class="thread" id="th-${e.id}">${filaEnvio(e)}${subfilaMismaGuia(e)}</div>`;
+      else if (e.retorno) out += filaRetornoIndependiente(e) + filaEnvio(e);
+      else out += filaEnvio(e);
+    });
+    document.getElementById('tbody').innerHTML = out;
   }
 
   /* ===================== DETALLE ===================== */
-  /* Card de guía con la estructura del productivo:
-     [logo] Paquetería: número · servicio · referencia cruzada · cobro de retorno
-                                              Fecha estimada de entrega / fecha    */
+  /* Card de guía con la estructura de Figma:
+     [logo] Paquetería: número · servicio · referencia cruzada (link)
+                                       Fecha estimada de entrega / fecha        */
   function cardGuia(e, o){
     return `<div class="card">
       <div class="hd">${o.titulo}</div>
       <div class="bd gcard">
         ${logoSvg(e,'carrier brand')}
         <div class="info">
-          <div class="num">${e.carrier}: <a href="#" onclick="return false">${o.guia}</a>${o.tag ? ` <span class="tag-misma">${o.tag}</span>` : ''} ${chip(o.rastreo)}</div>
+          <div class="num">${e.carrier}: ${o.guia}${o.tag ? ` <span class="tag-misma">${o.tag}</span>` : ''}</div>
           <div class="svc">${e.servicio}</div>
-          ${o.ref ? `<div class="xref">${o.ref}</div>` : ''}
-          ${o.cobro ? `<div class="xref">Cobro de retorno: <b>${o.cobro}</b></div>` : ''}
+          <div class="xref">${o.refLbl}: ${o.link
+            ? `<a href="#" onclick="abrirDetalle('${e.id}','${o.link}');return false">${o.refGuia}</a>`
+            : `<span class="ref-plano">${o.refGuia}</span> <span class="nota">(misma guía)</span>`}</div>
+          ${o.cobroRet ? `<div class="xref">Cobro de retorno: <b>${o.cobroRet}</b></div>` : ''}
         </div>
         <div class="right"><span class="tlab">Fecha estimada de entrega</span><span class="edate">${o.entrega}</span></div>
       </div>
     </div>`;
   }
 
-  function cadenaGuias(e){
-    const r = e.retorno, misma = esMisma(e);
-    const original = cardGuia(e, {
-      titulo:'Guía original', guia:e.guia, rastreo:e.rastreo, entrega:e.entrega,
-      ref:`Guía retorno: <a href="#" onclick="return false">${guiaRet(e)}</a>${misma ? ' <span class="nota">(misma guía)</span>' : ''}`
-    });
-    const conector = `<div class="gconn">
-      <span class="loop"><svg class="ic"><use href="#i-return"/></svg></span>
-      <div><p class="gt1">${misma ? 'Retorno en la misma guía' : 'Retorno generado'}</p>
-      <p class="gt2">${misma
-        ? `${e.carrier} no generó una guía nueva: el retorno se deriva de la original y viaja con el mismo número · ${r.fecha}, ${r.hora}`
-        : `${e.carrier} generó la guía ${r.guia} · ${r.fecha}, ${r.hora}`}</p></div>
-    </div>`;
-    const retorno = cardGuia(e, {
-      titulo:'Guía retorno', guia:guiaRet(e), rastreo:r.rastreo, entrega:r.entrega,
-      tag: misma ? 'Misma guía' : '',
-      ref:`Guía original: <a href="#" onclick="return false">${e.guia}</a>${misma ? ' <span class="nota">(misma guía)</span>' : ''}`,
-      cobro:r.cobroEstado
-    });
-    return original + conector + retorno;
-  }
-
-  /* Cronograma en orden ascendente, como el productivo */
-  function cronograma(e){
+  /* Cronograma en orden descendente (lo más reciente arriba), como Figma */
+  function cronograma(e, eventos){
     let out = '', fechaPrev = '';
-    e.timeline.forEach(ev => {
+    eventos.forEach(ev => {
       if (ev.f !== fechaPrev){ out += `<span class="datechip">${ev.f}</span>`; fechaPrev = ev.f; }
       if (ev.hito){
-        out += `<div class="milestone${ev.ret ? ' ret' : ''}">
-          <span class="ico"><svg class="ic"><use href="#${ev.ret ? 'i-return' : 'i-truck'}"/></svg></span>
+        out += `<div class="milestone${ev.misma ? ' ret' : ''}">
+          <span class="ico"><svg class="ic"><use href="#${ev.misma ? 'i-return' : 'i-truck'}"/></svg></span>
           <div class="t">${ev.t}</div>
+          <div class="d">$${ev.monto}<br />${ev.h}</div>
           <button class="gref">${logoSvg(e,'brand')} <span>${ev.guia}</span></button>
-          <div class="d">$ ${ev.monto} MXN<br />${ev.h}</div>
         </div>`;
       } else {
-        const ico = ev.dot
-          ? '<svg class="ic" style="width:9px;height:9px"><use href="#i-truckdot"/></svg>'
-          : '<svg class="ic"><use href="#i-check"/></svg>';
+        const ico = ev.dot ? '<svg class="ic" style="width:9px;height:9px"><use href="#i-truckdot"/></svg>'
+                  : ev.alerta ? '<svg class="ic"><use href="#i-alert"/></svg>'
+                  : '<svg class="ic"><use href="#i-check"/></svg>';
         out += `<div class="ev"><span class="ico">${ico}</span>
-          <div class="t">${ev.t}</div><div class="d">${ev.h}</div></div>`;
+          <div class="t">${ev.t}</div>
+          ${ev.sub ? `<div class="d">${ev.sub}</div>` : ''}
+          <div class="d">${ev.h}</div>
+          ${ev.link ? `<a class="link" href="#" onclick="return false">${ev.link}</a>` : ''}</div>`;
       }
     });
     return out;
   }
 
-  function bloqueCobro(titulo, c, sub){
-    return `<div class="cobro-blk">
-      <div class="cb-t">${titulo}${sub ? ` <span class="cb-s">${sub}</span>` : ''}</div>
-      <div class="cobro-line"><span>Precio guía</span><span>$${c.precio}</span></div>
-      <div class="cobro-line"><span>Cargos adicionales</span><span>$${c.cargos}</span></div>
-      <div class="cobro-line tot"><span>Total</span><span>$${c.total}</span></div>
+  function cobroCard(c){
+    return `<div class="card">
+      <div class="hd">Resumen de cobro</div>
+      <div class="bd">
+        <div class="cobro-line"><span>Subtotal</span><span>$${c.sub}</span></div>
+        <div class="cobro-line"><span class="sub-link">Cargos adicionales</span><span>$${c.cargos}</span></div>
+        <div class="cobro-line"><span>Impuestos (IVA)</span><span>$${c.iva}</span></div>
+        <div class="cobro-total"><span>Total</span><span>$${c.total}</span></div>
+      </div>
     </div>`;
   }
 
-  function renderDetalle(e){
+  function renderDetalle(e, foco){
     window.__casoActual = e;
-    const r = e.retorno, misma = esMisma(e);
-    const total = (parseFloat(e.cobro.total) + parseFloat(r.cobro.total)).toFixed(2);
-    const nota = misma
-      ? `${e.carrier} regresó el paquete con el mismo número de guía. El retorno se deriva de la guía original y genera su propio cobro, descontado de tu saldo T1envíos.`
-      : `${e.carrier} generó una guía nueva para el retorno. El cobro se aplicó al no concretarse la entrega y se descontó de tu saldo T1envíos.`;
+    const r = e.retorno, misma = esMisma(e), esRet = foco === 'retorno';
+
+    /* Guía original → su propio cronograma.
+       Guía de retorno → cronograma unificado: primero el retorno, luego el origen. */
+    const eventos = misma ? e.tlOrig
+                  : esRet ? e.tlRet.concat(e.tlOrig)
+                  : e.tlOrig;
+
+    let cards;
+    if (misma){
+      cards = cardGuia(e, {titulo:'Guía original', guia:e.guia, entrega:e.entrega,
+                           refLbl:'Guía retorno', refGuia:e.guia})
+            + `<div class="gconn">
+                 <span class="loop"><svg class="ic"><use href="#i-return"/></svg></span>
+                 <div><p class="gt1">Retorno en la misma guía</p>
+                 <p class="gt2">${e.carrier} no generó una guía nueva: el retorno se deriva de la original y viaja con el mismo número · ${r.fecha}, ${r.hora}</p></div>
+               </div>`
+            + cardGuia(e, {titulo:'Guía retorno', guia:e.guia, tag:'Misma guía', entrega:r.entrega,
+                           refLbl:'Guía original', refGuia:e.guia, cobroRet:r.cobroEstado});
+    } else if (esRet){
+      cards = cardGuia(e, {titulo:'Guía retorno', guia:r.guia, entrega:r.entrega,
+                           refLbl:'Guía original', refGuia:e.guia, link:'original'});
+    } else {
+      cards = cardGuia(e, {titulo:'Guía original', guia:e.guia, entrega:e.entrega,
+                           refLbl:'Guía retorno', refGuia:r.guia, link:'retorno'});
+    }
+
+    const num  = (esRet && !misma) ? r.guia : e.guia;
+    const est  = (esRet && !misma) ? r.rastreo : e.rastreo;
+    const cob  = (esRet && !misma) ? r.cobro : e.cobro;
 
     document.getElementById('detalle').innerHTML = `
       <div class="dethead">
         <div class="l">
           <h1><button class="backbtn" onclick="show('listado')" aria-label="Volver"><svg class="ic"><use href="#i-back"/></svg></button>
-            ${e.guia} ${chip(e.rastreo)}</h1>
+            ${num} ${chip(est)}</h1>
           <p class="meta">Creado el ${e.creado}</p>
         </div>
         <div style="display:flex;gap:12px">
@@ -1137,13 +1181,10 @@
 
       <div class="detgrid">
         <div class="colcards">
-          <div class="cobro-note" style="margin:0 0 16px 0">
-            <svg class="ic"><use href="#i-info"/></svg> ${nota}
-          </div>
-          ${cadenaGuias(e)}
+          ${cards}
           <div class="card">
             <div class="hd">Cronograma</div>
-            <div class="bd"><div class="tl">${cronograma(e)}</div></div>
+            <div class="bd"><div class="tl">${cronograma(e, eventos)}</div></div>
           </div>
         </div>
 
@@ -1163,15 +1204,7 @@
               <div class="dims"><p><b>${e.paquete[0]}</b></p>${e.paquete.slice(1).map(x => `<p>${x}</p>`).join('')}</div>
             </div>
           </div>
-
-          <div class="card">
-            <div class="hd">Resumen de cobro</div>
-            <div class="bd">
-              ${bloqueCobro('Guía original', e.cobro, e.guia)}
-              ${bloqueCobro('Guía retorno', r.cobro, misma ? 'misma guía' : r.guia)}
-              <div class="cobro-total"><span>Total del envío</span><span>$${total} MXN</span></div>
-            </div>
-          </div>
+          ${cobroCard(cob)}
         </div>
       </div>`;
   }
@@ -1189,15 +1222,16 @@
         <p>Revisa el detalle en <b>T1envíos → Mis envíos</b>.</p>
         <span class="watime">${r.fecha} · ${r.hora}</span>
       </div>
-      <button class="wacta" onclick="abrirDetalle('${e.id}')">Rastrear retorno</button>`;
+      <button class="wacta" onclick="abrirDetalle('${e.id}','retorno')">Rastrear retorno</button>`;
   }
 
   /* ===================== INTERACCIONES ===================== */
-  function abrirDetalle(id){
+  function abrirDetalle(id, foco){
     const e = byId(id);
     if (!e || !e.retorno){ show('listado'); return; }
-    renderWA(e); renderDetalle(e); show('detalle');
-    document.querySelectorAll('.demobar .vbtn[data-caso]').forEach(b => b.classList.toggle('on', b.dataset.caso === id));
+    renderWA(e); renderDetalle(e, foco || 'original'); show('detalle');
+    const marca = id + ':' + (foco || 'original');
+    document.querySelectorAll('.demobar .vbtn[data-caso]').forEach(b => b.classList.toggle('on', b.dataset.caso === marca));
   }
 
   function show(view){
@@ -1258,5 +1292,5 @@
 
   document.addEventListener('click', closeMenus);
   renderListado();
-  renderWA(byId('e-ups'));
+  renderWA(byId('e-dhl'));
 </script>
