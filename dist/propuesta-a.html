@@ -133,6 +133,7 @@
   .ck svg{width:11px;height:11px;color:#fff;stroke-width:3}
   .carrier{width:40px;height:40px;border-radius:9px;display:block}
   .gnum{font-weight:700;font-size:14px;color:var(--dark);display:flex;align-items:center;gap:6px}
+  .gnum .n{display:inline-block;width:112px;font-variant-numeric:tabular-nums}
   .gsub{font-size:13px;color:var(--sec);margin-top:2px}
   .fecha b{display:block;font-weight:600;font-size:13px}
   .fecha span{font-size:12px;color:var(--sec)}
@@ -296,7 +297,9 @@
   .gcard .xref b{color:var(--oxford);font-weight:700}
   .gcard .xref .nota{color:var(--ter)}
   .gcard .right{text-align:right;flex:none}
-  .gcard .tlab{display:block;font-size:12px;color:var(--sec)}
+  .gcard .right.dos{display:flex;flex-direction:column;gap:12px}
+  .gcard .right.dos .tlab{white-space:nowrap}
+  .gcard .tlab{display:block;font-size:12px;color:var(--sec);white-space:nowrap}
   .gcard .edate{display:block;font-size:15px;font-weight:600;color:var(--dark);margin-top:2px}
   .tag-misma{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:4px;background:var(--blue-100);color:var(--blue-700);font-size:11px;font-weight:700}
   .subrow .gnum{font-size:13.5px;letter-spacing:-0.2px}
@@ -774,7 +777,7 @@
       ]
     },
     {
-      id:'e-express', guia:'PEX00918273645', logo:'logo-express', carrier:'Paquete Express', servicio:'Estándar / 4 días',
+      id:'e-express', guia:'PEX009182736', logo:'logo-express', carrier:'Paquete Express', servicio:'Estándar / 4 días',
       fecha:'29 de Ago', hora:'16:08 hrs', canal:'Shopify', cliente:'Carlos Peña',
       costo:'102.50', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
       creado:'29 de agosto, 2026 a las 16:08hrs', entrega:'03 sep',
@@ -788,18 +791,18 @@
         cobro:{sub:'70.10', cargos:'13.35', iva:'13.35', total:'96.80'}
       },
       tlOrig:[
-        {f:'06/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'PEX00918273645', monto:'96.80', h:'9:30:55 AM'},
+        {f:'06/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'PEX009182736', monto:'96.80', h:'9:30:55 AM'},
         {f:'06/09/2026', t:'Devuelto al remitente', h:'9:02:11 AM'},
         {f:'05/09/2026', t:'En espera de ser recogido por el destinatario', h:'5:15:40 PM'},
         {f:'04/09/2026', t:'Intento de entrega — domicilio cerrado', h:'12:47:19 PM'},
         {f:'02/09/2026', t:'Intento de entrega — sin quien reciba', h:'10:21:36 AM'},
         {f:'31/08/2026', t:'En camino', h:'7:55:02 AM', dot:true},
         {f:'30/08/2026', t:'Recolectado', h:'11:30:44 AM'},
-        {f:'29/08/2026', hito:true, t:'Guía creada (Original)', guia:'PEX00918273645', monto:'102.50', h:'4:08:20 PM'}
+        {f:'29/08/2026', hito:true, t:'Guía creada (Original)', guia:'PEX009182736', monto:'102.50', h:'4:08:20 PM'}
       ]
     },
     {
-      id:'e-t1envios', guia:'T1E20260903117', logo:'logo-t1envios-iso', carrier:'T1envíos', servicio:'Nacional / 3 días',
+      id:'e-t1envios', guia:'T1E260903117', logo:'logo-t1envios-iso', carrier:'T1envíos', servicio:'Nacional / 3 días',
       fecha:'28 de Ago', hora:'12:41 hrs', canal:'T1tienda', cliente:'Ana Salas',
       costo:'131.75', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
       creado:'28 de agosto, 2026 a las 12:41hrs', entrega:'01 sep',
@@ -814,18 +817,18 @@
       },
       tlOrig:[
         {f:'07/09/2026', t:'Entregado', h:'4:05:52 PM'},
-        {f:'05/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'T1E20260903117', monto:'124.40', h:'11:52:33 AM'},
+        {f:'05/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'T1E260903117', monto:'124.40', h:'11:52:33 AM'},
         {f:'05/09/2026', t:'Devuelto al remitente', h:'11:20:06 AM'},
         {f:'03/09/2026', t:'En espera de ser recogido por el destinatario', h:'9:45:18 AM'},
         {f:'01/09/2026', t:'Intento de entrega — sin quien reciba', h:'1:12:25 PM'},
         {f:'31/08/2026', t:'Llegada al centro de clasificación', h:'10:38:47 PM'},
         {f:'29/08/2026', t:'En camino', h:'8:14:02 AM', dot:true},
         {f:'28/08/2026', t:'Recolectado', h:'6:20:31 PM'},
-        {f:'28/08/2026', hito:true, t:'Guía creada (Original)', guia:'T1E20260903117', monto:'131.75', h:'12:41:09 PM'}
+        {f:'28/08/2026', hito:true, t:'Guía creada (Original)', guia:'T1E260903117', monto:'131.75', h:'12:41:09 PM'}
       ]
     },
     {
-      id:'e-t1economic', guia:'T1EC0459812337', logo:'logo-t1economic', carrier:'T1 Economic', servicio:'Económico / 5 días',
+      id:'e-t1economic', guia:'T1EC04598123', logo:'logo-t1economic', carrier:'T1 Economic', servicio:'Económico / 5 días',
       fecha:'27 de Ago', hora:'08:55 hrs', canal:'Claroshop', cliente:'Diego Lara',
       costo:'96.40', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
       creado:'27 de agosto, 2026 a las 08:55hrs', entrega:'03 sep',
@@ -839,18 +842,18 @@
         cobro:{sub:'66.04', cargos:'12.58', iva:'12.58', total:'91.20'}
       },
       tlOrig:[
-        {f:'07/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'T1EC0459812337', monto:'91.20', h:'3:18:29 PM'},
+        {f:'07/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'T1EC04598123', monto:'91.20', h:'3:18:29 PM'},
         {f:'07/09/2026', t:'Devuelto al remitente', h:'2:50:17 PM'},
         {f:'05/09/2026', t:'En espera de ser recogido por el destinatario', h:'10:08:44 AM'},
         {f:'03/09/2026', t:'Intento de entrega — sin quien reciba', h:'2:15:03 PM'},
         {f:'01/09/2026', t:'Llegada al centro de clasificación', h:'11:22:38 PM'},
         {f:'29/08/2026', t:'En camino', h:'9:05:47 AM', dot:true},
         {f:'28/08/2026', t:'Recolectado', h:'1:40:22 PM'},
-        {f:'27/08/2026', hito:true, t:'Guía creada (Original)', guia:'T1EC0459812337', monto:'96.40', h:'8:55:14 AM'}
+        {f:'27/08/2026', hito:true, t:'Guía creada (Original)', guia:'T1EC04598123', monto:'96.40', h:'8:55:14 AM'}
       ]
     },
     {
-      id:'e-ampm', guia:'AMP0459812774', logo:'logo-ampm', carrier:'AMPM', servicio:'Punto de entrega / 3 días',
+      id:'e-ampm', guia:'AMP045981277', logo:'logo-ampm', carrier:'AMPM', servicio:'Punto de entrega / 3 días',
       fecha:'26 de Ago', hora:'11:40 hrs', canal:'Amazon', cliente:'Sofía Herrera',
       costo:'145.20', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
       creado:'26 de agosto, 2026 a las 11:40hrs', entrega:'31 ago',
@@ -864,20 +867,20 @@
         cobro:{sub:'100.36', cargos:'19.12', iva:'19.12', total:'138.60'}
       },
       tlOrig:[
-        {f:'04/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'AMP0459812774', monto:'138.60', h:'9:35:27 AM'},
+        {f:'04/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'AMP045981277', monto:'138.60', h:'9:35:27 AM'},
         {f:'04/09/2026', t:'Devuelto al remitente', h:'9:10:44 AM'},
         {f:'03/09/2026', t:'No recogido en el plazo — se inicia retorno', h:'6:30:18 PM'},
         {f:'31/08/2026', t:'En espera de ser recogido por el destinatario', h:'12:04:31 PM'},
         {f:'29/08/2026', t:'Disponible en punto de entrega', h:'10:15:06 AM'},
         {f:'27/08/2026', t:'En camino', h:'7:22:40 AM', dot:true},
         {f:'26/08/2026', t:'Recolectado', h:'4:58:13 PM'},
-        {f:'26/08/2026', hito:true, t:'Guía creada (Original)', guia:'AMP0459812774', monto:'145.20', h:'11:40:52 AM'}
+        {f:'26/08/2026', hito:true, t:'Guía creada (Original)', guia:'AMP045981277', monto:'145.20', h:'11:40:52 AM'}
       ]
     },
 
     /* ── Retorno con GUÍA NUEVA ────────────────────────────────── */
     {
-      id:'e-dhl', guia:'1697107624', logo:'logo-dhl', carrier:'DHL', servicio:'Economico / 2 días',
+      id:'e-dhl', guia:'431697107624', logo:'logo-dhl', carrier:'DHL', servicio:'Economico / 2 días',
       fecha:'26 de Ago', hora:'14:11 hrs', canal:'—', cliente:'Essensorial',
       costo:'108.33', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
       creado:'3 de septiembre, 2026 a las 11:03hrs', entrega:'29 ago',
@@ -885,7 +888,7 @@
       paquete:['1 paquete','(17 x 17 x 17 cm)','2kg'],
       cobro:{sub:'88.05', cargos:'12.08', iva:'16.02', total:'116.15'},
       retorno:{
-        tipo:'nueva', guia:'8427659995', fecha:'03 de Sep', hora:'11:03 hrs',
+        tipo:'nueva', guia:'438427659995', fecha:'03 de Sep', hora:'11:03 hrs',
         costo:'116.15', rastreo:{t:'Entregado', c:'entregado'}, entrega:'09 sep',
         cobroEstado:'Pendiente',
         cobro:{sub:'92.63', cargos:'12.08', iva:'16.02', total:'116.15'}
@@ -896,13 +899,13 @@
         {f:'26/08/2026', t:'Llegada al centro de clasificación', h:'11:00:15 PM'},
         {f:'26/08/2026', t:'En camino', h:'10:24:23 PM', dot:true},
         {f:'26/08/2026', t:'Recolectado', h:'6:58:52 PM'},
-        {f:'26/08/2026', hito:true, t:'Guía creada (Original)', guia:'1697107624', monto:'116.15', h:'2:11:37 PM'}
+        {f:'26/08/2026', hito:true, t:'Guía creada (Original)', guia:'431697107624', monto:'116.15', h:'2:11:37 PM'}
       ],
       tlRet:[
         {f:'03/09/2026', t:'RETORNADA', h:'5:04:15 PM'},
         {f:'03/09/2026', t:'Entregado', h:'5:04:15 PM'},
         {f:'03/09/2026', t:'En manos del courier para entrega', h:'11:01:48 AM'},
-        {f:'02/09/2026', hito:true, t:'Guía creada (Retorno)', guia:'8427659995', monto:'108.33', h:'5:30:02 PM'}
+        {f:'02/09/2026', hito:true, t:'Guía creada (Retorno)', guia:'438427659995', monto:'108.33', h:'5:30:02 PM'}
       ]
     },
     {
@@ -962,7 +965,7 @@
 
     /* ── Envíos sin retorno (contraste) ────────────────────────── */
     {
-      id:'e-dhl-generada', guia:'2521900290', logo:'logo-dhl', carrier:'DHL', servicio:'Economico / 2 días',
+      id:'e-dhl-generada', guia:'432521900290', logo:'logo-dhl', carrier:'DHL', servicio:'Economico / 2 días',
       fecha:'07 de Sep', hora:'23:02 hrs', canal:'—', cliente:'Angel',
       costo:'119.01', estado:'Activa', rastreo:{t:'Guía generada', c:'generada'}
     },
@@ -1014,7 +1017,7 @@
     return `<div class="grid-row row" data-tipo="envio">
       <div class="cell"><span class="ck"></span></div>
       <div class="cell">${logoSvg(e,'carrier brand')}</div>
-      <div class="cell"><div class="gnum">${e.guia}${esMisma(e)
+      <div class="cell"><div class="gnum"><span class="n">${e.guia}</span>${esMisma(e)
           ? ` <span class="loop-inline" data-tip="Guía de retorno"><svg class="ic"><use href="#i-return"/></svg></span>` : ''}</div>
         <div class="gsub">${e.carrier}</div>${toggle}</div>
       <div class="cell fecha"><b>${e.fecha}</b><span>${e.hora}</span></div>
@@ -1032,7 +1035,7 @@
     return `<div class="grid-row row" data-tipo="retorno">
       <div class="cell"><span class="ck"></span></div>
       <div class="cell">${logoSvg(e,'carrier brand')}</div>
-      <div class="cell"><div class="gnum">${r.guia}
+      <div class="cell"><div class="gnum"><span class="n">${r.guia}</span>
           <span class="loop-inline" data-tip="Guía de retorno"><svg class="ic"><use href="#i-return"/></svg></span></div>
         <div class="gsub">${e.carrier}</div></div>
       <div class="cell fecha"><b>${r.fecha}</b><span>${r.hora}</span></div>
@@ -1051,7 +1054,7 @@
     return `<div class="grid-row subrow" data-tipo="retorno">
       <div class="cell"><span class="ck" style="visibility:hidden"></span></div>
       <div class="cell"></div>
-      <div class="cell gcell"><div class="gnum">${e.guia}</div></div>
+      <div class="cell gcell"><div class="gnum"><span class="n">${e.guia}</span></div></div>
       <div class="cell fecha"><b>${r.fecha}</b><span>${r.hora}</span></div>
       <div class="cell canal">${e.canal}</div>
       <div class="cell cliente">${e.cliente} <svg class="ic"><use href="#i-chev-d"/></svg></div>
@@ -1151,10 +1154,23 @@
 
     let cards;
     if (misma){
-      cards = cardGuia(e, {titulo:'Guía original', guia:e.guia, entrega:e.entrega,
-                           refLbl:'Guía retorno', refGuia:e.guia})
-            + cardGuia(e, {titulo:'Guía retorno', guia:e.guia, entrega:r.entrega,
-                           refLbl:'Guía original', refGuia:e.guia});
+      /* Una sola guía → una sola card: número, paquetería y servicio no se repiten,
+         y las dos fechas estimadas conviven en la columna derecha.                */
+      cards = `<div class="card">
+        <div class="hd">Guía de envío y retorno</div>
+        <div class="bd gcard">
+          ${logoSvg(e,'carrier brand')}
+          <div class="info">
+            <div class="num">${e.carrier}: ${e.guia}</div>
+            <div class="svc">${e.servicio}</div>
+            <div class="xref">El retorno viaja con esta misma guía</div>
+          </div>
+          <div class="right dos">
+            <div><span class="tlab">Entrega original</span><span class="edate">${e.entrega}</span></div>
+            <div><span class="tlab">Entrega del retorno</span><span class="edate">${r.entrega}</span></div>
+          </div>
+        </div>
+      </div>`;
     } else if (esRet){
       cards = cardGuia(e, {titulo:'Guía retorno', guia:r.guia, entrega:r.entrega,
                            refLbl:'Guía original', refGuia:e.guia, link:'original'});
