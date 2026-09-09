@@ -1007,7 +1007,9 @@
     return `<div class="grid-row row" data-tipo="envio">
       <div class="cell"><span class="ck"></span></div>
       <div class="cell">${logoSvg(e,'carrier brand')}</div>
-      <div class="cell"><div class="gnum">${e.guia}</div><div class="gsub">${e.carrier}</div>${toggle}</div>
+      <div class="cell"><div class="gnum">${e.guia}${esMisma(e)
+          ? ` <span class="loop-inline" data-tip="El retorno viaja con esta misma guía"><svg class="ic"><use href="#i-return"/></svg></span>` : ''}</div>
+        <div class="gsub">${e.carrier}</div>${toggle}</div>
       <div class="cell fecha"><b>${e.fecha}</b><span>${e.hora}</span></div>
       <div class="cell canal">${e.canal}</div>
       <div class="cell cliente">${e.cliente} <svg class="ic"><use href="#i-chev-d"/></svg></div>
@@ -1041,10 +1043,9 @@
     const r = e.retorno;
     return `<div class="grid-row subrow" data-tipo="retorno">
       <div class="cell"><span class="ck" style="visibility:hidden"></span></div>
-      <div class="cell">${logoSvg(e,'carrier brand')}</div>
+      <div class="cell"></div>
       <div class="cell gcell">
-        <div class="gnum">${e.guia}
-          <span class="loop-inline" data-tip="Guía de retorno"><svg class="ic"><use href="#i-return"/></svg></span></div>
+        <div class="gnum">${e.guia}</div>
         <div class="gsub">${e.carrier}</div>
       </div>
       <div class="cell fecha"><b>${r.fecha}</b><span>${r.hora}</span></div>
