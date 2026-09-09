@@ -833,7 +833,7 @@
 
     /* ── Retorno sobre la MISMA GUÍA ───────────────────────────── */
     {
-      id:'e-ups', guia:'1Z999AA10123456784', logo:'logo-ups', carrier:'UPS', servicio:'Terrestre / 3 días',
+      id:'e-ups', guia:'1Z9990123456', logo:'logo-ups', carrier:'UPS', servicio:'Terrestre / 3 días',
       fecha:'30 de Ago', hora:'10:26 hrs', canal:'Mercado Libre', cliente:'Mauricio Beltrán',
       costo:'269.52', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
       creado:'30 de agosto, 2026 a las 10:26hrs', entrega:'02 sep',
@@ -848,14 +848,14 @@
       },
       tlOrig:[
         {f:'05/09/2026', t:'En camino', h:'7:45:11 AM', dot:true},
-        {f:'04/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'1Z999AA10123456784', monto:'241.10', h:'9:14:26 AM'},
+        {f:'04/09/2026', hito:true, misma:true, t:'Retorno iniciado en la misma guía', guia:'1Z9990123456', monto:'241.10', h:'9:14:26 AM'},
         {f:'04/09/2026', t:'Devuelto al remitente', h:'8:58:03 AM'},
         {f:'03/09/2026', t:'En espera de ser recogido por el destinatario', h:'9:30:12 AM'},
         {f:'02/09/2026', t:'Intento de entrega — domicilio cerrado', h:'1:22:38 PM'},
         {f:'01/09/2026', t:'Intento de entrega — sin quien reciba', h:'11:44:20 AM'},
         {f:'31/08/2026', t:'En camino', h:'7:12:55 AM', dot:true},
         {f:'30/08/2026', t:'Recolectado', h:'2:15:07 PM'},
-        {f:'30/08/2026', hito:true, t:'Guía creada (Original)', guia:'1Z999AA10123456784', monto:'269.52', h:'10:26:41 AM'}
+        {f:'30/08/2026', hito:true, t:'Guía creada (Original)', guia:'1Z9990123456', monto:'269.52', h:'10:26:41 AM'}
       ]
     },
     {
@@ -977,7 +977,7 @@
       costo:'58.00', estado:'Activa', rastreo:{t:'Entregado', c:'entregado'}
     },
     {
-      id:'e-ups-cancel', guia:'1Z999AA10998877665', logo:'logo-ups', carrier:'UPS', servicio:'Terrestre / 3 días',
+      id:'e-ups-cancel', guia:'1Z9998877665', logo:'logo-ups', carrier:'UPS', servicio:'Terrestre / 3 días',
       fecha:'05 de Sep', hora:'14:17 hrs', canal:'Shopify', cliente:'Jessica',
       costo:'119.01', estado:'Cancelada', rastreo:{t:'Cancelado', c:'cancelado'}
     }
@@ -1044,10 +1044,7 @@
     return `<div class="grid-row subrow" data-tipo="retorno">
       <div class="cell"><span class="ck" style="visibility:hidden"></span></div>
       <div class="cell"></div>
-      <div class="cell gcell">
-        <div class="gnum">${e.guia}</div>
-        <div class="gsub">${e.carrier}</div>
-      </div>
+      <div class="cell gcell"><div class="gnum">${e.guia}</div></div>
       <div class="cell fecha"><b>${r.fecha}</b><span>${r.hora}</span></div>
       <div class="cell canal">${e.canal}</div>
       <div class="cell cliente">${e.cliente} <svg class="ic"><use href="#i-chev-d"/></svg></div>
