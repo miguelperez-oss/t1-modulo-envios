@@ -1138,11 +1138,6 @@
     if (misma){
       cards = cardGuia(e, {titulo:'Guía original', guia:e.guia, entrega:e.entrega,
                            refLbl:'Guía retorno', refGuia:e.guia})
-            + `<div class="gconn">
-                 <span class="loop"><svg class="ic"><use href="#i-return"/></svg></span>
-                 <div><p class="gt1">Retorno en la misma guía</p>
-                 <p class="gt2">${e.carrier} no generó una guía nueva: el retorno se deriva de la original y viaja con el mismo número · ${r.fecha}, ${r.hora}</p></div>
-               </div>`
             + cardGuia(e, {titulo:'Guía retorno', guia:e.guia, tag:'Misma guía', entrega:r.entrega,
                            refLbl:'Guía original', refGuia:e.guia, cobroRet:r.cobroEstado});
     } else if (esRet){
