@@ -753,7 +753,7 @@
       creado:'30 de agosto, 2026 a las 10:26hrs', entrega:'02 sep',
       destino:{t:'Av. Vallarta 1500', d:'Av. Vallarta 1500, Americana, Guadalajara, Jalisco, 44160', c:['mauricio.beltran@gmail.com','3312440087']},
       paquete:['1 paquete','(40 x 30 x 20 cm)','5kg'],
-      cobro:{sub:'195.16', cargos:'37.18', iva:'37.18', total:'269.52'},
+      cobro:{sub:'207.84', cargos:'24.50', iva:'37.18', total:'269.52'},
       retorno:{
         tipo:'misma', fecha:'04 de Sep', hora:'09:14 hrs',
         costo:'241.10', rastreo:{t:'En camino', c:'transito'}, entrega:'07 sep',
@@ -1080,7 +1080,6 @@
           <div class="xref">${o.refLbl}: ${o.link
             ? `<a href="#" onclick="abrirDetalle('${e.id}','${o.link}');return false">${o.refGuia}</a>`
             : `<span class="ref-plano">${o.refGuia}</span>`}</div>
-          ${o.cobroRet ? `<div class="xref">Cobro de retorno: <b>${o.cobroRet}</b></div>` : ''}
         </div>
         <div class="right"><span class="tlab">Fecha estimada de entrega</span><span class="edate">${o.entrega}</span></div>
       </div>
@@ -1113,16 +1112,25 @@
     return out;
   }
 
-  function cobroCard(c){
-    return `<div class="card">
-      <div class="hd">Resumen de cobro</div>
+  function desglose(c, titulo){
+    return `${titulo ? `<div class="cb-t">${titulo}</div>` : ''}
+      <div class="cobro-line"><span>Subtotal</span><span>$${c.sub}</span></div>
+      <div class="cobro-line"><span class="sub-link">Cargos adicionales</span><span>$${c.cargos}</span></div>
+      <div class="cobro-line"><span>Impuestos (IVA)</span><span>$${c.iva}</span></div>
+      <div class="cobro-line tot"><span>Total</span><span>$${c.total}</span></div>`;
+  }
+
+  /* Una sola guía → un desglose. Misma guía → los dos cobros y el total del envío. */
+  function cobroCard(e, misma){
+    if (!misma) return `<div class="card"><div class="hd">Resumen de cobro</div>
+      <div class="bd">${desglose(e.cobro)}</div></div>`;
+    const total = (parseFloat(e.cobro.total) + parseFloat(e.retorno.cobro.total)).toFixed(2);
+    return `<div class="card"><div class="hd">Resumen de cobro</div>
       <div class="bd">
-        <div class="cobro-line"><span>Subtotal</span><span>$${c.sub}</span></div>
-        <div class="cobro-line"><span class="sub-link">Cargos adicionales</span><span>$${c.cargos}</span></div>
-        <div class="cobro-line"><span>Impuestos (IVA)</span><span>$${c.iva}</span></div>
-        <div class="cobro-total"><span>Total</span><span>$${c.total}</span></div>
-      </div>
-    </div>`;
+        <div class="cobro-blk">${desglose(e.cobro, 'Guía original')}</div>
+        <div class="cobro-blk">${desglose(e.retorno.cobro, 'Cobro por retorno')}</div>
+        <div class="cobro-total"><span>Total del envío</span><span>$${total} MXN</span></div>
+      </div></div>`;
   }
 
   function renderDetalle(e, foco){
@@ -1140,7 +1148,7 @@
       cards = cardGuia(e, {titulo:'Guía original', guia:e.guia, entrega:e.entrega,
                            refLbl:'Guía retorno', refGuia:e.guia})
             + cardGuia(e, {titulo:'Guía retorno', guia:e.guia, entrega:r.entrega,
-                           refLbl:'Guía original', refGuia:e.guia, cobroRet:r.cobroEstado});
+                           refLbl:'Guía original', refGuia:e.guia});
     } else if (esRet){
       cards = cardGuia(e, {titulo:'Guía retorno', guia:r.guia, entrega:r.entrega,
                            refLbl:'Guía original', refGuia:e.guia, link:'original'});
@@ -1151,7 +1159,7 @@
 
     const num  = (esRet && !misma) ? r.guia : e.guia;
     const est  = (esRet && !misma) ? r.rastreo : e.rastreo;
-    const cob  = (esRet && !misma) ? r.cobro : e.cobro;
+
 
     document.getElementById('detalle').innerHTML = `
       <div class="dethead">
@@ -1191,7 +1199,7 @@
               <div class="dims"><p><b>${e.paquete[0]}</b></p>${e.paquete.slice(1).map(x => `<p>${x}</p>`).join('')}</div>
             </div>
           </div>
-          ${cobroCard(cob)}
+          ${cobroCard(esRet && !misma ? {cobro:r.cobro} : e, misma)}
         </div>
       </div>`;
   }
