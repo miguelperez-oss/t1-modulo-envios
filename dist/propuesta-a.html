@@ -181,7 +181,8 @@
   [data-tip]{position:relative}
   [data-tip]:hover::after{
     content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);
-    background:var(--oxford);color:#fff;font-size:12px;font-weight:500;padding:5px 10px;border-radius:4px;white-space:nowrap;z-index:60;pointer-events:none;
+    background:#fff;color:var(--dark);font-size:12px;font-weight:600;padding:6px 11px;border-radius:6px;white-space:nowrap;z-index:60;pointer-events:none;
+    border:1px solid var(--g-200);box-shadow:0 4px 12px rgba(0,0,0,.10);
   }
 
   /* ============ Detalle ============ */
@@ -1002,14 +1003,14 @@
     const abierto = esMisma(e) && e.id === PRIMER_MISMA;
     const toggle = esMisma(e)
       ? `<button class="toggle-ret" onclick="toggleThread('${e.id}')" aria-expanded="${abierto}"
-           data-tip="El retorno viaja con esta misma guía">
+           data-tip="Guía de retorno">
            <span class="tlabel">${abierto ? 'Ver menos' : 'Ver retorno'}</span>
            <svg class="ic chev"><use href="#i-chev-u"/></svg></button>` : '';
     return `<div class="grid-row row" data-tipo="envio">
       <div class="cell"><span class="ck"></span></div>
       <div class="cell">${logoSvg(e,'carrier brand')}</div>
       <div class="cell"><div class="gnum">${e.guia}${esMisma(e)
-          ? ` <span class="loop-inline" data-tip="El retorno viaja con esta misma guía"><svg class="ic"><use href="#i-return"/></svg></span>` : ''}</div>
+          ? ` <span class="loop-inline" data-tip="Guía de retorno"><svg class="ic"><use href="#i-return"/></svg></span>` : ''}</div>
         <div class="gsub">${e.carrier}</div>${toggle}</div>
       <div class="cell fecha"><b>${e.fecha}</b><span>${e.hora}</span></div>
       <div class="cell canal">${e.canal}</div>
