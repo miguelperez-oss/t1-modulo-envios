@@ -1078,7 +1078,7 @@
           <div class="svc">${e.servicio}</div>
           <div class="xref">${o.refLbl}: ${o.link
             ? `<a href="#" onclick="abrirDetalle('${e.id}','${o.link}');return false">${o.refGuia}</a>`
-            : `<span class="ref-plano">${o.refGuia}</span> <span class="nota">(misma guía)</span>`}</div>
+            : `<span class="ref-plano">${o.refGuia}</span>`}</div>
           ${o.cobroRet ? `<div class="xref">Cobro de retorno: <b>${o.cobroRet}</b></div>` : ''}
         </div>
         <div class="right"><span class="tlab">Fecha estimada de entrega</span><span class="edate">${o.entrega}</span></div>
@@ -1138,7 +1138,7 @@
     if (misma){
       cards = cardGuia(e, {titulo:'Guía original', guia:e.guia, entrega:e.entrega,
                            refLbl:'Guía retorno', refGuia:e.guia})
-            + cardGuia(e, {titulo:'Guía retorno', guia:e.guia, tag:'Misma guía', entrega:r.entrega,
+            + cardGuia(e, {titulo:'Guía retorno', guia:e.guia, entrega:r.entrega,
                            refLbl:'Guía original', refGuia:e.guia, cobroRet:r.cobroEstado});
     } else if (esRet){
       cards = cardGuia(e, {titulo:'Guía retorno', guia:r.guia, entrega:r.entrega,
