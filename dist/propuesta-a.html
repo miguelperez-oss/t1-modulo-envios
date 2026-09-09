@@ -158,14 +158,9 @@
   .thread:not(.closed) .row{border-bottom:none}
   .subrow::before{content:"";position:absolute;top:0;left:112px;right:16px;border-top:1px solid var(--g-200)}
   .thread.standalone .subrow::before{display:none}
-  .subrow .loopbadge{position:absolute;left:63px;top:calc(50% - 13px);width:26px;height:26px;border-radius:50%;background:#fff;border:1px solid var(--g-300);display:flex;align-items:center;justify-content:center;color:var(--sec)}
-  .subrow .loopbadge svg{width:13px;height:13px;stroke-width:2}
   .subrow .gcell{grid-column:3}
   .subrow .tag-ret{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:4px;background:var(--g-100);color:#525252;font-size:11px;font-weight:600;margin-left:6px}
   .thread.closed .subrow{display:none}
-  .thread.standalone .loopbadge{display:none}
-  .subrow .carrier{display:none}
-  .thread.standalone .subrow .carrier{display:block}
 
   .rowacts{position:relative;display:flex;justify-content:flex-end;padding-right:16px}
   .menu-acts{position:absolute;right:8px;top:calc(100% - 6px);width:170px;background:#fff;border:1px solid var(--g-200);border-radius:10px;padding:4px;z-index:40;display:none}
@@ -302,7 +297,6 @@
   .gcard .tlab{display:block;font-size:12px;color:var(--sec)}
   .gcard .edate{display:block;font-size:15px;font-weight:600;color:var(--dark);margin-top:2px}
   .tag-misma{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:4px;background:var(--blue-100);color:var(--blue-700);font-size:11px;font-weight:700}
-  .subrow .gsub.der{color:var(--ter);font-size:11.5px;margin-top:3px}
   .subrow .gnum{font-size:13.5px;letter-spacing:-0.2px}
 
   /* hito del cronograma */
@@ -1048,11 +1042,10 @@
     return `<div class="grid-row subrow" data-tipo="retorno">
       <div class="cell"><span class="ck" style="visibility:hidden"></span></div>
       <div class="cell">${logoSvg(e,'carrier brand')}</div>
-      <span class="loopbadge" data-tip="Guía de retorno"><svg class="ic"><use href="#i-return"/></svg></span>
       <div class="cell gcell">
-        <div class="gnum">${e.guia}</div>
-        <div style="margin-top:4px"><span class="tag-misma">Misma guía</span></div>
-        <div class="gsub der">Deriva de la guía original</div>
+        <div class="gnum">${e.guia}
+          <span class="loop-inline" data-tip="Guía de retorno"><svg class="ic"><use href="#i-return"/></svg></span></div>
+        <div class="gsub">${e.carrier}</div>
       </div>
       <div class="cell fecha"><b>${r.fecha}</b><span>${r.hora}</span></div>
       <div class="cell canal">${e.canal}</div>
