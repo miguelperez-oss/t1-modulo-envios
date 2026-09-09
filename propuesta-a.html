@@ -986,6 +986,7 @@
   const logoSvg = (e, cls) => `<svg class="${cls}" role="img" aria-label="${e.carrier}"><use href="#${e.logo}"/></svg>`;
   const chip = r => `<span class="chip ${r.c}">${r.t}</span>`;
   const esMisma = e => e.retorno && e.retorno.tipo === 'misma';
+  const PRIMER_MISMA = (ENVIOS.find(x => x.retorno && x.retorno.tipo === 'misma') || {}).id;
   const guiaRet = e => esMisma(e) ? e.guia : e.retorno.guia;
 
   /* ===================== LISTADO ===================== */
@@ -998,10 +999,11 @@
   /* Fila de la guía original. Solo las paqueterías que retornan sobre la misma
      guía llevan el desplegable: ahí el retorno no existe como guía aparte.      */
   function filaEnvio(e){
+    const abierto = esMisma(e) && e.id === PRIMER_MISMA;
     const toggle = esMisma(e)
-      ? `<button class="toggle-ret" onclick="toggleThread('${e.id}')" aria-expanded="true"
+      ? `<button class="toggle-ret" onclick="toggleThread('${e.id}')" aria-expanded="${abierto}"
            data-tip="El retorno viaja con esta misma guía">
-           <span class="tlabel">Ver menos</span>
+           <span class="tlabel">${abierto ? 'Ver menos' : 'Ver retorno'}</span>
            <svg class="ic chev"><use href="#i-chev-u"/></svg></button>` : '';
     return `<div class="grid-row row" data-tipo="envio">
       <div class="cell"><span class="ck"></span></div>
@@ -1056,7 +1058,7 @@
   function renderListado(){
     let out = '';
     ENVIOS.forEach(e => {
-      if (esMisma(e)) out += `<div class="thread" id="th-${e.id}">${filaEnvio(e)}${subfilaMismaGuia(e)}</div>`;
+      if (esMisma(e)) out += `<div class="thread${e.id === PRIMER_MISMA ? '' : ' closed'}" id="th-${e.id}">${filaEnvio(e)}${subfilaMismaGuia(e)}</div>`;
       else if (e.retorno) out += filaRetornoIndependiente(e) + filaEnvio(e);
       else out += filaEnvio(e);
     });
@@ -1264,9 +1266,10 @@
       r.style.display = (tipo === 'todas' || r.dataset.tipo === tipo) ? '' : 'none';
     });
     document.querySelectorAll('.thread').forEach(th => {
-      th.classList.remove('closed');
+      const abrir = tipo !== 'todas' || th.id === 'th-' + PRIMER_MISMA;
+      th.classList.toggle('closed', !abrir);
       th.classList.toggle('standalone', tipo === 'retorno');
-      const l = th.querySelector('.tlabel'); if (l) l.textContent = 'Ver menos';
+      const l = th.querySelector('.tlabel'); if (l) l.textContent = abrir ? 'Ver menos' : 'Ver retorno';
     });
     closeMenus();
   }
