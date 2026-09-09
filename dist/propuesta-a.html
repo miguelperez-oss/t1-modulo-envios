@@ -162,9 +162,11 @@
   .thread.closed .subrow{display:none}
 
   .rowacts{position:relative;display:flex;justify-content:flex-end;padding-right:16px}
-  .menu-acts{position:absolute;right:8px;top:calc(100% - 6px);width:170px;background:#fff;border:1px solid var(--g-200);border-radius:10px;padding:4px;z-index:40;display:none}
+  .menu-acts{position:absolute;right:8px;top:calc(100% - 6px);width:190px;background:#fff;border:1px solid var(--g-200);border-radius:10px;padding:4px;z-index:40;display:none}
   .menu-acts.open{display:block}
-  .menu-acts button{display:block;width:100%;text-align:left;padding:9px 12px;border-radius:8px;font-size:13px}
+  .menu-acts button{display:block;width:100%;text-align:left;padding:11px 14px;border-radius:8px;font-size:13px}
+  .menu-acts button+button{border-top:1px solid var(--g-100);border-radius:0}
+  .menu-acts button:last-child{border-bottom-left-radius:8px;border-bottom-right-radius:8px}
   .menu-acts button:hover{background:var(--g-50)}
   .menu-acts button.danger{color:var(--red-700)}
 
@@ -994,7 +996,12 @@
   function acciones(e, foco){
     return `<div class="cell rowacts"><button class="btn-ghost-icon" onclick="toggleActs(event,this)" aria-label="Acciones">
         <svg class="ic" style="width:18px;height:18px"><use href="#i-dots"/></svg></button>
-      <div class="menu-acts"><button onclick="abrirDetalle('${e.id}','${foco}')">Ver detalle</button></div></div>`;
+      <div class="menu-acts">
+        <button>Descargar guía</button>
+        <button>Reportar incidencia</button>
+        <button>Rastrear guía</button>
+        <button onclick="abrirDetalle('${e.id}','${foco}')">Ver detalle</button>
+      </div></div>`;
   }
 
   /* Fila de la guía original. Solo las paqueterías que retornan sobre la misma
