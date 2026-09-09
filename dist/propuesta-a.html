@@ -149,7 +149,6 @@
   .toggle-ret:hover{background:var(--g-100)}
   .toggle-ret svg{width:13px;height:13px;stroke-width:2;transition:transform .15s}
   .thread.closed .toggle-ret .chev{transform:rotate(180deg)}
-  .thread:not(.closed) .toggle-ret{background:var(--g-100);border-color:var(--g-300)}
 
   /* subfila de retorno (hija) — sin fondo fijo; gris solo en hover */
   .subrow{border-bottom:1px solid var(--g-200);min-height:76px;position:relative}
@@ -1058,7 +1057,7 @@
       <div class="cell costo">$${r.costo}<small>MXN</small></div>
       <div class="cell estado">Activa</div>
       <div class="cell">${chip(r.rastreo)}</div>
-      ${acciones(e,'retorno')}</div>`;
+      <div class="cell"></div></div>`;
   }
 
   function renderListado(){
@@ -1163,9 +1162,9 @@
             <div class="svc">${e.servicio}</div>
             <div class="xref">Guía retorno: <span class="ref-plano">${e.guia}</span> <span class="nota">(misma guía)</span></div>
           </div>
-          <div class="right dos">
-            <div><span class="tlab">Entrega original</span><span class="edate">${e.entrega}</span></div>
-            <div><span class="tlab">Entrega del retorno</span><span class="edate">${r.entrega}</span></div>
+          <div class="right">
+            <span class="tlab">Fecha de entrega sobre el retorno</span>
+            <span class="edate">${r.entrega}</span>
           </div>
         </div>
       </div>`;
