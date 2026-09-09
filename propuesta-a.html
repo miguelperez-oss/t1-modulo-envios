@@ -876,18 +876,18 @@
 
     /* ── Retorno con GUÍA NUEVA ────────────────────────────────── */
     {
-      id:'e-dhl', guia:'8427659995', logo:'logo-dhl', carrier:'DHL', servicio:'Economico / 2 días',
-      fecha:'03 de Sep', hora:'11:03 hrs', canal:'—', cliente:'Essensorial',
-      costo:'116.15', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
-      creado:'3 de septiembre, 2026 a las 11:03hrs', entrega:'09 sep',
+      id:'e-dhl', guia:'1697107624', logo:'logo-dhl', carrier:'DHL', servicio:'Economico / 2 días',
+      fecha:'26 de Ago', hora:'14:11 hrs', canal:'—', cliente:'Essensorial',
+      costo:'108.33', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'3 de septiembre, 2026 a las 11:03hrs', entrega:'29 ago',
       destino:{t:'Av. San Ignacio 942', d:'Av. San Ignacio 942, Jardines de San Ignacio, México, Jalisco, 45040', c:['info@essensorial.com','3342052870']},
       paquete:['1 paquete','(17 x 17 x 17 cm)','2kg'],
       cobro:{sub:'88.05', cargos:'12.08', iva:'16.02', total:'116.15'},
       retorno:{
-        tipo:'nueva', guia:'1697107624', fecha:'26 de Ago', hora:'14:11 hrs',
-        costo:'108.33', rastreo:{t:'Entregado', c:'entregado'}, entrega:'29 ago',
+        tipo:'nueva', guia:'8427659995', fecha:'03 de Sep', hora:'11:03 hrs',
+        costo:'116.15', rastreo:{t:'Entregado', c:'entregado'}, entrega:'09 sep',
         cobroEstado:'Pendiente',
-        cobro:{sub:'86.18', cargos:'7.21', iva:'14.94', total:'108.33'}
+        cobro:{sub:'92.63', cargos:'12.08', iva:'16.02', total:'116.15'}
       },
       tlOrig:[
         {f:'02/09/2026', t:'Devuelto al remitente', h:'5:27:44 PM'},
@@ -895,13 +895,13 @@
         {f:'26/08/2026', t:'Llegada al centro de clasificación', h:'11:00:15 PM'},
         {f:'26/08/2026', t:'En camino', h:'10:24:23 PM', dot:true},
         {f:'26/08/2026', t:'Recolectado', h:'6:58:52 PM'},
-        {f:'26/08/2026', hito:true, t:'Guía creada (Original)', guia:'8427659995', monto:'116.15', h:'2:11:37 PM'}
+        {f:'26/08/2026', hito:true, t:'Guía creada (Original)', guia:'1697107624', monto:'116.15', h:'2:11:37 PM'}
       ],
       tlRet:[
         {f:'03/09/2026', t:'RETORNADA', h:'5:04:15 PM'},
         {f:'03/09/2026', t:'Entregado', h:'5:04:15 PM'},
         {f:'03/09/2026', t:'En manos del courier para entrega', h:'11:01:48 AM'},
-        {f:'02/09/2026', hito:true, t:'Guía creada (Retorno)', guia:'1697107624', monto:'108.33', h:'5:30:02 PM'}
+        {f:'02/09/2026', hito:true, t:'Guía creada (Retorno)', guia:'8427659995', monto:'108.33', h:'5:30:02 PM'}
       ]
     },
     {
@@ -1059,7 +1059,7 @@
     let out = '';
     ENVIOS.forEach(e => {
       if (esMisma(e)) out += `<div class="thread${e.id === PRIMER_MISMA ? '' : ' closed'}" id="th-${e.id}">${filaEnvio(e)}${subfilaMismaGuia(e)}</div>`;
-      else if (e.retorno) out += filaRetornoIndependiente(e) + filaEnvio(e);
+      else if (e.retorno) out += filaEnvio(e) + filaRetornoIndependiente(e);
       else out += filaEnvio(e);
     });
     document.getElementById('tbody').innerHTML = out;
