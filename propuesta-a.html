@@ -745,91 +745,6 @@
   };
 
   const ENVIOS = [
-    /* ── Retorno con GUÍA NUEVA ────────────────────────────────── */
-    {
-      id:'e-dhl', guia:'8427659995', logo:'logo-dhl', carrier:'DHL', servicio:'Economico / 2 días',
-      fecha:'03 de Sep', hora:'11:03 hrs', canal:'—', cliente:'Essensorial',
-      costo:'116.15', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
-      creado:'3 de septiembre, 2026 a las 11:03hrs', entrega:'09 sep',
-      destino:{t:'Av. San Ignacio 942', d:'Av. San Ignacio 942, Jardines de San Ignacio, México, Jalisco, 45040', c:['info@essensorial.com','3342052870']},
-      paquete:['1 paquete','(17 x 17 x 17 cm)','2kg'],
-      cobro:{sub:'88.05', cargos:'12.08', iva:'16.02', total:'116.15'},
-      retorno:{
-        tipo:'nueva', guia:'1697107624', fecha:'26 de Ago', hora:'14:11 hrs',
-        costo:'108.33', rastreo:{t:'Entregado', c:'entregado'}, entrega:'29 ago',
-        cobroEstado:'Pendiente',
-        cobro:{sub:'86.18', cargos:'7.21', iva:'14.94', total:'108.33'}
-      },
-      tlOrig:[
-        {f:'02/09/2026', t:'Devuelto al remitente', h:'5:27:44 PM'},
-        {f:'27/08/2026', t:'En espera de ser recogido por el destinatario', h:'12:08:20 PM'},
-        {f:'26/08/2026', t:'Llegada al centro de clasificación', h:'11:00:15 PM'},
-        {f:'26/08/2026', t:'En camino', h:'10:24:23 PM', dot:true},
-        {f:'26/08/2026', t:'Recolectado', h:'6:58:52 PM'},
-        {f:'26/08/2026', hito:true, t:'Guía creada (Original)', guia:'8427659995', monto:'116.15', h:'2:11:37 PM'}
-      ],
-      tlRet:[
-        {f:'03/09/2026', t:'RETORNADA', h:'5:04:15 PM'},
-        {f:'03/09/2026', t:'Entregado', h:'5:04:15 PM'},
-        {f:'03/09/2026', t:'En manos del courier para entrega', h:'11:01:48 AM'},
-        {f:'02/09/2026', hito:true, t:'Guía creada (Retorno)', guia:'1697107624', monto:'108.33', h:'5:30:02 PM'}
-      ]
-    },
-    {
-      id:'e-fedex', guia:'794658219873', logo:'logo-fedex', carrier:'FedEx', servicio:'Express nacional / 1 día',
-      fecha:'01 de Sep', hora:'13:45 hrs', canal:'Amazon', cliente:'Luis Damián',
-      costo:'118.00', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
-      creado:'1 de septiembre, 2026 a las 13:45hrs', entrega:'03 sep',
-      destino:{t:'Blvd. Manuel Ávila Camacho 5', d:'Blvd. Manuel Ávila Camacho 5, Lomas de Sotelo, Naucalpan, Estado de México, 53390', c:['luis.damian@outlook.com','5533901147']},
-      paquete:['2 paquetes','(30 x 22 x 18 cm)','3.4kg'],
-      cobro:{sub:'85.48', cargos:'16.24', iva:'16.28', total:'118.00'},
-      retorno:{
-        tipo:'nueva', guia:'794658331120', fecha:'05 de Sep', hora:'10:12 hrs',
-        costo:'112.30', rastreo:{t:'En camino', c:'transito'}, entrega:'08 sep',
-        cobroEstado:'$112.30 MXN',
-        cobro:{sub:'81.32', cargos:'15.49', iva:'15.49', total:'112.30'}
-      },
-      tlOrig:[
-        {f:'05/09/2026', t:'Devuelto al remitente', h:'9:58:11 AM'},
-        {f:'04/09/2026', t:'Intento de entrega — sin quien reciba', h:'3:40:05 PM'},
-        {f:'03/09/2026', t:'Intento de entrega — domicilio incorrecto', h:'11:18:40 AM'},
-        {f:'02/09/2026', t:'En camino', h:'7:40:12 AM', dot:true},
-        {f:'01/09/2026', t:'Recolectado', h:'4:05:33 PM'},
-        {f:'01/09/2026', hito:true, t:'Guía creada (Original)', guia:'794658219873', monto:'118.00', h:'1:45:10 PM'}
-      ],
-      tlRet:[
-        {f:'06/09/2026', t:'En camino', h:'8:22:19 AM', dot:true},
-        {f:'05/09/2026', hito:true, t:'Guía creada (Retorno)', guia:'794658331120', monto:'112.30', h:'10:12:47 AM'}
-      ]
-    },
-    {
-      id:'e-99min', guia:'99M240815330', logo:'logo-99min', carrier:'99 minutos', servicio:'Mismo día / 24H',
-      fecha:'31 de Ago', hora:'09:12 hrs', canal:'T1tienda', cliente:'Regina Torres',
-      costo:'64.90', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
-      creado:'31 de agosto, 2026 a las 09:12hrs', entrega:'01 sep',
-      destino:{t:'Calle Ámsterdam 240', d:'Calle Ámsterdam 240, Hipódromo Condesa, México, Ciudad de México, 06100', c:['regina.torres@gmail.com','5522148890']},
-      paquete:['1 paquete','(20 x 15 x 10 cm)','0.8kg'],
-      cobro:{sub:'47.00', cargos:'8.95', iva:'8.95', total:'64.90'},
-      retorno:{
-        tipo:'nueva', guia:'99M240816871', fecha:'02 de Sep', hora:'14:20 hrs',
-        costo:'58.00', rastreo:{t:'En camino', c:'transito'}, entrega:'03 sep',
-        cobroEstado:'$58.00 MXN',
-        cobro:{sub:'42.00', cargos:'8.00', iva:'8.00', total:'58.00'}
-      },
-      tlOrig:[
-        {f:'02/09/2026', t:'Devuelto al remitente', h:'1:05:09 PM'},
-        {f:'01/09/2026', t:'Intento de entrega — el cliente no aceptó el paquete', h:'4:48:52 PM'},
-        {f:'31/08/2026', t:'Intento de entrega — sin quien reciba', h:'12:30:18 PM'},
-        {f:'31/08/2026', t:'En camino', h:'10:05:22 AM', dot:true},
-        {f:'31/08/2026', t:'Recolectado', h:'9:48:31 AM'},
-        {f:'31/08/2026', hito:true, t:'Guía creada (Original)', guia:'99M240815330', monto:'64.90', h:'9:12:04 AM'}
-      ],
-      tlRet:[
-        {f:'02/09/2026', t:'En camino', h:'3:02:15 PM', dot:true},
-        {f:'02/09/2026', hito:true, t:'Guía creada (Retorno)', guia:'99M240816871', monto:'58.00', h:'2:20:44 PM'}
-      ]
-    },
-
     /* ── Retorno sobre la MISMA GUÍA ───────────────────────────── */
     {
       id:'e-ups', guia:'1Z9990123456', logo:'logo-ups', carrier:'UPS', servicio:'Terrestre / 3 días',
@@ -956,6 +871,91 @@
         {f:'27/08/2026', t:'En camino', h:'7:22:40 AM', dot:true},
         {f:'26/08/2026', t:'Recolectado', h:'4:58:13 PM'},
         {f:'26/08/2026', hito:true, t:'Guía creada (Original)', guia:'AMP0459812774', monto:'145.20', h:'11:40:52 AM'}
+      ]
+    },
+
+    /* ── Retorno con GUÍA NUEVA ────────────────────────────────── */
+    {
+      id:'e-dhl', guia:'8427659995', logo:'logo-dhl', carrier:'DHL', servicio:'Economico / 2 días',
+      fecha:'03 de Sep', hora:'11:03 hrs', canal:'—', cliente:'Essensorial',
+      costo:'116.15', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'3 de septiembre, 2026 a las 11:03hrs', entrega:'09 sep',
+      destino:{t:'Av. San Ignacio 942', d:'Av. San Ignacio 942, Jardines de San Ignacio, México, Jalisco, 45040', c:['info@essensorial.com','3342052870']},
+      paquete:['1 paquete','(17 x 17 x 17 cm)','2kg'],
+      cobro:{sub:'88.05', cargos:'12.08', iva:'16.02', total:'116.15'},
+      retorno:{
+        tipo:'nueva', guia:'1697107624', fecha:'26 de Ago', hora:'14:11 hrs',
+        costo:'108.33', rastreo:{t:'Entregado', c:'entregado'}, entrega:'29 ago',
+        cobroEstado:'Pendiente',
+        cobro:{sub:'86.18', cargos:'7.21', iva:'14.94', total:'108.33'}
+      },
+      tlOrig:[
+        {f:'02/09/2026', t:'Devuelto al remitente', h:'5:27:44 PM'},
+        {f:'27/08/2026', t:'En espera de ser recogido por el destinatario', h:'12:08:20 PM'},
+        {f:'26/08/2026', t:'Llegada al centro de clasificación', h:'11:00:15 PM'},
+        {f:'26/08/2026', t:'En camino', h:'10:24:23 PM', dot:true},
+        {f:'26/08/2026', t:'Recolectado', h:'6:58:52 PM'},
+        {f:'26/08/2026', hito:true, t:'Guía creada (Original)', guia:'8427659995', monto:'116.15', h:'2:11:37 PM'}
+      ],
+      tlRet:[
+        {f:'03/09/2026', t:'RETORNADA', h:'5:04:15 PM'},
+        {f:'03/09/2026', t:'Entregado', h:'5:04:15 PM'},
+        {f:'03/09/2026', t:'En manos del courier para entrega', h:'11:01:48 AM'},
+        {f:'02/09/2026', hito:true, t:'Guía creada (Retorno)', guia:'1697107624', monto:'108.33', h:'5:30:02 PM'}
+      ]
+    },
+    {
+      id:'e-fedex', guia:'794658219873', logo:'logo-fedex', carrier:'FedEx', servicio:'Express nacional / 1 día',
+      fecha:'01 de Sep', hora:'13:45 hrs', canal:'Amazon', cliente:'Luis Damián',
+      costo:'118.00', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'1 de septiembre, 2026 a las 13:45hrs', entrega:'03 sep',
+      destino:{t:'Blvd. Manuel Ávila Camacho 5', d:'Blvd. Manuel Ávila Camacho 5, Lomas de Sotelo, Naucalpan, Estado de México, 53390', c:['luis.damian@outlook.com','5533901147']},
+      paquete:['2 paquetes','(30 x 22 x 18 cm)','3.4kg'],
+      cobro:{sub:'85.48', cargos:'16.24', iva:'16.28', total:'118.00'},
+      retorno:{
+        tipo:'nueva', guia:'794658331120', fecha:'05 de Sep', hora:'10:12 hrs',
+        costo:'112.30', rastreo:{t:'En camino', c:'transito'}, entrega:'08 sep',
+        cobroEstado:'$112.30 MXN',
+        cobro:{sub:'81.32', cargos:'15.49', iva:'15.49', total:'112.30'}
+      },
+      tlOrig:[
+        {f:'05/09/2026', t:'Devuelto al remitente', h:'9:58:11 AM'},
+        {f:'04/09/2026', t:'Intento de entrega — sin quien reciba', h:'3:40:05 PM'},
+        {f:'03/09/2026', t:'Intento de entrega — domicilio incorrecto', h:'11:18:40 AM'},
+        {f:'02/09/2026', t:'En camino', h:'7:40:12 AM', dot:true},
+        {f:'01/09/2026', t:'Recolectado', h:'4:05:33 PM'},
+        {f:'01/09/2026', hito:true, t:'Guía creada (Original)', guia:'794658219873', monto:'118.00', h:'1:45:10 PM'}
+      ],
+      tlRet:[
+        {f:'06/09/2026', t:'En camino', h:'8:22:19 AM', dot:true},
+        {f:'05/09/2026', hito:true, t:'Guía creada (Retorno)', guia:'794658331120', monto:'112.30', h:'10:12:47 AM'}
+      ]
+    },
+    {
+      id:'e-99min', guia:'99M240815330', logo:'logo-99min', carrier:'99 minutos', servicio:'Mismo día / 24H',
+      fecha:'31 de Ago', hora:'09:12 hrs', canal:'T1tienda', cliente:'Regina Torres',
+      costo:'64.90', estado:'Activa', rastreo:{t:'Retornado', c:'retornado'},
+      creado:'31 de agosto, 2026 a las 09:12hrs', entrega:'01 sep',
+      destino:{t:'Calle Ámsterdam 240', d:'Calle Ámsterdam 240, Hipódromo Condesa, México, Ciudad de México, 06100', c:['regina.torres@gmail.com','5522148890']},
+      paquete:['1 paquete','(20 x 15 x 10 cm)','0.8kg'],
+      cobro:{sub:'47.00', cargos:'8.95', iva:'8.95', total:'64.90'},
+      retorno:{
+        tipo:'nueva', guia:'99M240816871', fecha:'02 de Sep', hora:'14:20 hrs',
+        costo:'58.00', rastreo:{t:'En camino', c:'transito'}, entrega:'03 sep',
+        cobroEstado:'$58.00 MXN',
+        cobro:{sub:'42.00', cargos:'8.00', iva:'8.00', total:'58.00'}
+      },
+      tlOrig:[
+        {f:'02/09/2026', t:'Devuelto al remitente', h:'1:05:09 PM'},
+        {f:'01/09/2026', t:'Intento de entrega — el cliente no aceptó el paquete', h:'4:48:52 PM'},
+        {f:'31/08/2026', t:'Intento de entrega — sin quien reciba', h:'12:30:18 PM'},
+        {f:'31/08/2026', t:'En camino', h:'10:05:22 AM', dot:true},
+        {f:'31/08/2026', t:'Recolectado', h:'9:48:31 AM'},
+        {f:'31/08/2026', hito:true, t:'Guía creada (Original)', guia:'99M240815330', monto:'64.90', h:'9:12:04 AM'}
+      ],
+      tlRet:[
+        {f:'02/09/2026', t:'En camino', h:'3:02:15 PM', dot:true},
+        {f:'02/09/2026', hito:true, t:'Guía creada (Retorno)', guia:'99M240816871', monto:'58.00', h:'2:20:44 PM'}
       ]
     },
 
