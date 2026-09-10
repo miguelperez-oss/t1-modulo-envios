@@ -1,20 +1,21 @@
-# Guion — video de guías de retorno (1:45 aprox.)
+# Guion — video de guías de retorno (2:01 aprox.)
 
 > Locución + qué mostrar en pantalla. Prototipo: `propuesta-a.html`
 > (`t1-modulo-envios.vercel.app/propuesta-a`). Datos de ejemplo.
 >
-> **Encuadre:** las guías de retorno antes no existían en la plataforma —se enviaban por
-> correo. Hoy ya viven en Mis envíos. De ahí salen dos casos: el retorno como guía
-> independiente (**ya en producción**) y el retorno como estado adicional de la misma
-> guía (**lo que resuelve este front**).
+> **Encuadre:** las guías de retorno no existían en la plataforma. Llegaban por correo a
+> **Ops**, después de conciliar con la paquetería, y de ahí se daba seguimiento a mano.
+> Hoy ya viven en Mis envíos. De ahí salen dos casos: el retorno como guía independiente
+> (**ya en producción**) y el retorno como estado adicional de la misma guía
+> (**lo que resuelve este front**).
 
 ---
 
 ### 0:00 – 0:18 · Por qué esto es nuevo
 
 **Locución**
-> Hasta ahora, cuando una entrega no se concretaba, la guía de retorno se le enviaba al
-> vendedor por correo electrónico: no existía dentro de la plataforma.
+> Hasta ahora, cuando una entrega no se concretaba, la guía de retorno no existía en la
+> plataforma: llegaba por correo al equipo de Ops, después de conciliar con la paquetería.
 > Hoy ya la vemos en Mis envíos, y eso abre dos escenarios distintos según la paquetería.
 
 **Pantalla:** listado "Mis envíos" completo, scroll lento.
@@ -91,6 +92,6 @@ cargos $33.26 + IVA $33.26 = **$241.10**; **total del envío $510.62 MXN**.
 - La barra oscura superior es control del prototipo (no es parte de la UI): conviene
   recortarla en la edición o no encuadrarla.
 - Entrar a los detalles desde **⋯ → Ver detalle**, para que se vea el flujo real.
-- Ritmo: ~150 palabras por minuto; el guion son ~265 palabras (1:45).
+- Ritmo: ~150 palabras por minuto; el guion son ~303 palabras (2:01).
   Para bajarlo a 1:00, recortar el caso 1 a una frase ("el caso de guía independiente ya
   está en producción") y arrancar directo en el desplegable.
